@@ -4,14 +4,16 @@ from django.views import generic
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 
-from .models import * 
+from .models import *
+
 
 class Index(TemplateView):
-    template_name="main/index.html"
+    template_name = "main/index.html"
 
-    
+
 class Product(TemplateView):
-    template_name="main/product.html"
+    template_name = "main/product.html"
+
 
 class Search(TemplateView):
     template_name = "main/search.html"
@@ -20,8 +22,10 @@ class Search(TemplateView):
 class AboutUs(TemplateView):
     template_name = "main/about_us.html"
 
+
 class Login(TemplateView):
     template_name = "main/account-login.html"
+
 
 class Register(TemplateView):
     template_name = "main/account-register.html"
@@ -30,12 +34,10 @@ class Register(TemplateView):
 class Privacy(TemplateView):
     template_name = "main/privacy.html"
 
-    
+
 class Terms(TemplateView):
     template_name = "main/terms.html"
 
 
 class ProductWiseList(TemplateView):
     template_name = "main/product-wise-list.html"
-
-        
