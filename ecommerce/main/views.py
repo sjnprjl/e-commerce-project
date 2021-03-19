@@ -6,42 +6,50 @@ from django.views.generic.base import TemplateView
 
 from .models import * 
 
-class index(TemplateView):
+class Index(TemplateView):
     template_name="main/index.html"
+    def __init__(self, *args):
+        super(Index, self).__init__(*args)
     
-class product(TemplateView):
+class Product(TemplateView):
     template_name="main/product.html"
+    def __init__(self, *args):
+        super(Product, self).__init__(*args)
 
-class search(TemplateView):
+class Search(TemplateView):
     template_name = "main/search.html"
+    def __init__(self, *args):
+        super(Search, self).__init__(*args)
 
-class aboutus(TemplateView):
+class Aboutus(TemplateView):
     template_name = "main/about_us.html"
+    def __init__(self, *args):
+        super(Aboutus, self).__init__(*args)
 
-class login(TemplateView):
+class Login(TemplateView):
     template_name = "main/account-login.html"
     def __init__(self, *args):
-        super(login, self).__init__(*args)
+        super(Login, self).__init__(*args)
 
-class register(TemplateView):
+class Register(TemplateView):
     template_name = "main/account-register.html"
     def __init__(self, *args):
-        super(register, self).__init__(*args)
+        super(Register, self).__init__(*args)
 
-class privacy(TemplateView):
+class Privacy(TemplateView):
     template_name = "main/privacy.html"
     def __init__(self, *args):
-        super(privacy, self).__init__(*args)
+        super(Privacy, self).__init__(*args)
     
-class terms(TemplateView):
+class Terms(TemplateView):
     template_name = "main/terms.html"
     def __init__(self, *args):
-        super(terms, self).__init__(*args)
+        super(Terms, self).__init__(*args)
 
-class product_wise_list(TemplateView):
+class Product_wise_list(TemplateView):
     template_name = "main/product-wise-list.html"
     def __init__(self, *args):
-        super(product_wise_list, self).__init__(*args)
+        super(Product_wise_list, self).__init__(*args)
         
         
         
