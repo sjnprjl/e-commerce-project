@@ -1,2 +1,0 @@
-# e-commerce-project
-projecta!
