@@ -17,7 +17,6 @@
     <base />
     <link href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen" />
     <link href="{% static 'vendors/jquery/swiper/css/swiper.min.css' %}" rel="stylesheet" type="text/css" />
-    <!-- icon font -->
     <link href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'vendors/ionicons/css/ionicons.css' %}" rel="stylesheet" type="text/css" />
     <!-- use for ostromi -->
@@ -76,12 +75,8 @@
     <!-- Bootstrap Js -->
     <script src="{%static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
 </head>
-<body class="common-home">
-    {% block content %}
-
-    {% endblock %}
-    
+{% block content %}
+{% endblock content %}
 </body>
-<!-- Mirrored from ostromi2.demo.towerthemes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 17 Mar 2021 14:32:18 GMT -->
 
 </html>
