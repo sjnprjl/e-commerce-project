@@ -17,7 +17,7 @@ class Search(TemplateView):
     template_name = "main/search.html"
 
 
-class Aboutus(TemplateView):
+class AboutUs(TemplateView):
     template_name = "main/about_us.html"
 
 class Login(TemplateView):
@@ -35,7 +35,7 @@ class Terms(TemplateView):
     template_name = "main/terms.html"
 
 
-class Product_wise_list(TemplateView):
+class ProductWiseList(TemplateView):
     template_name = "main/product-wise-list.html"
 
         
