@@ -68,7 +68,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "kamaldb",
         "USER": "postgres",
-        "PASSWORD": "root",
+        "PASSWORD": "lord",
         "HOST": "localhost",
     }
 }
