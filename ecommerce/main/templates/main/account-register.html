@@ -7,10 +7,6 @@
         <div class="container">
             <div class="box-inner">
                 <ul class="box-top box-top-left pull-left">
-                    <!--<li><a href="http://ostromi2.demo.towerthemes.com/information-contact"><i class="fa fa-phone"></i> <span class="hidden-xs hidden-sm hidden-md">+88.2345.6789</span></a></li>
-							<li><a href="http://ostromi2.demo.towerthemes.com/index.php?route=checkout/cart" title="Shopping Cart"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">Shopping Cart</span></a></li>
-				<li><a href="http://ostromi2.demo.towerthemes.com/index.php?route=checkout/checkout" title="Checkout"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">Checkout</span></a></li>
-			 -->
                     <li>
                         <p>Mid-season sale up to 20% OFF. Use code “SALEOFF20”</p>
                     </li>
@@ -279,113 +275,113 @@
                         </div>
                     </div>
 
-                    <script>
-                        $(document).ready(function () {
-                            var flag = false;
-                            var ajax_search_enable = $('#ajax-search-enable').val();
+                    {% comment %}<script>{% endcomment %}
+                        {% comment %}$(document).ready(function () {{% endcomment %}
+                            {% comment %}var flag = false;{% endcomment %}
+                            {% comment %}var ajax_search_enable = $('#ajax-search-enable').val();{% endcomment %}
 
-                            var current_cate_value = $('ul.cate-items li.selected').data('value');
-                            var current_cate_text = $('ul.cate-items li.selected').html();
+                            {% comment %}var current_cate_value = $('ul.cate-items li.selected').data('value');{% endcomment %}
+                            {% comment %}var current_cate_text = $('ul.cate-items li.selected').html();{% endcomment %}
 
-                            $('.cate-selected').attr('data-value', current_cate_value);
-                            $('.cate-selected').html(current_cate_text);
+                            {% comment %}$('.cate-selected').attr('data-value', current_cate_value);{% endcomment %}
+                            {% comment %}$('.cate-selected').html(current_cate_text);{% endcomment %}
 
-                            $('.hover-cate p').click(function () {
-                                $(".cate-items").toggle("slow");
-                            });
+                            {% comment %}$('.hover-cate p').click(function () {{% endcomment %}
+                                {% comment %}$(".cate-items").toggle("slow");{% endcomment %}
+                            {% comment %}});{% endcomment %}
 
-                            $('.ajax-result-container').hover(
-                                function () {
-                                    flag = true;
-                                },
-                                function () {
-                                    flag = false;
-                                }
-                            );
+                            {% comment %}$('.ajax-result-container').hover({% endcomment %}
+                                {% comment %}function () {{% endcomment %}
+                                    {% comment %}flag = true;{% endcomment %}
+                                {% comment %}},{% endcomment %}
+                                {% comment %}function () {{% endcomment %}
+                                    {% comment %}flag = false;{% endcomment %}
+                                {% comment %}}{% endcomment %}
+                            {% comment %});{% endcomment %}
 
-                            $('.hover-cate').hover(
-                                function () {
-                                    flag = true;
-                                },
-                                function () {
-                                    flag = false;
-                                }
-                            );
+                            {% comment %}$('.hover-cate').hover({% endcomment %}
+                                {% comment %}function () {{% endcomment %}
+                                    {% comment %}flag = true;{% endcomment %}
+                                {% comment %}},{% endcomment %}
+                                {% comment %}function () {{% endcomment %}
+                                    {% comment %}flag = false;{% endcomment %}
+                                {% comment %}}{% endcomment %}
+                            {% comment %});{% endcomment %}
 
-                            $('#search-by-category').focusout(function () {
-                                if (flag == true) {
-                                    $('.ajax-result-container').show();
-                                } else {
-                                    $('.ajax-result-container').hide();
-                                }
-                            });
+                            {% comment %}$('#search-by-category').focusout(function () {{% endcomment %}
+                                {% comment %}if (flag == true) {{% endcomment %}
+                                    {% comment %}$('.ajax-result-container').show();{% endcomment %}
+                                {% comment %}} else {{% endcomment %}
+                                    {% comment %}$('.ajax-result-container').hide();{% endcomment %}
+                                {% comment %}}{% endcomment %}
+                            {% comment %}});{% endcomment %}
 
-                            $('#search-by-category').focusin(function () {
-                                $('.ajax-result-container').show();
-                            });
+                            {% comment %}$('#search-by-category').focusin(function () {{% endcomment %}
+                                {% comment %}$('.ajax-result-container').show();{% endcomment %}
+                            {% comment %}});{% endcomment %}
 
-                            $('#btn-search-category').click(function () {
-                                var url = 'index64b3.html?route=product/search';
-                                var text_search = $('#text-search').val();
-                                if (text_search) {
-                                    url += '&search=' + encodeURIComponent(text_search);
-                                }
+                            {% comment %}$('#btn-search-category').click(function () {{% endcomment %}
+                                {% comment %}var url = 'index64b3.html?route=product/search';{% endcomment %}
+                                {% comment %}var text_search = $('#text-search').val();{% endcomment %}
+                                {% comment %}if (text_search) {{% endcomment %}
+                                    {% comment %}url += '&search=' + encodeURIComponent(text_search);{% endcomment %}
+                                {% comment %}}{% endcomment %}
 
-                                var category_search = $('.cate-selected').attr("data-value");
-                                if (category_search) {
-                                    url += '&category_id=' + encodeURIComponent(category_search);
-                                }
+                                {% comment %}var category_search = $('.cate-selected').attr("data-value");{% endcomment %}
+                                {% comment %}if (category_search) {{% endcomment %}
+                                    {% comment %}url += '&category_id=' + encodeURIComponent(category_search);{% endcomment %}
+                                {% comment %}}{% endcomment %}
 
-                                location = url;
-                            });
+                                {% comment %}location = url;{% endcomment %}
+                            {% comment %}});{% endcomment %}
 
-                            if (ajax_search_enable == '1') {
-                                $('#text-search').keyup(function (e) {
-                                    var text_search = $(this).val();
-                                    var cate_search = $('.cate-selected').attr("data-value");
-                                    if (text_search != null && text_search != '') {
-                                        ajaxSearch(text_search, cate_search);
-                                    } else {
-                                        $('.ajax-result-container').html('');
-                                        $('.ajax-loader-container').hide();
-                                    }
-                                });
+                            {% comment %}if (ajax_search_enable == '1') {{% endcomment %}
+                                {% comment %}$('#text-search').keyup(function (e) {{% endcomment %}
+                                    {% comment %}var text_search = $(this).val();{% endcomment %}
+                                    {% comment %}var cate_search = $('.cate-selected').attr("data-value");{% endcomment %}
+                                    {% comment %}if (text_search != null && text_search != '') {{% endcomment %}
+                                        {% comment %}ajaxSearch(text_search, cate_search);{% endcomment %}
+                                    {% comment %}} else {{% endcomment %}
+                                        {% comment %}$('.ajax-result-container').html('');{% endcomment %}
+                                        {% comment %}$('.ajax-loader-container').hide();{% endcomment %}
+                                    {% comment %}}{% endcomment %}
+                                {% comment %}});{% endcomment %}
 
-                                $('ul.cate-items li.item-cate').click(function () {
-                                    var cate_search = $(this).data('value');
-                                    var text_search = $('#text-search').val();
-                                    $('.cate-selected').attr('data-value', cate_search);
-                                    $('.cate-selected').html($(this).html());
-                                    if (text_search != null && text_search != '') {
-                                        ajaxSearch(text_search, cate_search);
-                                    } else {
-                                        $('.ajax-result-container').html('');
-                                        $('.ajax-loader-container').hide();
-                                    }
-                                    $(".cate-items").hide();
-                                    $('#text-search').focus();
-                                });
-                            }
+                                {% comment %}$('ul.cate-items li.item-cate').click(function () {{% endcomment %}
+                                    {% comment %}var cate_search = $(this).data('value');{% endcomment %}
+                                    {% comment %}var text_search = $('#text-search').val();{% endcomment %}
+                                    {% comment %}$('.cate-selected').attr('data-value', cate_search);{% endcomment %}
+                                    {% comment %}$('.cate-selected').html($(this).html());{% endcomment %}
+                                    {% comment %}if (text_search != null && text_search != '') {{% endcomment %}
+                                        {% comment %}ajaxSearch(text_search, cate_search);{% endcomment %}
+                                    {% comment %}} else {{% endcomment %}
+                                        {% comment %}$('.ajax-result-container').html('');{% endcomment %}
+                                        {% comment %}$('.ajax-loader-container').hide();{% endcomment %}
+                                    {% comment %}}{% endcomment %}
+                                    {% comment %}$(".cate-items").hide();{% endcomment %}
+                                    {% comment %}$('#text-search').focus();{% endcomment %}
+                                {% comment %}});{% endcomment %}
+                            {% comment %}}{% endcomment %}
 
-                            function ajaxSearch(text_search, cate_search) {
-                                $.ajax({
-                                    url: 'http://ostromi2.demo.towerthemes.com/index.php?route=extension/module/ptsearch/ajaxSearch',
-                                    type: 'post',
-                                    data: {text_search: text_search, cate_search: cate_search},
-                                    beforeSend: function () {
-                                        $('.ajax-loader-container').show();
-                                    },
-                                    success: function (json) {
-                                        if (json['success'] == true) {
-                                            $('.ajax-result-container').html(json['result_html']);
-                                            $('.ajax-loader-container').hide();
-                                        }
-                                    }
-                                });
-                            }
+                            {% comment %}function ajaxSearch(text_search, cate_search) {{% endcomment %}
+                                {% comment %}$.ajax({{% endcomment %}
+                                    {% comment %}url: 'http://ostromi2.demo.towerthemes.com/index.php?route=extension/module/ptsearch/ajaxSearch',{% endcomment %}
+                                    {% comment %}type: 'post',{% endcomment %}
+                                    {% comment %}data: {text_search: text_search, cate_search: cate_search},{% endcomment %}
+                                    {% comment %}beforeSend: function () {{% endcomment %}
+                                        {% comment %}$('.ajax-loader-container').show();{% endcomment %}
+                                    {% comment %}},{% endcomment %}
+                                    {% comment %}success: function (json) {{% endcomment %}
+                                        {% comment %}if (json['success'] == true) {{% endcomment %}
+                                            {% comment %}$('.ajax-result-container').html(json['result_html']);{% endcomment %}
+                                            {% comment %}$('.ajax-loader-container').hide();{% endcomment %}
+                                        {% comment %}}{% endcomment %}
+                                    {% comment %}}{% endcomment %}
+                                {% comment %}});{% endcomment %}
+                            {% comment %}}{% endcomment %}
 
-                        });
-                    </script>
+                        {% comment %}});{% endcomment %}
+                    {% comment %}</script>{% endcomment %}
                 </div>
             </div>
         </div>
@@ -759,106 +755,106 @@
             </aside>
         </div>
     </div>
-    <script type="text/javascript">< !--
-            // Sort the custom fields
-            $('#account .form-group[data-sort]').detach().each(function () {
-                if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {
-                    $('#account .form-group').eq($(this).attr('data-sort')).before(this);
-                }
+    {% comment %}<script type="text/javascript">{% endcomment %}
+            {% comment %}// Sort the custom fields{% endcomment %}
+            {% comment %}$('#account .form-group[data-sort]').detach().each(function () {{% endcomment %}
+                {% comment %}if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {{% endcomment %}
+                    {% comment %}$('#account .form-group').eq($(this).attr('data-sort')).before(this);{% endcomment %}
+                {% comment %}}{% endcomment %}
 
-                if ($(this).attr('data-sort') > $('#account .form-group').length) {
-                    $('#account .form-group:last').after(this);
-                }
+                {% comment %}if ($(this).attr('data-sort') > $('#account .form-group').length) {{% endcomment %}
+                    {% comment %}$('#account .form-group:last').after(this);{% endcomment %}
+                {% comment %}}{% endcomment %}
 
-                if ($(this).attr('data-sort') == $('#account .form-group').length) {
-                    $('#account .form-group:last').after(this);
-                }
+                {% comment %}if ($(this).attr('data-sort') == $('#account .form-group').length) {{% endcomment %}
+                    {% comment %}$('#account .form-group:last').after(this);{% endcomment %}
+                {% comment %}}{% endcomment %}
 
-                if ($(this).attr('data-sort') < -$('#account .form-group').length) {
-                    $('#account .form-group:first').before(this);
-                }
-            });
+                {% comment %}if ($(this).attr('data-sort') < -$('#account .form-group').length) {{% endcomment %}
+                    {% comment %}$('#account .form-group:first').before(this);{% endcomment %}
+                {% comment %}}{% endcomment %}
+            {% comment %}});{% endcomment %}
 
-        $('input[name=\'customer_group_id\']').on('change', function () {
-            $.ajax({
-                url: 'index.php?route=account/register/customfield&customer_group_id=' + this.value,
-                dataType: 'json',
-                success: function (json) {
-                    $('.custom-field').hide();
-                    $('.custom-field').removeClass('required');
+        {% comment %}$('input[name=\'customer_group_id\']').on('change', function () {{% endcomment %}
+            {% comment %}$.ajax({{% endcomment %}
+                {% comment %}url: 'index.php?route=account/register/customfield&customer_group_id=' + this.value,{% endcomment %}
+                {% comment %}dataType: 'json',{% endcomment %}
+                {% comment %}success: function (json) {{% endcomment %}
+                    {% comment %}$('.custom-field').hide();{% endcomment %}
+                    {% comment %}$('.custom-field').removeClass('required');{% endcomment %}
 
-                    for (i = 0; i < json.length; i++) {
-                        custom_field = json[i];
+                    {% comment %}for (i = 0; i < json.length; i++) {{% endcomment %}
+                        {% comment %}custom_field = json[i];{% endcomment %}
 
-                        $('#custom-field' + custom_field['custom_field_id']).show();
+                        {% comment %}$('#custom-field' + custom_field['custom_field_id']).show();{% endcomment %}
 
-                        if (custom_field['required']) {
-                            $('#custom-field' + custom_field['custom_field_id']).addClass('required');
-                        }
-                    }
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                }
-            });
-        });
+                        {% comment %}if (custom_field['required']) {{% endcomment %}
+                            {% comment %}$('#custom-field' + custom_field['custom_field_id']).addClass('required');{% endcomment %}
+                        {% comment %}}{% endcomment %}
+                    {% comment %}}{% endcomment %}
+                {% comment %}},{% endcomment %}
+                {% comment %}error: function (xhr, ajaxOptions, thrownError) {{% endcomment %}
+                    {% comment %}alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);{% endcomment %}
+                {% comment %}}{% endcomment %}
+            {% comment %}});{% endcomment %}
+        {% comment %}});{% endcomment %}
 
-        $('input[name=\'customer_group_id\']:checked').trigger('change');
-//--></script>
-    <script type="text/javascript">< !--
-            $('button[id^=\'button-custom-field\']').on('click', function () {
-                var element = this;
+        {% comment %}$('input[name=\'customer_group_id\']:checked').trigger('change');{% endcomment %}
+{% comment %}</script>{% endcomment %}
+    {% comment %}<script type="text/javascript">< !--{% endcomment %}
+            {% comment %}$('button[id^=\'button-custom-field\']').on('click', function () {{% endcomment %}
+                {% comment %}var element = this;{% endcomment %}
 
-                $('#form-upload').remove();
+                {% comment %}$('#form-upload').remove();{% endcomment %}
 
-                $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');
+                {% comment %}$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');{% endcomment %}
 
-                $('#form-upload input[name=\'file\']').trigger('click');
+                {% comment %}$('#form-upload input[name=\'file\']').trigger('click');{% endcomment %}
 
-                if (typeof timer != 'undefined') {
-                    clearInterval(timer);
-                }
+                {% comment %}if (typeof timer != 'undefined') {{% endcomment %}
+                    {% comment %}clearInterval(timer);{% endcomment %}
+                {% comment %}}{% endcomment %}
 
-                timer = setInterval(function () {
-                    if ($('#form-upload input[name=\'file\']').val() != '') {
-                        clearInterval(timer);
+                {% comment %}timer = setInterval(function () {{% endcomment %}
+                    {% comment %}if ($('#form-upload input[name=\'file\']').val() != '') {{% endcomment %}
+                        {% comment %}clearInterval(timer);{% endcomment %}
 
-                        $.ajax({
-                            url: 'index.php?route=tool/upload',
-                            type: 'post',
-                            dataType: 'json',
-                            data: new FormData($('#form-upload')[0]),
-                            cache: false,
-                            contentType: false,
-                            processData: false,
-                            beforeSend: function () {
-                                $(element).button('loading');
-                            },
-                            complete: function () {
-                                $(element).button('reset');
-                            },
-                            success: function (json) {
-                                $(element).parent().find('.text-danger').remove();
+                        {% comment %}$.ajax({{% endcomment %}
+                            {% comment %}url: 'index.php?route=tool/upload',{% endcomment %}
+                            {% comment %}type: 'post',{% endcomment %}
+                            {% comment %}dataType: 'json',{% endcomment %}
+                            {% comment %}data: new FormData($('#form-upload')[0]),{% endcomment %}
+                            {% comment %}cache: false,{% endcomment %}
+                            {% comment %}contentType: false,{% endcomment %}
+                            {% comment %}processData: false,{% endcomment %}
+                            {% comment %}beforeSend: function () {{% endcomment %}
+                                {% comment %}$(element).button('loading');{% endcomment %}
+                            {% comment %}},{% endcomment %}
+                            {% comment %}complete: function () {{% endcomment %}
+                                {% comment %}$(element).button('reset');{% endcomment %}
+                            {% comment %}},{% endcomment %}
+                            {% comment %}success: function (json) {{% endcomment %}
+                                {% comment %}$(element).parent().find('.text-danger').remove();{% endcomment %}
 
-                                if (json['error']) {
-                                    $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');
-                                }
+                                {% comment %}if (json['error']) {{% endcomment %}
+                                    {% comment %}$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');{% endcomment %}
+                                {% comment %}}{% endcomment %}
 
-                                if (json['success']) {
-                                    alert(json['success']);
+                                {% comment %}if (json['success']) {{% endcomment %}
+                                    {% comment %}alert(json['success']);{% endcomment %}
 
-                                    $(element).parent().find('input').val(json['code']);
-                                }
-                            },
-                            error: function (xhr, ajaxOptions, thrownError) {
-                                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                            }
-                        });
-                    }
-                }, 500);
-            });
-//--></script>
-    <script type="text/javascript">< !--
+                                    {% comment %}$(element).parent().find('input').val(json['code']);{% endcomment %}
+                                {% comment %}}{% endcomment %}
+                            {% comment %}},{% endcomment %}
+                            {% comment %}error: function (xhr, ajaxOptions, thrownError) {{% endcomment %}
+                                {% comment %}alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);{% endcomment %}
+                            {% comment %}}{% endcomment %}
+                        {% comment %}});{% endcomment %}
+                    {% comment %}}{% endcomment %}
+                {% comment %}}, 500);{% endcomment %}
+            {% comment %}});{% endcomment %}
+{% comment %}</script>{% endcomment %}
+    <script type="text/javascript">
             $('.date').datetimepicker({
                 language: 'en-gb',
                 pickTime: false
@@ -874,8 +870,6 @@
             pickDate: true,
             pickTime: true
         });
-//--></script>
-<!--footer-->
-{% include 'main/base_files/footer.html' %}
+</script>
 </div>
 {% endblock content %}
