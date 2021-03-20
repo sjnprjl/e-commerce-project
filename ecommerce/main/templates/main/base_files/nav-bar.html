@@ -45,13 +45,11 @@
                                             class="a-third-title">Dishwasher-Safe</span></a>
                                 </li>
                                 <li class="li-third-items">
-                                    <a href="cookware/cookware-sets/gas-stovetop-compatible.html"
-                                        class="a-third-link"><span class="a-third-title">Gas
+                                    <a href="cookware/cookware-sets/gas-stovetop-compatible.html" class="a-third-link"><span class="a-third-title">Gas
                                             Stovetop Compatible</span></a>
                                 </li>
                                 <li class="li-third-items">
-                                    <a href="cookware/cookware-sets/induction-stovetop-compatible.html"
-                                        class="a-third-link"><span class="a-third-title">Induction Stovetop
+                                    <a href="cookware/cookware-sets/induction-stovetop-compatible.html" class="a-third-link"><span class="a-third-title">Induction Stovetop
                                             Compatible</span></a>
                                 </li>
                                 <li class="li-third-items">
@@ -177,7 +175,7 @@
         </li>
         <li class="li-top-item ">
             <a class="a-top-link a-item" href="bakeware.html">
-                <span>Bakeware</span>
+                <span>Bakere</span>
             </a>
         </li>
         <li class="li-top-item ">
@@ -205,16 +203,15 @@
 
 
 <div id="logo">
-    <a href="{% url 'main' %}"><img src="{% static 'image/catalog/logo/ostromi2.png' %}" title="" alt=""
-            class="img-responsive" /></a> </div>
+    <a href="{% url 'main' %}"><img src="{% static 'image/catalog/logo/ostromi2.png' %}" title="" alt="" class="img-responsive" /></a>
+</div>
 
 <div class="col-cart">
 
     <a href="account-login.html?route=account/wishlist" id="wishlist-total"><span><span class="text-wishlist">Wish
                 List</span> <span class="txt-count">0</span></span></a>
     <div id="cart" class="btn-group btn-block">
-        <button type="button" data-toggle="dropdown" data-loading-text="Loading..."
-            class="btn btn-inverse btn-block btn-lg dropdown-toggle"><span id="cart-total"><span
+        <button type="button" data-toggle="dropdown" data-loading-text="Loading..." class="btn btn-inverse btn-block btn-lg dropdown-toggle"><span id="cart-total"><span
                     class="txt-count">0</span> <span class="text-cart">$0.00</span></span></button>
         <ul class="dropdown-menu pull-right">
             <li>
@@ -223,4 +220,144 @@
             </li>
         </ul>
     </div>
+</div>
+
+</div>
+<div class="col-search">
+    <div id="search-by-category">
+        <div class="dropdown-toggle search-button" data-toggle="dropdown"></div>
+        <div class="dropdown-menu search-content">
+            <div class="search-container">
+
+                <input type="text" name="search" id="text-search" value="" placeholder="Search entire store here ..." class="" />
+                <div id="sp-btn-search" class="">
+                    <button type="button" id="btn-search-category" class="btn btn-default btn-lg">
+                            <span class="hidden-xs">Search</span>
+                        </button>
+                </div>
+                <div class="search-ajax">
+                    <div class="ajax-loader-container" style="display: none;">
+                        <img src="{%static 'image/catalog/ajax-loader.gif' %}" alt="search-ajax" class="ajax-load-img" width="30" height="30" />
+                    </div>
+                    <div class="ajax-result-container">
+                        <!-- Content of search results -->
+                    </div>
+                </div>
+                <input type="hidden" id="ajax-search-enable" value="1" />
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var flag = false;
+            var ajax_search_enable = $('#ajax-search-enable').val();
+
+            var current_cate_value = $('ul.cate-items li.selected').data('value');
+            var current_cate_text = $('ul.cate-items li.selected').html();
+
+            $('.cate-selected').attr('data-value', current_cate_value);
+            $('.cate-selected').html(current_cate_text);
+
+            $('.hover-cate p').click(function() {
+                $(".cate-items").toggle("slow");
+            });
+
+            $('.ajax-result-container').hover(
+                function() {
+                    flag = true;
+                },
+                function() {
+                    flag = false;
+                }
+            );
+
+            $('.hover-cate').hover(
+                function() {
+                    flag = true;
+                },
+                function() {
+                    flag = false;
+                }
+            );
+
+            $('#search-by-category').focusout(function() {
+                if (flag == true) {
+                    $('.ajax-result-container').show();
+                } else {
+                    $('.ajax-result-container').hide();
+                }
+            });
+
+            $('#search-by-category').focusin(function() {
+                $('.ajax-result-container').show();
+            });
+
+            $('#btn-search-category').click(function() {
+                var url = 'index64b3.html?route=product/search';
+                var text_search = $('#text-search').val();
+                if (text_search) {
+                    url += '&search=' + encodeURIComponent(text_search);
+                }
+
+                var category_search = $('.cate-selected').attr("data-value");
+                if (category_search) {
+                    url += '&category_id=' + encodeURIComponent(category_search);
+                }
+
+                location = url;
+            });
+
+            if (ajax_search_enable == '1') {
+                $('#text-search').keyup(function(e) {
+                    var text_search = $(this).val();
+                    var cate_search = $('.cate-selected').attr("data-value");
+                    if (text_search != null && text_search != '') {
+                        ajaxSearch(text_search, cate_search);
+                    } else {
+                        $('.ajax-result-container').html('');
+                        $('.ajax-loader-container').hide();
+                    }
+                });
+
+                $('ul.cate-items li.item-cate').click(function() {
+                    var cate_search = $(this).data('value');
+                    var text_search = $('#text-search').val();
+                    $('.cate-selected').attr('data-value', cate_search);
+                    $('.cate-selected').html($(this).html());
+                    if (text_search != null && text_search != '') {
+                        ajaxSearch(text_search, cate_search);
+                    } else {
+                        $('.ajax-result-container').html('');
+                        $('.ajax-loader-container').hide();
+                    }
+                    $(".cate-items").hide();
+                    $('#text-search').focus();
+                });
+            }
+
+            function ajaxSearch(text_search, cate_search) {
+                $.ajax({
+                    url: 'http://ostromi2.demo.towerthemes.com/index.php?route=extension/module/ptsearch/ajaxSearch',
+                    type: 'post',
+                    data: {
+                        text_search: text_search,
+                        cate_search: cate_search
+                    },
+                    beforeSend: function() {
+                        $('.ajax-loader-container').show();
+                    },
+                    success: function(json) {
+                        if (json['success'] == true) {
+                            $('.ajax-result-container').html(json['result_html']);
+                            $('.ajax-loader-container').hide();
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
 </div>
