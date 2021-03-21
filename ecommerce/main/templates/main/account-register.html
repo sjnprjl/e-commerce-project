@@ -227,14 +227,14 @@
     </header>
     <div id="account-register" class="container">
         <ul class="breadcrumb">
-            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-            <li><a href="account-login.html?route=account/account">Account</a></li>
-            <li><a href="index5502.html?route=account/register">Register</a></li>
+            <li><a href="{% url 'main' %}"><i class="fa fa-home"></i></a></li>
+            <li><a href="">Account</a></li>
+            <li><a href="">Register</a></li>
         </ul>
         <div class="row">
             <div id="content" class="col-sm-9">
                 <h1>Register Account</h1>
-                <p>If you already have an account with us, please login at the <a href="account-login.html">login
+                <p>If you already have an account with us, please login at the <a href="{% url 'login' %}">login
                         page</a>.</p>
                 <form action="http://ostromi2.demo.towerthemes.com/index.php?route=account/register" method="post"
                     enctype="multipart/form-data" class="form-horizontal">
@@ -320,21 +320,21 @@
             <aside id="column-right" class="col-sm-3 col-xs-12">
                 <div class="col-order-inner">
                     <div class="list-group">
-                        <a href="account-login.html" class="list-group-item">Login</a> <a
-                            href="index5502.html?route=account/register" class="list-group-item">Register</a> <a
-                            href="indexacda.html?route=account/forgotten" class="list-group-item">Forgotten
+                        <a href="{% url 'login' %}" class="list-group-item">Login</a> <a
+                            href="{% url 'register' %}" class="list-group-item">Register</a> <a
+                            href="" class="list-group-item">Forgotten
                             Password</a>
-                        <a href="account-login.html?route=account/account" class="list-group-item">My Account</a>
-                        <a href="account-login.html?route=account/address" class="list-group-item">Address Book</a>
-                        <a href="account-login.html?route=account/wishlist" class="list-group-item">Wish List</a> <a
-                            href="account-login.html" class="list-group-item">Order History</a> <a
-                            href="account-login.html?route=account/download" class="list-group-item">Downloads</a><a
-                            href="account-login.html?route=account/recurring" class="list-group-item">Recurring
-                            payments</a> <a href="account-login.html?route=account/reward"
-                            class="list-group-item">Reward Points</a> <a href="account-login.html?route=account/return"
-                            class="list-group-item">Returns</a> <a href="account-login.html?route=account/transaction"
+                        <a href="" class="list-group-item">My Account</a>
+                        <a href="" class="list-group-item">Address Book</a>
+                        <a href="" class="list-group-item">Wish List</a> <a
+                            href="" class="list-group-item">Order History</a> <a
+                            href="" class="list-group-item">Downloads</a><a
+                            href="" class="list-group-item">Recurring
+                            payments</a> <a href=""
+                            class="list-group-item">Reward Points</a> <a href=""
+                            class="list-group-item">Returns</a> <a href=""
                             class="list-group-item">Transactions</a> <a
-                            href="account-login.html?route=account/newsletter" class="list-group-item">Newsletter</a>
+                            href="" class="list-group-item">Newsletter</a>
                     </div>
 
                 </div>
