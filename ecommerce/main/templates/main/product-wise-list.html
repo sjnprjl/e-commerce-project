@@ -126,7 +126,7 @@
         </div>
         <div class="layered-navigation-block"></div>
         <div class="ajax-loader">
-            <img src="image/catalog/ajax-loader.gif" alt="" />
+            <img src="{% static 'image/catalog/ajax-loader.gif' %}" alt="" />
         </div>
         <ul class="breadcrumb">
             <li><a href="index.html"><i class="fa fa-home"></i></a></li>
@@ -315,10 +315,10 @@
 
                     <div class="pt-block static-sidebar">
                         <div class="image">
-                            <a href="#"><img src="image/catalog/ptblock/img1-sidebar.jpg" alt="img1-sidebar"></a>
+                            <a href="#"><img src="{% static 'image/catalog/ptblock/img1-sidebar.jpg' %}" alt="img1-sidebar"></a>
                         </div>
                         <div class="image">
-                            <a href="#"><img src="image/catalog/ptblock/img2-sidebar.jpg" alt="img2-sidebar"></a>
+                            <a href="#"><img src="{% static 'image/catalog/ptblock/img2-sidebar.jpg' %}" alt="img2-sidebar"></a>
                         </div>
                     </div>
 
@@ -328,7 +328,7 @@
             <div id="content" class="col-sm-9">
 
                 <h1>Cookware</h1>
-                <div class="category-image"><img src="image/cache/catalog/category-image/category-image2-840x250.jpg"
+                <div class="category-image"><img src="{% static 'image/cache/catalog/category-image/category-image2-840x250.jpg' %}"
                         alt="Cookware" title="Cookware" class="img-thumbnail" /></div>
 
                 <h3 class="text-refine">Refine Search</h3>
@@ -444,7 +444,7 @@
                                                 <div><span class="pro-label sale">Sale</span></div>
                                             </div>
                                             <a href="cookware/apple-cinema-30-inch-hd-flat-panel-display2.html">
-                                                <img src="image/cache/catalog/products/2/1-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/1-600x600.jpg' %}"
                                                     alt="Apple Cinema 30-inch HD Flat-Panel Display"
                                                     title="Apple Cinema 30-inch HD Flat-Panel Display"
                                                     class="img-responsive img-cate-88" />
@@ -496,28 +496,28 @@
                                                     <a href="javascript:void(0);"
                                                         onclick="swatches.changeSwatchInCategory($(this));" title="Red"
                                                         style=" width: 15px; height: 15px;
-																	background-image: url('image/cache/catalog/color-option/Red-15x15.jpg') " data-product-id="88"
+																	background-image: url({%static 'image/cache/catalog/color-option/Red-15x15.jpg' %}); " data-product-id="88"
                                                         data-product-option-value-id="130"></a>
                                                 </li>
                                                 <li class="swatches-options">
                                                     <a href="javascript:void(0);"
                                                         onclick="swatches.changeSwatchInCategory($(this));"
                                                         title="Black" style=" width: 15px; height: 15px;
-																	background-image: url('image/cache/catalog/color-option/Black-15x15.jpg') " data-product-id="88"
+																	background-image: url({%static '/image/cache/catalog/color-option/Black-15x15.jpg' %}) " data-product-id="88"
                                                         data-product-option-value-id="133"></a>
                                                 </li>
                                                 <li class="swatches-options">
                                                     <a href="javascript:void(0);"
                                                         onclick="swatches.changeSwatchInCategory($(this));"
                                                         title="White" style=" width: 15px; height: 15px;
-																	background-image: url('image/cache/catalog/color-option/White-15x15.jpg') " data-product-id="88"
+																	background-image: url({%static '/image/cache/catalog/color-option/White-15x15.jpg' %}) " data-product-id="88"
                                                         data-product-option-value-id="132"></a>
                                                 </li>
                                                 <li class="swatches-options">
                                                     <a href="javascript:void(0);"
                                                         onclick="swatches.changeSwatchInCategory($(this));"
                                                         title="LightSteelBlue" style=" width: 15px; height: 15px;
-																	background-image: url('image/cache/catalog/color-option/LightSteelBlue-15x15.jpg') "
+																	background-image: url({% static '/image/cache/catalog/color-option/LightSteelBlue-15x15.jpg' %}) "
                                                         data-product-id="88" data-product-option-value-id="131"></a>
                                                 </li>
                                             </ul>
@@ -552,7 +552,7 @@
                                             <div class="box-label">
                                             </div>
                                             <a href="cookware/ipod-shuffle2.html">
-                                                <img src="image/cache/catalog/products/2/17-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/17-600x600.jpg' %}"
                                                     alt="Apple iPod shuffle 2 GB Black (3rd Generation)"
                                                     title="Apple iPod shuffle 2 GB Black (3rd Generation)"
                                                     class="img-responsive img-cate-89" />
@@ -618,7 +618,7 @@
                                             <div class="box-label">
                                             </div>
                                             <a href="cookware/ipod-touch2.html">
-                                                <img src="image/cache/catalog/products/2/18-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/18-600x600.jpg' %}"
                                                     alt="Apple® IPod Touch (6th Generation)"
                                                     title="Apple® IPod Touch (6th Generation)"
                                                     class="img-responsive img-cate-90" />
@@ -682,7 +682,7 @@
                                             <div class="box-label">
                                             </div>
                                             <a href="cookware/hp-lp30652.html">
-                                                <img src="image/cache/catalog/products/2/11-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/11-600x600.jpg' %}"
                                                     alt="HP LP3065 LCD Monitor 30 - 2560 x 1600 @ 60 Hz"
                                                     title="HP LP3065 LCD Monitor 30 - 2560 x 1600 @ 60 Hz"
                                                     class="img-responsive img-cate-92" />
@@ -747,7 +747,7 @@
                                                 <div><span class="pro-label new">New</span></div>
                                             </div>
                                             <a href="cookware/htc-touch-hd2.html">
-                                                <img src="image/cache/catalog/products/2/12-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/12-600x600.jpg' %}"
                                                     alt="HTC Touch HD Windows Mobile smartphone"
                                                     title="HTC Touch HD Windows Mobile smartphone"
                                                     class="img-responsive img-cate-93" />
@@ -812,7 +812,7 @@
                                                 <div><span class="pro-label sale">Sale</span></div>
                                             </div>
                                             <a href="cookware/imac2.html">
-                                                <img src="image/cache/catalog/products/2/13-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/13-600x600.jpg' %}"
                                                     alt="iMac 4K 21.5-inch 2017 Mac Center"
                                                     title="iMac 4K 21.5-inch 2017 Mac Center"
                                                     class="img-responsive img-cate-94" />
@@ -875,7 +875,7 @@
                                             <div class="box-label">
                                             </div>
                                             <a href="cookware/iphone2.html">
-                                                <img src="image/cache/catalog/products/2/14-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/14-600x600.jpg' %}"
                                                     alt="iPhone 8 Plus features a 5.5-inch Retina HD display"
                                                     title="iPhone 8 Plus features a 5.5-inch Retina HD display"
                                                     class="img-responsive img-cate-95" />
@@ -940,7 +940,7 @@
                                                 <div><span class="pro-label new">New</span></div>
                                             </div>
                                             <a href="cookware/ipod-nano2.html">
-                                                <img src="image/cache/catalog/products/2/16-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/16-600x600.jpg' %}"
                                                     alt="iPod nano 8 GB 2nd Generation (Black)"
                                                     title="iPod nano 8 GB 2nd Generation (Black)"
                                                     class="img-responsive img-cate-97" />
@@ -1007,7 +1007,7 @@
                                                 <div><span class="pro-label new">New</span></div>
                                             </div>
                                             <a href="cookware/macbook-air2.html">
-                                                <img src="image/cache/catalog/products/2/2-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/2-600x600.jpg' %}"
                                                     alt="MacBook Air - 13.3&quot; Retina Display - Intel Core i5"
                                                     title="MacBook Air - 13.3&quot; Retina Display - Intel Core i5"
                                                     class="img-responsive img-cate-98" />
@@ -1072,7 +1072,7 @@
                                                 <div><span class="pro-label new">New</span></div>
                                             </div>
                                             <a href="cookware/macbook2.html">
-                                                <img src="image/cache/catalog/products/2/5-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/5-600x600.jpg' %}"
                                                     alt="MacBook Pro - 13&quot; Display with Touch Bar - Intel Core i5"
                                                     title="MacBook Pro - 13&quot; Display with Touch Bar - Intel Core i5"
                                                     class="img-responsive img-cate-99" />
@@ -1143,7 +1143,7 @@
                                                 <div><span class="pro-label new">New</span></div>
                                             </div>
                                             <a href="cookware/samsung-syncmaster-941bw2.html">
-                                                <img src="image/cache/catalog/products/2/7-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/7-600x600.jpg' %}"
                                                     alt="Samsung SyncMaster 2443BW - LCD monitor - 24&quot; Series"
                                                     title="Samsung SyncMaster 2443BW - LCD monitor - 24&quot; Series"
                                                     class="img-responsive img-cate-103" />
@@ -1210,7 +1210,7 @@
                                                 <div><span class="pro-label new">New</span></div>
                                             </div>
                                             <a href="cookware/viewsonic-vp32682.html">
-                                                <img src="image/cache/catalog/products/2/4-600x600.jpg"
+                                                <img src="{% static 'image/cache/catalog/products/2/4-600x600.jpg' %}"
                                                     alt="ViewSonic VP3268-4K PRO 32&quot; 4K Monitor with 100% sRGB"
                                                     title="ViewSonic VP3268-4K PRO 32&quot; 4K Monitor with 100% sRGB"
                                                     class="img-responsive img-cate-105" />

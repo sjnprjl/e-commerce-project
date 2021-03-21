@@ -443,7 +443,7 @@
                                                     pickDate: true,
                                                     pickTime: true
                                                 });
-                                                //-->
+                                                
                                             </script>
                                         </div>
                                     </div>
@@ -488,16 +488,19 @@
 
 
                             </div>
-                        </div>
-                        <div class="row sub-row">
-                            <div class="sub-col col-sm-12 col-md-9">
-                                <div class="slider-container ">
+                            <div class="row sub-row">
+                                <div class="sub-col col-sm-12 col-md-9">
+                                    <div class="slider-container ">
 
-                                    <div class="slide-loading"></div>
-                                    <div id="plaza-slider" class="plaza-slider">
-                                        <a href="#   "><img style="display: none;" src="image/cache/catalog/slider/slider1-ostromi2-840x510.jpg" alt="" title="#slide-caption2" /></a>
-                                        <a href="#   "><img style="display: none;" src="image/cache/catalog/slider/slider2-ostromi2-840x510.jpg" alt="" title="#slide-caption3" /></a>
-                                    </div>
+                                        <div class="slide-loading"></div>
+                                        <div id="plaza-slider" class="plaza-slider">
+                                            <a href="#   "><img style="display: none;"
+                                                    src="{% static 'image/cache/catalog/slider/slider1-ostromi2-840x510.jpg' %}" alt=""
+                                                    title="#slide-caption2" /></a>
+                                            <a href="#   "><img style="display: none;"
+                                                    src="{% static 'image/cache/catalog/slider/slider2-ostromi2-840x510.jpg' %}" alt=""
+                                                    title="#slide-caption3" /></a>
+                                        </div>
 
 
                                     <div id="slide-caption2" class="slide-caption nivo-html-caption nivo-caption">
@@ -570,12 +573,16 @@
                                 <div class="pt-block static-top-store2">
                                     <div class="inner">
                                         <div class="inner">
-                                            <div class="col">
-                                                <div class="image">
-                                                    <a href="cookware.html"><img src="{%static 'image/catalog/ptblock/img1-top-ostromi2.jpg' %}" alt="img1"></a>
-                                                    <div class="text">
-                                                        <h3 class="text1">Ceramic <span>Cookware</span></h3>
-                                                        <p class="text2">Starting At <span>$125.99</span></p>
+                                            <div class="inner">
+                                                <div class="col">
+                                                    <div class="image">
+                                                        <a href="cookware.html"><img
+                                                           src="{% static 'image/catalog/ptblock/img1-top-ostromi2.jpg' %}"
+                                                                alt="img1"></a>
+                                                        <div class="text">
+                                                            <h3 class="text1">Ceramic <span>Cookware</span></h3>
+                                                            <p class="text2">Starting At <span>$125.99</span></p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2641,8 +2648,7 @@
                                                             <div class="product-item">
                                                                 <div class="image ">
                                                                     <a href="htc-touch-hd2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/12-140x140.jpg" width="140" height="140" alt="HTC Touch HD Windows Mobile smartphone" title="HTC Touch HD Windows Mobile smartphone" class=" swiper-lazy  img-responsive img-mod-120-93"
-                                                                        />
+                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/12-140x140.jpg" width="140" height="140" alt="HTC Touch HD Windows Mobile smartphone" title="HTC Touch HD Windows Mobile smartphone" class=" swiper-lazy  img-responsive img-mod-120-93"/>
                                                                     </a>
                                                                     <div class="swiper-lazy-preloader"></div>
                                                                 </div>
