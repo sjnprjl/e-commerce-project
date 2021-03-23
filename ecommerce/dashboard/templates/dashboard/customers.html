@@ -1,0 +1,208 @@
+{%extends 'dashboard/base.html' %}
+{%load static %}
+{%block title %} customers {%endblock%}
+{%block customerActive %}active{%endblock%}
+{%block tableSs %} 
+<link rel="stylesheet" href="{%static 'plugins/datatables/datatables.min.css' %}">
+<style>
+.modal-display {
+    display: flex !important;
+}
+
+.modal-display > div {
+    animation: displayModal 0.4s ease forwards;
+}
+@keyframes displayModal {
+    to {
+        opacity: 1;
+        transform: translateY(50%);
+    }
+}
+</style>
+{%endblock%}
+
+{%block main %}
+<!-- Page Wrapper -->
+<div id="deleteModal" class="row display-none" style="height: 100vh; position: fixed;display:none; width:100%; z-index: 2; justify-content: center; align-items: flex-start; margin:0; background: rgba(0,0,0,0.12); ">
+    <div class="col-12 col-md-6 col-lg-4 d-flex" style="transform: translateY(-20%); opacity: 0;">
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h2 class="card-title mb-0 text-danger text-center">Are You Sure ?</h2>
+            </div>
+            <div class="card-body">
+                <p class="card-text modal-info text-center"></p>
+                <div class="d-flex" style="justify-content: space-evenly;">
+                    <button id="cancelDelete" class="btn btn-white text-danger">Cancel</button>
+                    <button id="deleteCustomer" class="btn btn-danger text-white">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-wrapper">
+    <div class="content container-fluid">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Customers</h3>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'dashboard'%}">Dashboard</a>
+                        </li>
+                        <li class="breadcrumb-item active">Customers</li>
+                    </ul>
+                </div>
+                <div class="col-auto">
+                    <a href="{% url 'create_customer' %}" class="btn btn-primary mr-1">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+
+        <!-- Search Filter -->
+        <div id="filter_inputs" class="card filter-card"  style="display: block;">
+            <div class="card-body pb-0">
+                <h4>Search Your Customers Here </h4>
+                <div class="row">
+                    
+                    <div class="col-sm-6 col-md-3">
+                        
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" data-type="search-field" id="filterName" class="form-control" style="border: 1px solid rgba(0,0,0,0.5);">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3">
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" data-type="search-field" id="filterPhone" class="form-control" style="border: 1px solid rgba(0,0,0,0.5);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Search Filter -->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-center table-hover datatable">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Address</th>
+                                        <th>Isp</th>
+                                        <th>Expiration Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for customer in customers %}
+                                    <tr data-type="search-item">
+                                        <td>
+                                            {{forloop.counter}}
+                                        </td>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a href="{%url 'customer_profile' customer.id %}">{{customer.full_name}}</a>
+                                            </h2>
+                                        </td>
+                                        <td >{{customer.phone}}</td>
+                                        <td>{{customer.address}}</td>
+                                        <td>{{customer.isp}}</td>
+                                        <td>{{customer.exp_date|date:"Y, F d"}}</td>
+                                        <td><span class="badge badge-pill bg-{% if customer.activation == "expired" %}danger{% elif customer.activation == "active" %}success{%else %}warning{%endif%}-light">
+                                                {{customer.activation | title}}
+                                            </span></td>
+                                            <td >
+                                                <button data-name="{{customer.full_name}}" data-url="{% url 'delete_user' customer.id%}" class="delete_customer btn btn-white text-danger btn-sm mr-2"><i class="far fa-trash-alt mr-1"></i>Delete</button>
+                                            </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Wrapper -->
+{%endblock%}
+{%block tableScr %}
+<script src="{%static 'plugins/datatables/datatables.min.js' %}"></script>
+{%endblock%}
+{% block customScript %}
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+function csrfSafeMethod(method) {
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+const csrftoken = getCookie('csrftoken');
+
+const delete_customer_action = $('.delete_customer');
+const delete_customer = $("#deleteCustomer");
+let url;
+let customer_to_delete;
+let name;
+
+delete_customer_action.on('click', function() {
+    customer_to_delete = $(this);
+    url = customer_to_delete.attr('data-url');
+    name = customer_to_delete.attr('data-name');
+    $("#deleteModal").toggleClass("modal-display");
+    $(".modal-info").html(`Delete \"${name}\"?`)
+})
+$("#cancelDelete").on('click' , function() {
+    $("#deleteModal").toggleClass("modal-display");
+    url = "";
+})
+
+delete_customer.on('click', function() {
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if(!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    })
+
+    if(url) {
+        $.ajax({
+            url: url,
+            type: 'post', 
+            success: function(data) {
+                customer_to_delete.parent().parent().remove();
+                $("#deleteModal").toggleClass("modal-display");
+                url = "";
+            }
+        })
+    }  
+})
+
+</script>
+{% endblock %}

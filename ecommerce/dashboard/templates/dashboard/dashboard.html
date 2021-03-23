@@ -1,0 +1,232 @@
+{%extends 'dashboard/base.html' %}
+{%block indexActive %}active{%endblock%}
+{%block title %}Dashboard |{{user_info.username}} {{request.user.username}}{%endblock%}
+{%block main %}
+{% load static %}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <p style='font-weight: bold; font-size: x-large;'>Dashboard</p>
+        <div class="row">
+
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card">
+                    <a href="{%url 'customer' %}">
+                        <div class="card-body">
+                            <div class="dash-widget-header">
+                                <span class="dash-widget-icon bg-6">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                                <div class="dash-count">
+                                    <div class="dash-title">Total Users</div>
+                                    <div class="dash-counts">
+                                        {{customers|length}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="dash-widget-header">
+                            <span class="dash-widget-icon bg-7">
+                                <i class="fas fa-file-alt"></i>
+                            </span>
+                            <div class="dash-count">
+                                <div class="dash-title">Active Users</div>
+                                <div class="dash-counts">
+                                    <p>{{active_users|length}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="dash-widget-header">
+                            <span class="dash-widget-icon bg-8">
+                                <i class="far fa-file"></i>
+                            </span>
+                            <div class="dash-count">
+                                <div class="dash-title">Expired Users</div>
+                                <div class="dash-counts">
+                                    <p>{{expired_users|length}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="dash-widget-header">
+                            <span class="dash-widget-icon bg-3">
+                                <i class="fas fa-user"></i>
+                            </span>
+                            <div class="dash-count">
+                                <div class="dash-title">Logged In</div>
+                                <div class="dash-counts">
+                                    <p>{{request.user.username}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title">Active Users</h5>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="progress progress-md rounded-pill mb-3">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 47%"
+                                    aria-valuenow="47" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 28%"
+                                    aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 15%"
+                                    aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-info" role="progressbar" style="width: 10%"
+                                    aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-success mr-1"></i> Active
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-warning mr-1"></i> Running
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-danger mr-1"></i> Expired
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-info mr-1"></i> Overdeu
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-stripped table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Expire Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        {% if active_users %}
+                                        {% for active_user in active_users %}
+                                        
+                                    <tr>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a href="{%url 'customer_profile' active_user.id %}">{{active_user.full_name}}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{active_user.reg_date}}</td>
+                                        <td><span class="badge badge-pill bg-success-light">Active</span></td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                    <tr>
+                                        <td>No Active users found.</td>
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title">Expired Users</h5>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <div class="progress progress-md rounded-pill mb-3">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 39%"
+                                    aria-valuenow="39" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 35%"
+                                    aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 26%"
+                                    aria-valuenow="26" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-success mr-1"></i> Active
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-warning mr-1"></i> Running
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-danger mr-1"></i> Expired
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-circle text-info mr-1"></i> Overdeu
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Customer</th>
+                                        <th>Expiry Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if expired_users %}
+                                    {% for expired_user in expired_users %}
+                                   
+                                    <tr>
+                                        <td>
+                                            <h2 class="table-avatar">
+                                                <a href="{%url 'customer_profile' expired_user.id %}">{{expired_user.full_name}}</a>
+                                            </h2>
+                                        </td>
+                                        <td>{{expired_user.exp_date}}</td>
+                                        <td><span class="badge badge-pill bg-danger-light">Expired</span></td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    {% else %}
+
+                                    <tr>
+                                        <td>No expired users found.</td> 
+                                    </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock %}
+{%block customJs %}
+{%endblock %}
