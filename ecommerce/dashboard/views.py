@@ -12,4 +12,4 @@ class DashboardView(LoginRequiredMixin, generic.base.TemplateView):
 
 
 class LoginView(generic.base.TemplateView):
-    template_name = "dashboard/login.html"
+    template_name = "dashboard/user-login.html"
