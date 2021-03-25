@@ -3,6 +3,7 @@
 {% block content %}
 <div class="wrapper">
     <div id="back-top"><i class="ion-chevron-up"></i></div>
+   
     <nav id="top">
         <div class="container">
             <div class="box-inner">
@@ -35,8 +36,7 @@
                                 </ul>
                             </div>
                             <input type="hidden" name="code" value="" />
-                            <input type="hidden" name="redirect"
-                                value="http://ostromi2.demo.towerthemes.com/index.php?route=account/register" />
+                            <input type="hidden" name="redirect" value="http://ostromi2.demo.towerthemes.com/privacy" />
                         </form>
 
                     </li>
@@ -63,8 +63,7 @@
                                 </ul>
                             </div>
                             <input type="hidden" name="code" value="" />
-                            <input type="hidden" name="redirect"
-                                value="http://ostromi2.demo.towerthemes.com/index.php?route=account/register" />
+                            <input type="hidden" name="redirect" value="http://ostromi2.demo.towerthemes.com/privacy" />
                         </form>
 
                     </li>
@@ -198,457 +197,172 @@
 
                     {% include 'main/base_files/nav-bar.html' %}
 
-                </div>
-                <div class="col-search">
-                    <div id="search-by-category">
-                        <div class="dropdown-toggle search-button" data-toggle="dropdown"></div>
-                        <div class="dropdown-menu search-content">
-                            <div class="search-container">
-                                <div class="categories-container">
-                                    <div class="hover-cate">
-                                        <p><span class="cate-selected" data-value="0">All Categories</span><i
-                                                class="ion-ios-arrow-down"></i></p>
-                                        <ul class="cate-items">
-                                            <li class="item-cate" data-value="0">All Categories</li>
-                                            <li data-value="247" class="item-cate">Appliances</li>
-                                            <li data-value="246" class="item-cate">Bakeware</li>
-                                            <li data-value="259" class="item-cate">Brand Categories</li>
-                                            <li data-value="253" class="item-cate f1">Brand Category 1</li>
-                                            <li data-value="254" class="item-cate f1">Brand Category 2</li>
-                                            <li data-value="255" class="item-cate f1">Brand Category 3</li>
-                                            <li data-value="256" class="item-cate f1">Brand Category 4</li>
-                                            <li data-value="257" class="item-cate f1">Brand Category 5</li>
-                                            <li data-value="221" class="item-cate">Cookware</li>
-                                            <li data-value="222" class="item-cate f1">Cookware Sets</li>
-                                            <li data-value="229" class="item-cate f2">Ceramic</li>
-                                            <li data-value="226" class="item-cate f2">Dishwasher-Safe</li>
-                                            <li data-value="227" class="item-cate f2">Gas Stovetop Compatible</li>
-                                            <li data-value="228" class="item-cate f2">Induction Stovetop Compatible
-                                            </li>
-                                            <li data-value="230" class="item-cate f2">Mirror Satin</li>
-                                            <li data-value="223" class="item-cate f1">Pans</li>
-                                            <li data-value="237" class="item-cate f2">Hard Anodized</li>
-                                            <li data-value="238" class="item-cate f2">Scratch Resistant</li>
-                                            <li data-value="240" class="item-cate f2">Thermo-Spot</li>
-                                            <li data-value="239" class="item-cate f2">Titanium Nonstick </li>
-                                            <li data-value="236" class="item-cate f2">Ultimate</li>
-                                            <li data-value="224" class="item-cate f1">Skillets</li>
-                                            <li data-value="234" class="item-cate f2">Aluminum Nonstick</li>
-                                            <li data-value="231" class="item-cate f2">Calphalon</li>
-                                            <li data-value="232" class="item-cate f2">Contemporary</li>
-                                            <li data-value="233" class="item-cate f2">Hard-Anodized</li>
-                                            <li data-value="235" class="item-cate f2">Sauce Pan</li>
-                                            <li data-value="225" class="item-cate f1">Teakettles</li>
-                                            <li data-value="242" class="item-cate f2">Aura Stainless</li>
-                                            <li data-value="241" class="item-cate f2">Cuisinart</li>
-                                            <li data-value="244" class="item-cate f2">Homeinart</li>
-                                            <li data-value="245" class="item-cate f2">Kettle Stainless</li>
-                                            <li data-value="243" class="item-cate f2">Steel Stovetop</li>
-                                            <li data-value="251" class="item-cate">Drinkware</li>
-                                            <li data-value="249" class="item-cate">Glassware</li>
-                                            <li data-value="250" class="item-cate">Kitchenwares</li>
-                                            <li data-value="248" class="item-cate">Knives</li>
-                                            <li data-value="252" class="item-cate">Tablewares</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <input type="text" name="search" id="text-search" value=""
-                                    placeholder="Search entire store here ..." class="" />
-                                <div id="sp-btn-search" class="">
-                                    <button type="button" id="btn-search-category" class="btn btn-default btn-lg">
-                                        <span class="hidden-xs">Search</span>
-                                    </button>
-                                </div>
-                                <div class="search-ajax">
-                                    <div class="ajax-loader-container" style="display: none;">
-                                        <img src="image/catalog/ajax-loader.gif" alt="search-ajax" class="ajax-load-img"
-                                            width="30" height="30" />
-                                    </div>
-                                    <div class="ajax-result-container">
-                                        <!-- Content of search results -->
-                                    </div>
-                                </div>
-                                <input type="hidden" id="ajax-search-enable" value="1" />
-                            </div>
+                    {% comment %}
+                    <script>{% endcomment %}
+                        {% comment %} $(document).ready(function () {
+                            {% endcomment %}
+                            {% comment %} var flag = false; {% endcomment %}
+                            {% comment %} var ajax_search_enable = $('#ajax-search-enable').val(); {% endcomment %}
 
+                            {% comment %} var current_cate_value = $('ul.cate-items li.selected').data('value'); {% endcomment %}
+                            {% comment %} var current_cate_text = $('ul.cate-items li.selected').html(); {% endcomment %}
 
-                        </div>
-                    </div>
+                            {% comment %} $('.cate-selected').attr('data-value', current_cate_value); {% endcomment %}
+                            {% comment %} $('.cate-selected').html(current_cate_text); {% endcomment %}
 
-                    {% comment %}<script>{% endcomment %}
-                        {% comment %}$(document).ready(function () {{% endcomment %}
-                            {% comment %}var flag = false;{% endcomment %}
-                            {% comment %}var ajax_search_enable = $('#ajax-search-enable').val();{% endcomment %}
+                            {% comment %} $('.hover-cate p').click(function () {
+                                {% endcomment %}
+                                {% comment %} $(".cate-items").toggle("slow"); {% endcomment %}
+                                {% comment %}
+                            }); {% endcomment %}
 
-                            {% comment %}var current_cate_value = $('ul.cate-items li.selected').data('value');{% endcomment %}
-                            {% comment %}var current_cate_text = $('ul.cate-items li.selected').html();{% endcomment %}
+                            {% comment %} $('.ajax-result-container').hover({% endcomment %}
+                                {% comment %}function () {
+                            {% endcomment %}
+                            {% comment %} flag = true; {% endcomment %}
+                            {% comment %}
+                        }, {% endcomment %}
+                            {% comment %}function () {
+                                {% endcomment %}
+                                {% comment %} flag = false; {% endcomment %}
+                                {% comment %}
+                            }{% endcomment %}
+                            {% comment %}); {% endcomment %}
 
-                            {% comment %}$('.cate-selected').attr('data-value', current_cate_value);{% endcomment %}
-                            {% comment %}$('.cate-selected').html(current_cate_text);{% endcomment %}
+                        {% comment %} $('.hover-cate').hover({% endcomment %}
+                            {% comment %}function () {
+                                {% endcomment %}
+                                {% comment %} flag = true; {% endcomment %}
+                                {% comment %}
+                            }, {% endcomment %}
+                            {% comment %}function () {
+                                {% endcomment %}
+                                {% comment %} flag = false; {% endcomment %}
+                                {% comment %}
+                            }{% endcomment %}
+                            {% comment %}); {% endcomment %}
 
-                            {% comment %}$('.hover-cate p').click(function () {{% endcomment %}
-                                {% comment %}$(".cate-items").toggle("slow");{% endcomment %}
-                            {% comment %}});{% endcomment %}
+                        {% comment %} $('#search-by-category').focusout(function () {
+                            {% endcomment %}
+                            {% comment %} if (flag == true) {
+                                {% endcomment %}
+                                {% comment %} $('.ajax-result-container').show(); {% endcomment %}
+                                {% comment %}
+                            } else {
+                                {% endcomment %}
+                                {% comment %} $('.ajax-result-container').hide(); {% endcomment %}
+                                {% comment %}
+                            } {% endcomment %}
+                            {% comment %}
+                        }); {% endcomment %}
 
-                            {% comment %}$('.ajax-result-container').hover({% endcomment %}
-                                {% comment %}function () {{% endcomment %}
-                                    {% comment %}flag = true;{% endcomment %}
-                                {% comment %}},{% endcomment %}
-                                {% comment %}function () {{% endcomment %}
-                                    {% comment %}flag = false;{% endcomment %}
-                                {% comment %}}{% endcomment %}
-                            {% comment %});{% endcomment %}
+                        {% comment %} $('#search-by-category').focusin(function () {
+                            {% endcomment %}
+                            {% comment %} $('.ajax-result-container').show(); {% endcomment %}
+                            {% comment %}
+                        }); {% endcomment %}
 
-                            {% comment %}$('.hover-cate').hover({% endcomment %}
-                                {% comment %}function () {{% endcomment %}
-                                    {% comment %}flag = true;{% endcomment %}
-                                {% comment %}},{% endcomment %}
-                                {% comment %}function () {{% endcomment %}
-                                    {% comment %}flag = false;{% endcomment %}
-                                {% comment %}}{% endcomment %}
-                            {% comment %});{% endcomment %}
+                        {% comment %} $('#btn-search-category').click(function () {
+                            {% endcomment %}
+                            {% comment %} var url = 'index64b3.html?route=product/search'; {% endcomment %}
+                            {% comment %} var text_search = $('#text-search').val(); {% endcomment %}
+                            {% comment %} if (text_search) {
+                                {% endcomment %}
+                                {% comment %} url += '&search=' + encodeURIComponent(text_search); {% endcomment %}
+                                {% comment %}
+                            } {% endcomment %}
 
-                            {% comment %}$('#search-by-category').focusout(function () {{% endcomment %}
-                                {% comment %}if (flag == true) {{% endcomment %}
-                                    {% comment %}$('.ajax-result-container').show();{% endcomment %}
-                                {% comment %}} else {{% endcomment %}
-                                    {% comment %}$('.ajax-result-container').hide();{% endcomment %}
-                                {% comment %}}{% endcomment %}
-                            {% comment %}});{% endcomment %}
+                            {% comment %} var category_search = $('.cate-selected').attr("data-value"); {% endcomment %}
+                            {% comment %} if (category_search) {
+                                {% endcomment %}
+                                {% comment %} url += '&category_id=' + encodeURIComponent(category_search); {% endcomment %}
+                                {% comment %}
+                            } {% endcomment %}
 
-                            {% comment %}$('#search-by-category').focusin(function () {{% endcomment %}
-                                {% comment %}$('.ajax-result-container').show();{% endcomment %}
-                            {% comment %}});{% endcomment %}
+                            {% comment %} location = url; {% endcomment %}
+                            {% comment %}
+                        }); {% endcomment %}
 
-                            {% comment %}$('#btn-search-category').click(function () {{% endcomment %}
-                                {% comment %}var url = 'index64b3.html?route=product/search';{% endcomment %}
-                                {% comment %}var text_search = $('#text-search').val();{% endcomment %}
-                                {% comment %}if (text_search) {{% endcomment %}
-                                    {% comment %}url += '&search=' + encodeURIComponent(text_search);{% endcomment %}
-                                {% comment %}}{% endcomment %}
+                        {% comment %} if (ajax_search_enable == '1') {
+                            {% endcomment %}
+                            {% comment %} $('#text-search').keyup(function (e) {
+                                {% endcomment %}
+                                {% comment %} var text_search = $(this).val(); {% endcomment %}
+                                {% comment %} var cate_search = $('.cate-selected').attr("data-value"); {% endcomment %}
+                                {% comment %} if (text_search != null && text_search != '') {
+                                    {% endcomment %}
+                                    {% comment %} ajaxSearch(text_search, cate_search); {% endcomment %}
+                                    {% comment %}
+                                } else {
+                                    {% endcomment %}
+                                    {% comment %} $('.ajax-result-container').html(''); {% endcomment %}
+                                    {% comment %} $('.ajax-loader-container').hide(); {% endcomment %}
+                                    {% comment %}
+                                } {% endcomment %}
+                                {% comment %}
+                            }); {% endcomment %}
 
-                                {% comment %}var category_search = $('.cate-selected').attr("data-value");{% endcomment %}
-                                {% comment %}if (category_search) {{% endcomment %}
-                                    {% comment %}url += '&category_id=' + encodeURIComponent(category_search);{% endcomment %}
-                                {% comment %}}{% endcomment %}
+                            {% comment %} $('ul.cate-items li.item-cate').click(function () {
+                                {% endcomment %}
+                                {% comment %} var cate_search = $(this).data('value'); {% endcomment %}
+                                {% comment %} var text_search = $('#text-search').val(); {% endcomment %}
+                                {% comment %} $('.cate-selected').attr('data-value', cate_search); {% endcomment %}
+                                {% comment %} $('.cate-selected').html($(this).html()); {% endcomment %}
+                                {% comment %} if (text_search != null && text_search != '') {
+                                    {% endcomment %}
+                                    {% comment %} ajaxSearch(text_search, cate_search); {% endcomment %}
+                                    {% comment %}
+                                } else {
+                                    {% endcomment %}
+                                    {% comment %} $('.ajax-result-container').html(''); {% endcomment %}
+                                    {% comment %} $('.ajax-loader-container').hide(); {% endcomment %}
+                                    {% comment %}
+                                } {% endcomment %}
+                                {% comment %} $(".cate-items").hide(); {% endcomment %}
+                                {% comment %} $('#text-search').focus(); {% endcomment %}
+                                {% comment %}
+                            }); {% endcomment %}
+                            {% comment %}
+                        } {% endcomment %}
 
-                                {% comment %}location = url;{% endcomment %}
-                            {% comment %}});{% endcomment %}
+                        {% comment %} function ajaxSearch(text_search, cate_search) {
+                            {% endcomment %}
+                            {% comment %} $.ajax({{% endcomment %}
+                        {% comment %} url: 'http://ostromi2.demo.towerthemes.com/index.php?route=extension/module/ptsearch/ajaxSearch', {% endcomment %}
+                        {% comment %} type: 'post', {% endcomment %}
+                        {% comment %} data: { text_search: text_search, cate_search: cate_search }, {% endcomment %}
+                        {% comment %} beforeSend: function () {
+                            {% endcomment %}
+                            {% comment %} $('.ajax-loader-container').show(); {% endcomment %}
+                            {% comment %}
+                        }, {% endcomment %}
+                        {% comment %} success: function (json) {
+                            {% endcomment %}
+                            {% comment %} if (json['success'] == true) {
+                                {% endcomment %}
+                                {% comment %} $('.ajax-result-container').html(json['result_html']); {% endcomment %}
+                                {% comment %} $('.ajax-loader-container').hide(); {% endcomment %}
+                                {% comment %}
+                            } {% endcomment %}
+                            {% comment %}
+                        } {% endcomment %}
+                        {% comment %}}); {% endcomment %}
+                        {% comment %}}{% endcomment %}
 
-                            {% comment %}if (ajax_search_enable == '1') {{% endcomment %}
-                                {% comment %}$('#text-search').keyup(function (e) {{% endcomment %}
-                                    {% comment %}var text_search = $(this).val();{% endcomment %}
-                                    {% comment %}var cate_search = $('.cate-selected').attr("data-value");{% endcomment %}
-                                    {% comment %}if (text_search != null && text_search != '') {{% endcomment %}
-                                        {% comment %}ajaxSearch(text_search, cate_search);{% endcomment %}
-                                    {% comment %}} else {{% endcomment %}
-                                        {% comment %}$('.ajax-result-container').html('');{% endcomment %}
-                                        {% comment %}$('.ajax-loader-container').hide();{% endcomment %}
-                                    {% comment %}}{% endcomment %}
-                                {% comment %}});{% endcomment %}
+                        {% comment %}}); {% endcomment %}
+                        {% comment %}</script>{% endcomment %}
 
-                                {% comment %}$('ul.cate-items li.item-cate').click(function () {{% endcomment %}
-                                    {% comment %}var cate_search = $(this).data('value');{% endcomment %}
-                                    {% comment %}var text_search = $('#text-search').val();{% endcomment %}
-                                    {% comment %}$('.cate-selected').attr('data-value', cate_search);{% endcomment %}
-                                    {% comment %}$('.cate-selected').html($(this).html());{% endcomment %}
-                                    {% comment %}if (text_search != null && text_search != '') {{% endcomment %}
-                                        {% comment %}ajaxSearch(text_search, cate_search);{% endcomment %}
-                                    {% comment %}} else {{% endcomment %}
-                                        {% comment %}$('.ajax-result-container').html('');{% endcomment %}
-                                        {% comment %}$('.ajax-loader-container').hide();{% endcomment %}
-                                    {% comment %}}{% endcomment %}
-                                    {% comment %}$(".cate-items").hide();{% endcomment %}
-                                    {% comment %}$('#text-search').focus();{% endcomment %}
-                                {% comment %}});{% endcomment %}
-                            {% comment %}}{% endcomment %}
-
-                            {% comment %}function ajaxSearch(text_search, cate_search) {{% endcomment %}
-                                {% comment %}$.ajax({{% endcomment %}
-                                    {% comment %}url: 'http://ostromi2.demo.towerthemes.com/index.php?route=extension/module/ptsearch/ajaxSearch',{% endcomment %}
-                                    {% comment %}type: 'post',{% endcomment %}
-                                    {% comment %}data: {text_search: text_search, cate_search: cate_search},{% endcomment %}
-                                    {% comment %}beforeSend: function () {{% endcomment %}
-                                        {% comment %}$('.ajax-loader-container').show();{% endcomment %}
-                                    {% comment %}},{% endcomment %}
-                                    {% comment %}success: function (json) {{% endcomment %}
-                                        {% comment %}if (json['success'] == true) {{% endcomment %}
-                                            {% comment %}$('.ajax-result-container').html(json['result_html']);{% endcomment %}
-                                            {% comment %}$('.ajax-loader-container').hide();{% endcomment %}
-                                        {% comment %}}{% endcomment %}
-                                    {% comment %}}{% endcomment %}
-                                {% comment %}});{% endcomment %}
-                            {% comment %}}{% endcomment %}
-
-                        {% comment %}});{% endcomment %}
-                    {% comment %}</script>{% endcomment %}
-                </div>
-            </div>
-        </div>
-        <div class="top-menu visible-lg">
-            <div class="container">
-                <div class="container-inner">
-                    <style>
-                        #pt-menu-9085 .pt-menu-bar {
-                            background: #FFFFFF;
-                            color: #FFFFFF;
-                            padding: 0px 0px 0px 0px;
-                        }
-
-                        #pt-menu-9085.pt-menu-bar {
-                            background: #FFFFFF;
-                            color: #FFFFFF;
-                        }
-
-                        #pt-menu-9085 .ul-top-items .li-top-item .a-top-link {
-                            background: #FFFFFF;
-                            padding: 1.5rem 0 1.5rem 0;
-                            color: #222222;
-                            font-size: 1.5rem;
-                            text-transform: uppercase;
-                            font-weight: 600;
-                        }
-
-                        #pt-menu-9085 .ul-top-items .li-top-item:hover .a-top-link,
-                        #pt-menu-9085 .ul-top-items .li-top-item:hover .a-top-link i,
-                        #pt-menu-9085 .ul-top-items .li-top-item.active .a-top-link {
-                            color: #FEBD69;
-                            font-weight: 600;
-                            background: #FFFFFF;
-                        }
-
-                        #pt-menu-9085 .mega-menu-container {
-
-                            background: #FFFFFF;
-                            padding: 1.5rem 4.5rem 2.2rem 4.5rem;
-                        }
-
-                        #pt-menu-9085 .mega-menu-container .a-mega-second-link {
-                            color: #222222;
-                            font-size: 1.5rem;
-                            text-transform: uppercase;
-                            font-weight: 700;
-                        }
-
-                        #pt-menu-9085 .mega-menu-container .a-mega-second-link:hover {
-                            color: #FEBD69;
-                            font-weight: 700;
-                        }
-
-                        #pt-menu-9085 .mega-menu-container .a-mega-third-link {
-                            color: #777777;
-                            font-size: 1.4rem;
-                            text-transform: capitalize;
-                            font-weight: 400;
-                        }
-
-                        #pt-menu-9085 .mega-menu-container .a-mega-third-link:hover {
-                            color: #FEBD69;
-                            font-weight: 400;
-                        }
-
-                        #pt-menu-9085 .ul-second-items .li-second-items {
-                            background: #FFFFFF;
-                            color: #222222;
-                        }
-
-                        #pt-menu-9085 .ul-second-items .li-second-items:hover,
-                        #pt-menu-9085 .ul-second-items .li-second-items.active {
-                            background: #FFFFFF;
-                            color: #FEBD69;
-                        }
-
-                        #pt-menu-9085 .ul-second-items .li-second-items .a-second-link {
-                            color: #222222;
-                            font-size: 1.5rem;
-                            text-transform: capitalize;
-                            font-weight: 700;
-                        }
-
-                        #pt-menu-9085 .ul-second-items .li-second-items .a-second-link:hover,
-                        #pt-menu-9085 .ul-second-items .li-second-items.active .a-second-link {
-                            color: #FEBD69;
-                            font-weight: 700;
-                        }
-
-                        #pt-menu-9085 .ul-third-items .li-third-items {
-                            background: #FFFFFF;
-                        }
-
-                        #pt-menu-9085 .ul-third-items .li-third-items:hover,
-                        #pt-menu-9085 .ul-third-items .li-third-items.active {
-                            background: #FFFFFF;
-                        }
-
-                        #pt-menu-9085 .ul-third-items .li-third-items .a-third-link {
-                            color: #777777;
-                            font-size: 1.4rem;
-                            text-transform: capitalize;
-                            font-weight: 400;
-                        }
-
-                        #pt-menu-9085 .ul-third-items .li-third-items .a-third-link:hover,
-                        #pt-menu-9085 .ul-third-items .li-third-items.active .a-third-link {
-                            color: #FEBD69;
-                            font-weight: 400;
-                        }
-                    </style>
-                    <div class="pt-menu horizontal-menu pt-menu-bar visible-lg  " id="pt-menu-9085">
-
-                        <input type="hidden" id="menu-effect-9085" class="menu-effect" value="none" />
-                        <ul class="ul-top-items">
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="index.html">
-                                    <span>Home</span>
-                                </a>
-                            </li>
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="cookware.html">
-                                    <span>Cookware</span>
-                                    <i class="ion-ios-arrow-down" aria-hidden="true"></i>
-                                </a>
-                                <!-- Mega Menu -->
-
-                                <div class="mega-menu-container sub-menu-container left  full-width "
-                                    style="width: 100%;">
-                                    <div class="row">
-                                        <div class="col-md-3 sub-item2-content sub-item2-category-content"
-                                            data-cols="3">
-                                            <h4><a class="a-mega-second-link"
-                                                    href="cookware/cookware-sets.html">Cookware Sets</a></h4>
-                                            <div class="sub_item3-content">
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/cookware-sets/ceramic.html">Ceramic</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/cookware-sets/dishwashersafe.html">Dishwasher-Safe</a>
-                                                </h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/cookware-sets/gas-stovetop-compatible.html">Gas
-                                                        Stovetop Compatible</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/cookware-sets/induction-stovetop-compatible.html">Induction
-                                                        Stovetop Compatible</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/cookware-sets/mirror-satin.html">Mirror
-                                                        Satin</a></h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 sub-item2-content sub-item2-category-content"
-                                            data-cols="3">
-                                            <h4><a class="a-mega-second-link" href="cookware/pans.html">Pans</a>
-                                            </h4>
-                                            <div class="sub_item3-content">
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/pans/hard-anodizeds.html">Hard Anodized</a>
-                                                </h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/pans/scratch-resistant.html">Scratch
-                                                        Resistant</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/pans/thermo-spot.html">Thermo-Spot</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/pans/titanium-nonstick.html">Titanium
-                                                        Nonstick </a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/pans/ultimate.html">Ultimate</a></h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 sub-item2-content sub-item2-category-content"
-                                            data-cols="3">
-                                            <h4><a class="a-mega-second-link" href="cookware/skillets.html">Skillets</a>
-                                            </h4>
-                                            <div class="sub_item3-content">
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/skillets/aluminum-nonstick.html">Aluminum
-                                                        Nonstick</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/skillets/calphalon.html">Calphalon</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/skillets/contemporary.html">Contemporary</a>
-                                                </h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/skillets/hard-anodized.html">Hard-Anodized</a>
-                                                </h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/skillets/sauce-pan.html">Sauce Pan</a></h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 sub-item2-content sub-item2-category-content"
-                                            data-cols="3">
-                                            <h4><a class="a-mega-second-link"
-                                                    href="cookware/teakettles.html">Teakettles</a></h4>
-                                            <div class="sub_item3-content">
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/teakettles/aura-stainless.html">Aura
-                                                        Stainless</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/teakettles/cuisinart.html">Cuisinart</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/teakettles/homeinart.html">Homeinart</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/teakettles/kettle-stainless.html">Kettle
-                                                        Stainless</a></h5>
-                                                <h5><a class="a-mega-third-link"
-                                                        href="cookware/teakettles/steel-stovetop.html">Steel
-                                                        Stovetop</a></h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!-- Flyout Menu -->
-                            </li>
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="appliances.html">
-                                    <span>Appliances</span>
-                                </a>
-                            </li>
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="bakeware.html">
-                                    <span>Bakeware</span>
-                                </a>
-                            </li>
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="knives.html">
-                                    <span>Knives</span>
-                                </a>
-                            </li>
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="drinkware.html">
-                                    <span>Drinkware</span>
-                                </a>
-                            </li>
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="kitchenwares.html">
-                                    <span>Kitchenwares</span>
-                                </a>
-                            </li>
-                            <li class="li-top-item left " style="float: left">
-                                <a class="a-top-link" href="tablewares.html">
-                                    <span>Tableware</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-
-
-                </div>
-            </div>
-        </div>
     </header>
     <div id="account-register" class="container">
         <ul class="breadcrumb">
-            <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-            <li><a href="account-login.html?route=account/account">Account</a></li>
-            <li><a href="index5502.html?route=account/register">Register</a></li>
+            <li><a href="{% url 'main' %}"><i class="fa fa-home"></i></a></li>
+            <li><a href="">Account</a></li>
+            <li><a href="">Register</a></li>
         </ul>
         <div class="row">
             <div id="content" class="col-sm-9">
                 <h1>Register Account</h1>
-                <p>If you already have an account with us, please login at the <a href="account-login.html">login
+                <p>If you already have an account with us, please login at the <a href="{% url 'login' %}">login
                         page</a>.</p>
                 <form action="http://ostromi2.demo.towerthemes.com/index.php?route=account/register" method="post"
                     enctype="multipart/form-data" class="form-horizontal">
@@ -734,131 +448,165 @@
             <aside id="column-right" class="col-sm-3 col-xs-12">
                 <div class="col-order-inner">
                     <div class="list-group">
-                        <a href="account-login.html" class="list-group-item">Login</a> <a
-                            href="index5502.html?route=account/register" class="list-group-item">Register</a> <a
-                            href="indexacda.html?route=account/forgotten" class="list-group-item">Forgotten
+                        <a href="{% url 'login' %}" class="list-group-item">Login</a> <a href="{% url 'register' %}"
+                            class="list-group-item">Register</a> <a href="" class="list-group-item">Forgotten
                             Password</a>
-                        <a href="account-login.html?route=account/account" class="list-group-item">My Account</a>
-                        <a href="account-login.html?route=account/address" class="list-group-item">Address Book</a>
-                        <a href="account-login.html?route=account/wishlist" class="list-group-item">Wish List</a> <a
-                            href="account-login.html" class="list-group-item">Order History</a> <a
-                            href="account-login.html?route=account/download" class="list-group-item">Downloads</a><a
-                            href="account-login.html?route=account/recurring" class="list-group-item">Recurring
-                            payments</a> <a href="account-login.html?route=account/reward"
-                            class="list-group-item">Reward Points</a> <a href="account-login.html?route=account/return"
-                            class="list-group-item">Returns</a> <a href="account-login.html?route=account/transaction"
-                            class="list-group-item">Transactions</a> <a
-                            href="account-login.html?route=account/newsletter" class="list-group-item">Newsletter</a>
+                        <a href="" class="list-group-item">My Account</a>
+                        <a href="" class="list-group-item">Address Book</a>
+                        <a href="" class="list-group-item">Wish List</a> <a href="" class="list-group-item">Order
+                            History</a> <a href="" class="list-group-item">Downloads</a><a href=""
+                            class="list-group-item">Recurring
+                            payments</a> <a href="" class="list-group-item">Reward Points</a> <a href=""
+                            class="list-group-item">Returns</a> <a href="" class="list-group-item">Transactions</a> <a
+                            href="" class="list-group-item">Newsletter</a>
                     </div>
 
                 </div>
             </aside>
         </div>
     </div>
-    {% comment %}<script type="text/javascript">{% endcomment %}
-            {% comment %}// Sort the custom fields{% endcomment %}
-            {% comment %}$('#account .form-group[data-sort]').detach().each(function () {{% endcomment %}
-                {% comment %}if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group').eq($(this).attr('data-sort')).before(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
+    {% comment %}
+    <script type="text/javascript">{% endcomment %}
+        {% comment %}// Sort the custom fields{% endcomment %}
+        {% comment %} $('#account .form-group[data-sort]').detach().each(function () {
+            {% endcomment %}
+            {% comment %} if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {
+                {% endcomment %}
+                {% comment %} $('#account .form-group').eq($(this).attr('data-sort')).before(this); {% endcomment %}
+                {% comment %}
+            } {% endcomment %}
 
-                {% comment %}if ($(this).attr('data-sort') > $('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group:last').after(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
+            {% comment %} if ($(this).attr('data-sort') > $('#account .form-group').length) {
+                {% endcomment %}
+                {% comment %} $('#account .form-group:last').after(this); {% endcomment %}
+                {% comment %}
+            } {% endcomment %}
 
-                {% comment %}if ($(this).attr('data-sort') == $('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group:last').after(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
+            {% comment %} if ($(this).attr('data-sort') == $('#account .form-group').length) {
+                {% endcomment %}
+                {% comment %} $('#account .form-group:last').after(this); {% endcomment %}
+                {% comment %}
+            } {% endcomment %}
 
-                {% comment %}if ($(this).attr('data-sort') < -$('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group:first').before(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
-            {% comment %}});{% endcomment %}
+            {% comment %} if ($(this).attr('data-sort') < -$('#account .form-group').length) {
+                {% endcomment %}
+                {% comment %} $('#account .form-group:first').before(this); {% endcomment %}
+                {% comment %}
+            } {% endcomment %}
+            {% comment %}
+        }); {% endcomment %}
 
-        {% comment %}$('input[name=\'customer_group_id\']').on('change', function () {{% endcomment %}
-            {% comment %}$.ajax({{% endcomment %}
-                {% comment %}url: 'index.php?route=account/register/customfield&customer_group_id=' + this.value,{% endcomment %}
-                {% comment %}dataType: 'json',{% endcomment %}
-                {% comment %}success: function (json) {{% endcomment %}
-                    {% comment %}$('.custom-field').hide();{% endcomment %}
-                    {% comment %}$('.custom-field').removeClass('required');{% endcomment %}
+        {% comment %} $('input[name=\'customer_group_id\']').on('change', function () {
+            {% endcomment %}
+            {% comment %} $.ajax({{% endcomment %}
+                {% comment %}url: 'index.php?route=account/register/customfield&customer_group_id=' + this.value, {% endcomment %}
+            {% comment %}dataType: 'json', {% endcomment %}
+            {% comment %}success: function (json) {
+                {% endcomment %}
+                {% comment %} $('.custom-field').hide(); {% endcomment %}
+                {% comment %} $('.custom-field').removeClass('required'); {% endcomment %}
 
-                    {% comment %}for (i = 0; i < json.length; i++) {{% endcomment %}
-                        {% comment %}custom_field = json[i];{% endcomment %}
+                {% comment %} for (i = 0; i < json.length; i++) {
+                    {% endcomment %}
+                    {% comment %} custom_field = json[i]; {% endcomment %}
 
-                        {% comment %}$('#custom-field' + custom_field['custom_field_id']).show();{% endcomment %}
+                    {% comment %} $('#custom-field' + custom_field['custom_field_id']).show(); {% endcomment %}
 
-                        {% comment %}if (custom_field['required']) {{% endcomment %}
-                            {% comment %}$('#custom-field' + custom_field['custom_field_id']).addClass('required');{% endcomment %}
-                        {% comment %}}{% endcomment %}
-                    {% comment %}}{% endcomment %}
-                {% comment %}},{% endcomment %}
-                {% comment %}error: function (xhr, ajaxOptions, thrownError) {{% endcomment %}
-                    {% comment %}alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);{% endcomment %}
-                {% comment %}}{% endcomment %}
-            {% comment %}});{% endcomment %}
-        {% comment %}});{% endcomment %}
+                    {% comment %} if (custom_field['required']) {
+                        {% endcomment %}
+                        {% comment %} $('#custom-field' + custom_field['custom_field_id']).addClass('required'); {% endcomment %}
+                        {% comment %}
+                    } {% endcomment %}
+                    {% comment %}
+                } {% endcomment %}
+                {% comment %}
+            }, {% endcomment %}
+            {% comment %}error: function (xhr, ajaxOptions, thrownError) {
+                {% endcomment %}
+                {% comment %} alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText); {% endcomment %}
+                {% comment %}
+            }{% endcomment %}
+            {% comment %}}); {% endcomment %}
+        {% comment %}}); {% endcomment %}
 
-        {% comment %}$('input[name=\'customer_group_id\']:checked').trigger('change');{% endcomment %}
-{% comment %}</script>{% endcomment %}
-    {% comment %}<script type="text/javascript">< !--{% endcomment %}
-            {% comment %}$('button[id^=\'button-custom-field\']').on('click', function () {{% endcomment %}
-                {% comment %}var element = this;{% endcomment %}
+        {% comment %} $('input[name=\'customer_group_id\']:checked').trigger('change'); {% endcomment %}
+        {% comment %}</script>{% endcomment %}
+    {% comment %}
+    <script type="text/javascript">< !--{% endcomment %}
+        {% comment %} $('button[id^=\'button-custom-field\']').on('click', function () {
+            {% endcomment %}
+            {% comment %} var element = this; {% endcomment %}
 
-                {% comment %}$('#form-upload').remove();{% endcomment %}
+            {% comment %} $('#form-upload').remove(); {% endcomment %}
 
-                {% comment %}$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');{% endcomment %}
+            {% comment %} $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>'); {% endcomment %}
 
-                {% comment %}$('#form-upload input[name=\'file\']').trigger('click');{% endcomment %}
+            {% comment %} $('#form-upload input[name=\'file\']').trigger('click'); {% endcomment %}
 
-                {% comment %}if (typeof timer != 'undefined') {{% endcomment %}
-                    {% comment %}clearInterval(timer);{% endcomment %}
-                {% comment %}}{% endcomment %}
+            {% comment %} if (typeof timer != 'undefined') {
+                {% endcomment %}
+                {% comment %} clearInterval(timer); {% endcomment %}
+                {% comment %}
+            } {% endcomment %}
 
-                {% comment %}timer = setInterval(function () {{% endcomment %}
-                    {% comment %}if ($('#form-upload input[name=\'file\']').val() != '') {{% endcomment %}
-                        {% comment %}clearInterval(timer);{% endcomment %}
+            {% comment %} timer = setInterval(function () {
+                {% endcomment %}
+                {% comment %} if ($('#form-upload input[name=\'file\']').val() != '') {
+                    {% endcomment %}
+                    {% comment %} clearInterval(timer); {% endcomment %}
 
-                        {% comment %}$.ajax({{% endcomment %}
-                            {% comment %}url: 'index.php?route=tool/upload',{% endcomment %}
-                            {% comment %}type: 'post',{% endcomment %}
-                            {% comment %}dataType: 'json',{% endcomment %}
-                            {% comment %}data: new FormData($('#form-upload')[0]),{% endcomment %}
-                            {% comment %}cache: false,{% endcomment %}
-                            {% comment %}contentType: false,{% endcomment %}
-                            {% comment %}processData: false,{% endcomment %}
-                            {% comment %}beforeSend: function () {{% endcomment %}
-                                {% comment %}$(element).button('loading');{% endcomment %}
-                            {% comment %}},{% endcomment %}
-                            {% comment %}complete: function () {{% endcomment %}
-                                {% comment %}$(element).button('reset');{% endcomment %}
-                            {% comment %}},{% endcomment %}
-                            {% comment %}success: function (json) {{% endcomment %}
-                                {% comment %}$(element).parent().find('.text-danger').remove();{% endcomment %}
+                    {% comment %} $.ajax({{% endcomment %}
+                {% comment %} url: 'index.php?route=tool/upload', {% endcomment %}
+                            {% comment %}type: 'post', {% endcomment %}
+            {% comment %}dataType: 'json', {% endcomment %}
+            {% comment %}data: new FormData($('#form-upload')[0]), {% endcomment %}
+            {% comment %}cache: false, {% endcomment %}
+            {% comment %}contentType: false, {% endcomment %}
+            {% comment %}processData: false, {% endcomment %}
+            {% comment %}beforeSend: function () {
+                {% endcomment %}
+                {% comment %} $(element).button('loading'); {% endcomment %}
+                {% comment %}
+            }, {% endcomment %}
+            {% comment %}complete: function () {
+                {% endcomment %}
+                {% comment %} $(element).button('reset'); {% endcomment %}
+                {% comment %}
+            }, {% endcomment %}
+            {% comment %}success: function (json) {
+                {% endcomment %}
+                {% comment %} $(element).parent().find('.text-danger').remove(); {% endcomment %}
 
-                                {% comment %}if (json['error']) {{% endcomment %}
-                                    {% comment %}$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');{% endcomment %}
-                                {% comment %}}{% endcomment %}
+                {% comment %} if (json['error']) {
+                    {% endcomment %}
+                    {% comment %} $(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>'); {% endcomment %}
+                    {% comment %}
+                } {% endcomment %}
 
-                                {% comment %}if (json['success']) {{% endcomment %}
-                                    {% comment %}alert(json['success']);{% endcomment %}
+                {% comment %} if (json['success']) {
+                    {% endcomment %}
+                    {% comment %} alert(json['success']); {% endcomment %}
 
-                                    {% comment %}$(element).parent().find('input').val(json['code']);{% endcomment %}
-                                {% comment %}}{% endcomment %}
-                            {% comment %}},{% endcomment %}
-                            {% comment %}error: function (xhr, ajaxOptions, thrownError) {{% endcomment %}
-                                {% comment %}alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);{% endcomment %}
-                            {% comment %}}{% endcomment %}
-                        {% comment %}});{% endcomment %}
-                    {% comment %}}{% endcomment %}
-                {% comment %}}, 500);{% endcomment %}
-            {% comment %}});{% endcomment %}
-{% comment %}</script>{% endcomment %}
+                    {% comment %} $(element).parent().find('input').val(json['code']); {% endcomment %}
+                    {% comment %}
+                } {% endcomment %}
+                {% comment %}
+            }, {% endcomment %}
+            {% comment %}error: function (xhr, ajaxOptions, thrownError) {
+                {% endcomment %}
+                {% comment %} alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText); {% endcomment %}
+                {% comment %}
+            }{% endcomment %}
+            {% comment %}}); {% endcomment %}
+        {% comment %}}{% endcomment %}
+        {% comment %}}, 500); {% endcomment %}
+        {% comment %}}); {% endcomment %}
+        {% comment %}</script>{% endcomment %}
     <script type="text/javascript">
-            $('.date').datetimepicker({
-                language: 'en-gb',
-                pickTime: false
-            });
+        $('.date').datetimepicker({
+            language: 'en-gb',
+            pickTime: false
+        });
 
         $('.time').datetimepicker({
             language: 'en-gb',
@@ -870,6 +618,6 @@
             pickDate: true,
             pickTime: true
         });
-</script>
+    </script>
 </div>
 {% endblock content %}

@@ -15,8 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block title%} Welcome - {% endblock %}</title>
     <base />
-    <link href="{% static 'main/vendors/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen" />
     <link href="{% static 'main/vendors/jquery/swiper/css/swiper.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'main/vendors/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" media="screen" />
     <link href="{% static 'main/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'main/vendors/ionicons/css/ionicons.css' %}" rel="stylesheet" type="text/css" />
     <!-- use for ostromi -->
@@ -65,7 +65,7 @@
                 }
             });
             $('#back-top').click(function () {
-                $('body,html').animate({scrollTop: 0}, 800);
+                $('body,html').animate({ scrollTop: 0 }, 800);
                 return false;
             });
         });
@@ -75,8 +75,12 @@
     <!-- Bootstrap Js -->
     <script src="{%static 'main/vendors/bootstrap/js/bootstrap.min.js' %}"></script>
 </head>
+<body>
+    
 {% block content %}
+{% include 'main/base_files/nav-bar.html' % }
 {% endblock content %}
+
 {% include 'main/base_files/footer.html' %}
 </body>
 

@@ -49,7 +49,7 @@
                             <div class="dropdown-menu footer-content">
                                 <div class="contact-block">
                                     <a href="#" class="logo-footer"><img
-                                            src="image/catalog/logo/ostromi2-footer.png" alt="logo-footer"></a>
+                                            src="{% static 'main/image/catalog/logo/ostromi2-footer.png' %}" alt="logo-footer"></a>
                                     <div class="phone">
                                         <p>Call Us toll Free</p>
                                         <h4>(+123) 456 789 or (+123) 666 888</h4>
@@ -95,14 +95,14 @@
                                     class="visible-xs ion-chevron-down"></i></h5>
                             <div class="dropdown-menu">
                                 <ul class="list-unstyled">
-                                    <li><a href="product-manufacturer.html">Brands</a></li>
-                                    <li><a href="account-voucher.html">Gift Certificates</a></li>
-                                    <li><a href="affiliate-login.html">Affiliate</a></li>
-                                    <li><a href="indexf110.html?route=product/special">Specials</a></li>
-                                    <li><a href="account-return-add.html">Returns</a></li>
-                                    <li><a href="account-login.html">Order History</a></li>
-                                    <li><a href="account-login.html?route=account/account">My Account</a></li>
-                                    <li><a href="account-login.html?route=account/wishlist">Wish List</a></li>
+                                    <li><a href="">Brands</a></li>
+                                    <li><a href="">Gift Certificates</a></li>
+                                    <li><a href="">Affiliate</a></li>
+                                    <li><a href="">Specials</a></li>
+                                    <li><a href="">Returns</a></li>
+                                    <li><a href="">Order History</a></li>
+                                    <li><a href="{% url 'login' %}">My Account</a></li>
+                                    <li><a href="">Wish List</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                     service. We've been delivering best bang for your buck for over 10 years, every item we
                     stock is carefully selected to ensure we offer you top quality at competitive prices.</p>
                 <div class="payment">
-                    <img src="image/catalog/ptblock/payment.png" alt="payment">
+                    <img src="{% static 'main/image/catalog/ptblock/payment.png' %}" alt="payment">
                 </div>
 
 
@@ -142,7 +142,7 @@
     <div class="footer-copyright">
         <div class="container">
             <div class="inner">
-                <p class="text-powered">Powered By <a href="../plazathemes.com/index.html">Plazathemes</a>.
+                <p class="text-powered">Powered By <a href="">Plazathemes</a>.
                     Store 2 &copy; 2021</p>
             </div>
         </div>
