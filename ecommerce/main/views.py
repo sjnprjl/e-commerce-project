@@ -1,5 +1,3 @@
-from typing import Generic
-from django.shortcuts import render
 from django.views import generic
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
@@ -7,37 +5,37 @@ from django.views.generic.base import TemplateView
 from .models import *
 
 
-class Index(TemplateView):
+class IndexView(TemplateView):
     template_name = "main/index.html"
 
 
-class Product(TemplateView):
+class ProductView(TemplateView):
     template_name = "main/product.html"
 
 
-class Search(TemplateView):
+class SearchView(TemplateView):
     template_name = "main/search.html"
 
 
-class AboutUs(TemplateView):
+class AboutUsView(TemplateView):
     template_name = "main/about_us.html"
 
 
-class Login(TemplateView):
+class LoginView(TemplateView):
     template_name = "main/account-login.html"
 
 
-class Register(TemplateView):
+class RegisterView(TemplateView):
     template_name = "main/account-register.html"
 
 
-class Privacy(TemplateView):
+class PrivacyView(TemplateView):
     template_name = "main/privacy.html"
 
 
-class Terms(TemplateView):
+class TermsView(TemplateView):
     template_name = "main/terms.html"
 
 
-class ProductWiseList(TemplateView):
+class ProductWiseListView(TemplateView):
     template_name = "main/product-wise-list.html"

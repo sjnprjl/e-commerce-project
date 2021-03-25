@@ -34,10 +34,10 @@
         <div class="header " style="background-color: #417690;">
             <!-- Logo -->
             <div class="header-left">
-                <a href="{%url 'main' %}" class="logo">
+                <a href="" class="logo">
                     <img src="{%static 'img/logoo.png' %}" alt="Logo">
                 </a>
-                <a href="{% url 'main'%}" class="logo logo-small">
+                <a href="" class="logo logo-small">
                     <img src="{%static 'img/logoo.png' %}" alt="Logo" width="30" height="30">
                 </a>
             </div>
@@ -75,9 +75,9 @@
                     </a>
                     
                     <div class="dropdown-menu text-white">
-                        <a class="dropdown-item" href="{% url 'profile' %}"><em data-feather="user" class="mr-1"></em>
+                        <a class="dropdown-item" href=""><em data-feather="user" class="mr-1"></em>
                             Profile</a>
-                        <a class="dropdown-item" href="{% url 'logout' %}"><em data-feather="log-out" class="mr-1"></em>
+                        <a class="dropdown-item" href=""><em data-feather="log-out" class="mr-1"></em>
                             Logout</a>
                     </div>
                 </li>
@@ -96,11 +96,11 @@
                     <ul>
                         <li class="menu-title text-white"><span>Main</span></li>
                         <li class="{%block indexActive %}{%endblock%} ">
-                            <a href="{%url 'dashboard' %}" class="text-white"><em data-feather="home"></em>
+                            <a href="" class="text-white"><em data-feather="home"></em>
                                 <span>Dashboard</span></a>
                         </li>
                         <li class="{%block customerActive %}{%endblock%}">
-                            <a href="{%url 'customer' %}" class="text-white"><em data-feather="users"></em>
+                            <a href="" class="text-white"><em data-feather="users"></em>
                                 <span>Customers</span></a>
                         </li>
 
