@@ -8,7 +8,7 @@ from .models import *
 
 class DashboardView(LoginRequiredMixin, generic.base.TemplateView):
     login_url = "/dashboard/login/"
-    template_name = "dashboard/dashboard.html"
+    template_name = "dashboard/dashboard-ecommerce.html"
 
 
 class LoginView(generic.base.TemplateView):
