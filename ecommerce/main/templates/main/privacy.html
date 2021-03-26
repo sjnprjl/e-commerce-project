@@ -3,6 +3,9 @@
 {% block content %}
 <div class="wrapper">
     <div id="back-top"><i class="ion-chevron-up"></i></div>
+<<<<<<< HEAD
+    {% include 'main/base_files/topbar.html' %}
+=======
     <nav id="top">
         <div class="container">
             <div class="box-inner">
@@ -45,18 +48,18 @@
                             <div class="btn-group">
                                 <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
 
-                                    <img src="catalog/language/en-gb/en-gb.png" alt="English" title="English">
+                                    <img src="{% static 'catalog/language/en-gb/en-gb.png' %}" alt="English" title="English">
                                     <span class="hidden-xs hidden-sm">Language</span>&nbsp;<i
                                         class="icon-right ion-ios-arrow-down"></i></button>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <button class="btn btn-link btn-block language-select" type="button"
-                                            name="en-gb"><img src="catalog/language/en-gb/en-gb.png" alt="English"
+                                            name="en-gb"><img src="{% static 'catalog/language/en-gb/en-gb.png' %}" alt="English"
                                                 title="English" /> English</button>
                                     </li>
                                     <li>
                                         <button class="btn btn-link btn-block language-select" type="button"
-                                            name="de-de"><img src="catalog/language/de-de/de-de.png" alt="Germany"
+                                            name="de-de"><img src="{% static 'catalog/language/de-de/de-de.png' %}" alt="Germany"
                                                 title="Germany" /> Germany</button>
                                     </li>
                                 </ul>
@@ -84,6 +87,7 @@
             </div>
         </div>
     </nav>
+>>>>>>> image-load-fix
     <header class="scroll-fix">
         <div class="container">
             <div class="box-inner">
@@ -198,6 +202,12 @@
                     {% include 'main/base_files/nav-bar.html' %}
 
                 </div>
+<<<<<<< HEAD
+                
+          
+      
+        
+=======
                 <div class="col-search">
                     <div id="search-by-category">
                         <div class="dropdown-toggle search-button" data-toggle="dropdown"></div>
@@ -260,7 +270,7 @@
                                 </div>
                                 <div class="search-ajax">
                                     <div class="ajax-loader-container" style="display: none;">
-                                        <img src="image/catalog/ajax-loader.gif" alt="search-ajax" class="ajax-load-img"
+                                        <img src="{% static 'image/catalog/ajax-loader.gif' %}" alt="search-ajax" class="ajax-load-img"
                                             width="30" height="30" />
                                     </div>
                                     <div class="ajax-result-container">
@@ -637,6 +647,7 @@
                 </div>
             </div>
         </div>
+>>>>>>> image-load-fix
     </header>
     <div id="information-information" class="container">
         <ul class="breadcrumb">
