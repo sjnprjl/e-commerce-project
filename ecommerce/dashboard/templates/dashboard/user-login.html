@@ -3,13 +3,16 @@
 {% block leftbar %} {%endblock %}
 {% block rightbar %} {%endblock %}
 {% block content %}
+<body class="vertical-layout">
+    <!-- Start Containerbar -->
+<div id="containerbar" class="containerbar authenticate-bg">
 <!-- Start Container -->
 <div class="container">
     <div class="auth-box login-box">
         <!-- Start row -->
         <div class="row no-gutters align-items-center justify-content-center">
             <!-- Start col -->
-            <div class="col-md-6 col-lg-5">
+            <div class="col-md-2 col-lg-5">
                 <!-- Start Auth Box -->
                 <div class="auth-box-right">
                     <div class="card">
@@ -43,8 +46,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-success btn-lg btn-block font-18">Log
-                                    in</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block font-18">Log in</button>
                             </form>
                             
                             
@@ -60,5 +62,9 @@
         <!-- End row -->
     </div>
 </div>
+</div>
+</div>
+</body>
 <!-- End Container -->
 {% endblock %}
+
