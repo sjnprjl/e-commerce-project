@@ -154,7 +154,7 @@
                                 <div id="ajax-login-block">
                                 </div>
                                 <div id="ajax-loader">
-                                    <img src="{%static 'image/catalog/ajax-loader.gif' %}" alt="" />
+                                    <img src="{%static 'main/image/catalog/ajax-loader.gif' %}" alt="" />
                                 </div>
                                 <div class="ajax-body-login">
                                     <div class="account-login">
@@ -183,7 +183,7 @@
                                                             <button class="button btn" type="button" onclick="ptlogin.loginAction(document.getElementById('input-email').value, document.getElementById('input-password').value)"><span>Login</span></button>
                                                             <button class="button btn" type="button" onclick="ptlogin.appendRegisterForm()"><span>Create
                                                                         an account</span></button>
-                                                            <img class="ajax-load-img" alt="" src="image/catalog/ajax-loader.gif" width="30" height="30" />
+                                                            <img class="ajax-load-img" alt="" src="main/image/catalog/ajax-loader.gif" width="30" height="30" />
                                                         </div>
                                                     </form>
                                                 </div>
@@ -497,10 +497,10 @@
                                         <div class="slide-loading"></div>
                                         <div id="plaza-slider" class="plaza-slider">
                                             <a href="#   "><img style="display: none;"
-                                                    src="{% static 'image/cache/catalog/slider/slider1-ostromi2-840x510.jpg' %}" alt=""
+                                                    src="{% static 'main/image/cache/catalog/slider/slider1-ostromi2-840x510.jpg' %}" alt=""
                                                     title="#slide-caption2" /></a>
                                             <a href="#   "><img style="display: none;"
-                                                    src="{% static 'image/cache/catalog/slider/slider2-ostromi2-840x510.jpg' %}" alt=""
+                                                    src="{% static 'main/image/cache/catalog/slider/slider2-ostromi2-840x510.jpg' %}" alt=""
                                                     title="#slide-caption3" /></a>
                                         </div>
 
@@ -579,7 +579,7 @@
                                                 <div class="col">
                                                     <div class="image">
                                                         <a href="cookware.html"><img
-                                                           src="{% static 'image/catalog/ptblock/img1-top-ostromi2.jpg' %}"
+                                                           src="{% static 'main/image/catalog/img1-top-ostromi2.jpg' %}"
                                                                 alt="img1"></a>
                                                         <div class="text">
                                                             <h3 class="text1">Ceramic <span>Cookware</span></h3>
@@ -590,7 +590,7 @@
                                             </div>
                                             <div class="col col2">
                                                 <div class="image">
-                                                    <a href="appliances.html"><img src="{%static 'image/catalog/ptblock/img2-top-ostromi2.jpg' %}" alt="img2"></a>
+                                                    <a href="appliances.html"><img src="{%static 'main/image/catalog/img2-top-ostromi2.jpg' %}" alt="img2"></a>
                                                     <div class="text">
                                                         <h3 class="text1">Master Mix <span>Basic</span></h3>
                                                         <p class="text2">Starting At <span>$119.99</span></p>
@@ -611,14 +611,14 @@
                                                 <div class="swiper-wrapper">
                                                     <div class="swiper-slide ">
                                                         <div class="category-content">
-                                                            <a href="appliances.html"><img src="{%static 'image/cache/catalog/f-cate/appliances-250x157.jpg' %}" alt="Appliances" /></a>
+                                                            <a href="appliances.html"><img src="{%static 'main/image/catalog/ptblock/img2-top-ostromi2.jpg' %}" alt="Appliances" /></a>
                                                             <h4 class="name"><a href="appliances.html">Appliances</a></h4>
                                                             <p class="total-items">7 products</p>
                                                         </div>
                                                     </div>
                                                     <div class="swiper-slide ">
                                                         <div class="category-content">
-                                                            <a href="bakeware.html"><img src="{%static 'image/cache/catalog/f-cate/bakeware-250x157.jpg' %}" alt="Bakeware" /></a>
+                                                            <a href="bakeware.html"><img src="{%static 'main/image/catalog/ptblock/img2-top-ostromi2.jpg' %}" alt="Bakeware" /></a>
                                                             <h4 class="name"><a href="bakeware.html">Bakeware</a>
                                                             </h4>
                                                             <p class="total-items">10 products</p>
@@ -626,7 +626,7 @@
                                                     </div>
                                                     <div class="swiper-slide ">
                                                         <div class="category-content">
-                                                            <a href="cookware.html"><img src="{%static 'image/cache/catalog/f-cate/cookware-250x157.jpg' %}" alt="Cookware" /></a>
+                                                            <a href="cookware.html"><img src="{%static 'main/image/catalog/ptblock/img2-top-ostromi2.jpg' %}" alt="Cookware" /></a>
                                                             <h4 class="name"><a href="cookware.html">Cookware</a>
                                                             </h4>
                                                             <p class="total-items">18 products</p>
@@ -634,7 +634,7 @@
                                                     </div>
                                                     <div class="swiper-slide ">
                                                         <div class="category-content">
-                                                            <a href="glassware.html"><img src="{%static 'image/cache/catalog/f-cate/glassware-250x157.jpg' %}" alt="Glassware" /></a>
+                                                            <a href="glassware.html"><img src="{%static 'main/image/cache/catalog/f-cate/glassware-250x157.jpg' %}" alt="Glassware" /></a>
                                                             <h4 class="name"><a href="glassware.html">Glassware</a>
                                                             </h4>
                                                             <p class="total-items">10 products</p>
@@ -1047,7 +1047,7 @@
                                                     }
                                                 },
                                                 autoplay: false,
-                                                loop: false
+                                                loop: true,
                                             });
                                         </script>
 
@@ -1055,7 +1055,7 @@
                                 </div>
                                 <div class="pt-block static-middle-store2">
                                     <div class="image">
-                                        <a href="#"><img src="{%static 'image/catalog/ptblock/img-middle-ostromi2.jpg' %}" alt="img"></a>
+                                        <a href="#"><img src="{%static 'main/image/catalog/img-middle-ostromi2.jpg' %}" alt="img"></a>
                                     </div>
                                 </div>
 
@@ -2627,7 +2627,7 @@
                                 </div>
                                 <div class="pt-block static-middle2-store2">
                                     <div class="image">
-                                        <a href="#"><img src="{%static 'image/catalog/ptblock/img-middle2-ostromi2.jpg' %}" alt="img-middle2"></a>
+                                        <a href="#"><img src="{%static 'main/image/catalog/img-middle2-ostromi2.jpg' %}" alt="img-middle2"></a>
                                         <div class="text">
                                             <h4 class="text1">limited time offer!</h4>
                                             <h3 class="text2">Double Offer!</h3>
@@ -3236,7 +3236,7 @@
                                 </div>
                                 <div class="pt-block static-bottom-store2">
                                     <div class="image">
-                                        <a href="#"><img src="{%static 'image/catalog/ptblock/img-bottom-ostromi2.jpg' %}" alt="img-bottom"></a>
+                                        <a href="#"><img src="{%static 'main/image/catalog/img-bottom-ostromi2.jpg' %}" alt="img-bottom"></a>
                                         <div class="text">
                                             <h3 class="text1">Introducing the <span>Egomix™ Hand Mixer</span></h3>
                                             <p class="text2">A kitchen staple gets a radical new makeover.</p>
