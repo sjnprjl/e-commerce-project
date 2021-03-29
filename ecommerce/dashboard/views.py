@@ -13,3 +13,21 @@ class DashboardView(LoginRequiredMixin, generic.base.TemplateView):
 
 class LoginView(generic.base.TemplateView):
     template_name = "dashboard/user-login.html"
+
+class ProductView(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-product-list.html"
+
+class ProductDetails(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-product-detail.html"
+
+class Order(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-order-list.html"
+
+class OrderDetails(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-order-detail.html"
+
+class Cart(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-cart.html"
+
+class Admin(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-myaccount.html"

@@ -106,7 +106,7 @@
             <div class="logobar">
                 <a href="index.html" class="logo logo-large"><img src="{% static 'main/image/catalog/logo/ostromi2-footer.png' %}"
                                                                   class="img-fluid" alt="logo"></a>
-                <a href="index.html" class="logo logo-small"><img src="{%static 'dashboard/images/small_logo.svg'%}"
+                <a href="index.html" class="logo logo-small"><img src="{% static 'main/image/catalog/logo/ostromi2-footer.png' %}"
                                                                   class="img-fluid" alt="logo"></a>
             </div>
             <!-- End Logobar -->
@@ -115,30 +115,14 @@
                 <ul class="vertical-menu">
                     <li>
                         <a href="javaScript:void();">
-                            <img src="{% static 'dashboard/images/svg-icon/dashboard.svg' %}" class="img-fluid"alt="dashboard" active><a href="dashboard-ecommerce.html">Dashboard</a>
-                        </a>
-                       
-                    
-                    
-                        
-                    </li>
-                    
-                   
-                    
-                  
-                 
-                    
-                    
-                            <li><a href="ecommerce-product-list.html">Product List</a></li>
-                            <li><a href="ecommerce-product-detail.html">Product Detail</a></li>
-                            <li><a href="ecommerce-order-list.html">Order List</a></li>
-                            <li><a href="ecommerce-order-detail.html">Order Detail</a></li>
-                            <li><a href="ecommerce-shop.html">Shop</a></li>
-                            <li><a href="ecommerce-single-product.html">Single Product</a></li>
-                            <li><a href="ecommerce-cart.html">Cart</a></li>
-                            <li><a href="ecommerce-checkout.html">Checkout</a></li>
-                            <li><a href="ecommerce-thankyou.html">Thank You</a></li>
-                            <li><a href="ecommerce-myaccount.html">My Account</a></li>
+                            <a href="{% url 'dashboard' %}">Dashboard</a>
+                        </a>   
+                    </li>                    
+                            <li><a href="{% url 'product' %}">Product List</a></li>
+                            <li><a href="{% url 'details' %}">Product Detail</a></li>
+                            <li><a href="{% url 'order' %}">Order List</a></li>
+                            <li><a href="{% url 'orderdetails' %}">Order Detail</a></li>
+                            <li><a href="{% url 'Admin' %}">My Account</a></li>
                         </ul>
                    
                 </ul>
@@ -157,8 +141,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="mobile-logobar">
-                        <a href="index.html" class="mobile-logo"><img src="{%static 'dashboard/images/logo.svg'%}"
-                                                                      class="img-fluid" alt="logo"></a>
+                        <a href="index.html" class="mobile-logo"><img src="{% static 'main/image/catalog/logo/kamal-small.png' %}" height="10px" class="img-fluid" alt="logo"></a>
                     </div>
                     <div class="mobile-togglebar">
                         <ul class="list-inline mb-0">
@@ -335,7 +318,19 @@
         <!-- End Topbar -->
         <!-- Start Breadcrumbbar -->
         <div class="breadcrumbbar">
-            
+            <div class="row align-items-center">
+                <div class="col-md-8 col-lg-8">
+                    <h4 class="page-title">Products</h4>
+                    <div class="breadcrumb-list">
+                       
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="widgetbar">
+                        <button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Add</button>
+                    </div>                        
+                </div>
+            </div>          
         </div>
         <!-- End Breadcrumbbar -->
         {% endblock %}
