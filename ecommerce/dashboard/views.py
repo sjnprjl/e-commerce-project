@@ -31,3 +31,7 @@ class Cart(generic.base.TemplateView):
 
 class Admin(generic.base.TemplateView):
     template_name = "dashboard/ecommerce-myaccount.html"
+
+class AddProduct(generic.base.TemplateView):
+    template_name = "dashboard/add-product.html"
+
