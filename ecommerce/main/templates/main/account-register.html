@@ -236,8 +236,8 @@
                 <h1>Register Account</h1>
                 <p>If you already have an account with us, please login at the <a href="account-login.html">login
                         page</a>.</p>
-                <form action="http://ostromi2.demo.towerthemes.com/index.php?route=account/register" method="post"
-                    enctype="multipart/form-data" class="form-horizontal">
+                <form action="" method="POST" class="form-horizontal">
+                    {%csrf_token%}
                     <fieldset id="account">
                         <legend>Your Personal Details</legend>
                         <div class="form-group required" style="display:  none ;">
@@ -253,29 +253,28 @@
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-firstname">First Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="firstname" value="" placeholder="First Name"
-                                    id="input-firstname" class="form-control" />
+                                {{form.user_name}}
+
                             </div>
                         </div>
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lastname" value="" placeholder="Last Name" id="input-lastname"
-                                    class="form-control" />
+                                
+                                {{form.full_name}}
                             </div>
                         </div>
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
                             <div class="col-sm-10">
-                                <input type="email" name="email" value="" placeholder="E-Mail" id="input-email"
-                                    class="form-control" />
+                           {{form.email}}
                             </div>
                         </div>
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-telephone">Telephone</label>
                             <div class="col-sm-10">
-                                <input type="tel" name="telephone" value="" placeholder="Telephone" id="input-telephone"
-                                    class="form-control" />
+                                <!-- <input type="tel" name="telephone" value="" placeholder="Telephone" id="input-telephone"
+                                    class="form-control" /> -->
                             </div>
                         </div>
                     </fieldset>
@@ -284,19 +283,18 @@
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-password">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" name="password" value="" placeholder="Password"
-                                    id="input-password" class="form-control" />
-                            </div>
+                            {{form.password1}}
+                                </div>
                         </div>
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-confirm">Password Confirm</label>
                             <div class="col-sm-10">
-                                <input type="password" name="confirm" value="" placeholder="Password Confirm"
-                                    id="input-confirm" class="form-control" />
-                            </div>
+                           
+                                {{form.password2}}
+                                </div>
                         </div>
                     </fieldset>
-                    <fieldset>
+                    <!-- <fieldset>
                         <legend>Newsletter</legend>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Subscribe</label>
@@ -308,7 +306,8 @@
                                     No</label>
                             </div>
                         </div>
-                    </fieldset>
+                    </fieldset> -->
+                    {{form.errors}}
 
                     <div class="buttons">
                         <div class="pull-right">

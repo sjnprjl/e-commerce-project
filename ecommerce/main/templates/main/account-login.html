@@ -142,21 +142,25 @@
                         <div class="well">
                             <h2>Returning Customer</h2>
                             <p><strong>I am a returning customer</strong></p>
-                            <form action="http://ostromi2.demo.towerthemes.com/account-login" method="post"
+                            <form action="{% url 'login' %}" method="POST"
                                 enctype="multipart/form-data">
+                                {% csrf_token %}
                                 <div class="form-group">
                                     <label class="control-label" for="input-email">E-Mail Address</label>
-                                    <input type="text" name="email" value="" placeholder="E-Mail Address"
-                                        id="input-email" class="form-control" />
+                                   <br> {{form.username}}
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="input-password">Password</label>
-                                    <input type="password" name="password" value="" placeholder="Password"
-                                        id="input-password" class="form-control" />
+                                   <br> {{form.password}}
                                     <a href="indexacda.html?route=account/forgotten">Forgotten Password</a></div>
                                 <input type="submit" value="Login" class="btn btn-primary" />
                                 <input type="hidden" name="redirect" value="account-login.html?route=account/account" />
                             </form>
+                            {{form.errors}}
+                            {% for message in messages %}
+                            {{message}}
+
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

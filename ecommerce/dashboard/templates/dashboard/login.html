@@ -14,19 +14,23 @@
                 <div class="auth-box-right">
                     <div class="card">
                         <div class="card-body">
-                            <form action="#">
+                            <form action="{%  url 'login' %}" method="POST">
+                                {% csrf_token %}
                                 <div class="form-head">
                                     <a href="index.html" class="logo"><img src="{% static 'main/image/catalog/logo/ostromi2.png' %}"
                                             class="img-fluid" alt="logo"></a>
                                 </div>
                                 <h4 class="text-primary my-4">Log in !</h4>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="username"
-                                        placeholder="Enter Username here" required>
+
+
+                                    {{form.username}}
+
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" id="password"
-                                        placeholder="Enter Password here" required>
+                               {{form.password}}
+
+
                                 </div>
                                 <div class="form-row mb-3">
                                     <div class="col-sm-6">
@@ -50,6 +54,7 @@
                             
                             <p class="mb-0 mt-3">Don't have a account? <a href="tel:9804385646">Contact Admin</a>
                             </p>
+                            {{form.errors}}
                         </div>
                     </div>
                 </div>

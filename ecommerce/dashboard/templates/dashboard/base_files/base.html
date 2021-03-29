@@ -104,9 +104,9 @@
         <div class="sidebar">
             <!-- Start Logobar -->
             <div class="logobar">
-                <a href="index.html" class="logo logo-large"><img src="{% static 'main/image/catalog/logo/ostromi2-footer.png' %}"
+                <a href="{% url 'dashboard' %}" class="logo logo-large"><img src="{% static 'main/image/catalog/logo/ostromi2-footer.png' %}"
                                                                   class="img-fluid" alt="logo"></a>
-                <a href="index.html" class="logo logo-small"><img src="{%static 'dashboard/images/small_logo.svg'%}"
+                <a href="{% url 'dashboard' %}" class="logo logo-small"><img src="{%static 'dashboard/images/small_logo.svg'%}"
                                                                   class="img-fluid" alt="logo"></a>
             </div>
             <!-- End Logobar -->
@@ -315,7 +315,7 @@
                                                                     class="img-fluid" alt="email">Email</a>
                                                     </li>
                                                     <li class="media dropdown-item">
-                                                        <a href="#" class="profile-icon"><img
+                                                        <a href="{% url 'logout' %}" class="profile-icon"><img
                                                                     src="{%static 'dashboard/images/svg-icon/logout.svg'%}"
                                                                     class="img-fluid" alt="logout">Logout</a>
                                                     </li>
