@@ -4,6 +4,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
     BaseUserManager,
 )
+from ckeditor.fields import RichTextField
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
@@ -53,17 +54,16 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    description =RichTextField(blank=True, null=True)
 
 
 class Product(models.Model):
     product_name = models.CharField(max_length=200, null=True)
     unit_price = models.IntegerField()
     discount = models.IntegerField()
-    rating = models.IntegerField()
     product_available = models.BooleanField(default=False)
-    description = models.CharField(max_length=500)
     quantity = models.IntegerField()
+    description = RichTextField(blank=True, null=True)
     image_field = models.ImageField(upload_to="uploads/")
 
     def __str__(self):
