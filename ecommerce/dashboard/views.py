@@ -25,3 +25,9 @@ class Order(generic.base.TemplateView):
 
 class OrderDetails(generic.base.TemplateView):
     template_name = "dashboard/ecommerce-order-detail.html"
+
+class Cart(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-cart.html"
+
+class Admin(generic.base.TemplateView):
+    template_name = "dashboard/ecommerce-myaccount.html"

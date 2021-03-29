@@ -39,3 +39,6 @@ class TermsView(TemplateView):
 
 class ProductWiseListView(TemplateView):
     template_name = "main/product-wise-list.html"
+
+class App(TemplateView):
+    template_name = "main/app.html"
