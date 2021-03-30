@@ -2,8 +2,9 @@ from django.views import generic
 from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic.edit import CreateView
 
-from .forms import CustomerCreationForm
+from .forms import SignupForm
 from .models import Customer
 
 from django.contrib.auth.views import LoginView
@@ -31,10 +32,10 @@ class LoginView(LoginView):
     template_name = "main/account-login.html"
 
 
-class RegisterView(FormView):
+class RegisterView(CreateView):
     model = Customer
     template_name = "main/account-register.html"
-    form_class = CustomerCreationForm
+    form_class = SignupForm
     success_url = '/'
 
 
