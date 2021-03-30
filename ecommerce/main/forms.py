@@ -1,6 +1,6 @@
 from django import forms
 
-from main.models import Customer
+from .models import Customer
 
 from django.core.exceptions import ValidationError
 

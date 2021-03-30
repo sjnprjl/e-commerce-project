@@ -3,8 +3,10 @@ from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 from django.contrib.messages.views import SuccessMessageMixin
 
-from main.forms import CustomerCreationForm
-from main.models import Customer
+from .forms import CustomerCreationForm
+from .models import Customer
+
+from django.contrib.auth.views import LoginView
 
 from django.views.generic import FormView, RedirectView
 
@@ -25,7 +27,7 @@ class AboutUsView(TemplateView):
     template_name = "main/about_us.html"
 
 
-class LoginView(FormView):
+class LoginView(LoginView):
     template_name = "main/account-login.html"
 
 
