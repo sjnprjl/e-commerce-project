@@ -11,6 +11,5 @@ urlpatterns = [
     path("orders-details/", OrderDetails.as_view(), name="orderdetails"),
     path("cart/", Cart.as_view(), name="Cart"),
     path("account/", Admin.as_view(), name="Admin"),
-
-    
+    path("logout/", LogoutView.as_view(), name="logout"),
 ]

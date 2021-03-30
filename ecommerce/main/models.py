@@ -9,46 +9,63 @@ from django.utils import timezone
 
 # Create your models here.
 
+from django.db import models
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+
 
 class CustomAccountManager(BaseUserManager):
-    def create_user(self, email, user_name, full_name, password, **kwargs):
+    def create_user(self, email, username, full_name, password, **kwargs):
         if not email:
             raise ValueError(_("Email field is required."))
         email = self.normalize_email(email)
-        user = self.model(
-            email=email, user_name=user_name, full_name=full_name, **kwargs
-        )
+        user = self.model(email=email, username=username, full_name=full_name, **kwargs)
         user.set_password(password)
-        user.save()
+        user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, user_name, full_name, password, **kwargs):
-        kwargs.setdefault("is_staff", True)
+    def create_superuser(self, email, username, full_name, password, **kwargs):
+        kwargs.setdefault("is_admin", True)
         kwargs.setdefault("is_superuser", True)
         kwargs.setdefault("is_active", True)
 
-        if kwargs.get("is_staff") is not True:
-            raise ValueError("Superuser must be assigned to is_staff=True")
+        if kwargs.get("is_admin") is not True:
+            raise ValueError("Superuser must be assigned to is_admin=True")
 
-        return self.create_user(email, user_name, full_name, password, **kwargs)
+        return self.create_user(email, username, full_name, password, **kwargs)
 
 
 class Customer(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
+    username = models.CharField(max_length=150, unique=True)
     full_name = models.CharField(max_length=100, blank=True)
     address = models.CharField(max_length=200, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     start_date = models.DateTimeField(default=timezone.now)
-    is_staff = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["user_name", "full_name"]
+    REQUIRED_FIELDS = ["username", "full_name"]
 
     objects = CustomAccountManager()
 
     def __str__(self):
-        return self.user_name
+        return self.username
+
+    def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
+        # Simplest possible answer: Yes, always
+        return True
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        # Simplest possible answer: All admins are staff
+        return self.is_admin
 
 
 class Category(models.Model):

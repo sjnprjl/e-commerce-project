@@ -236,8 +236,8 @@
                 <h1>Register Account</h1>
                 <p>If you already have an account with us, please login at the <a href="account-login.html">login
                         page</a>.</p>
-                <form action="http://ostromi2.demo.towerthemes.com/index.php?route=account/register" method="post"
-                    enctype="multipart/form-data" class="form-horizontal">
+                <form method="post" class="form-horizontal">
+                    {% csrf_token %}
                     <fieldset id="account">
                         <legend>Your Personal Details</legend>
                         <div class="form-group required" style="display:  none ;">
@@ -251,30 +251,30 @@
                             </div>
                         </div>
                         <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-firstname">First Name</label>
+                            <label class="col-sm-2 control-label" for="input-firstname">Full Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="firstname" value="" placeholder="First Name"
+                                <input type="text" name="full_name" value="" placeholder="Full Name"
                                     id="input-firstname" class="form-control" />
                             </div>
                         </div>
                         <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
+                            <label class="col-sm-2 control-label" for="input-username">Username</label>
                             <div class="col-sm-10">
-                                <input type="text" name="lastname" value="" placeholder="Last Name" id="input-lastname"
+                                <input type="text" name="username" value="" placeholder="Username" id="input-username"
                                     class="form-control" />
                             </div>
                         </div>
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
                             <div class="col-sm-10">
-                                <input type="email" name="email" value="" placeholder="E-Mail" id="input-email"
+                                <input type="text" name="email" value="" placeholder="E-Mail" id="input-email"
                                     class="form-control" />
                             </div>
                         </div>
                         <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-telephone">Telephone</label>
+                            <label class="col-sm-2 control-label" for="input-telephone">Phone Number</label>
                             <div class="col-sm-10">
-                                <input type="tel" name="telephone" value="" placeholder="Telephone" id="input-telephone"
+                                <input type="tel" name="phone_number" value="" placeholder="Phone Number" id="input-telephone"
                                     class="form-control" />
                             </div>
                         </div>
@@ -296,23 +296,10 @@
                             </div>
                         </div>
                     </fieldset>
-                    <fieldset>
-                        <legend>Newsletter</legend>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Subscribe</label>
-                            <div class="col-sm-10"> <label class="radio-inline">
-                                    <input type="radio" name="newsletter" value="1" />
-                                    Yes</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="newsletter" value="0" checked="checked" />
-                                    No</label>
-                            </div>
-                        </div>
-                    </fieldset>
 
                     <div class="buttons">
                         <div class="pull-right">
-                            <input type="submit" value="Continue" class="btn btn-primary" />
+                            <input type="submit" value="Register" class="btn btn-primary" />
                         </div>
                     </div>
                 </form>
@@ -341,121 +328,5 @@
             </aside>
         </div>
     </div>
-    {% comment %}<script type="text/javascript">{% endcomment %}
-            {% comment %}// Sort the custom fields{% endcomment %}
-            {% comment %}$('#account .form-group[data-sort]').detach().each(function () {{% endcomment %}
-                {% comment %}if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group').eq($(this).attr('data-sort')).before(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
-
-                {% comment %}if ($(this).attr('data-sort') > $('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group:last').after(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
-
-                {% comment %}if ($(this).attr('data-sort') == $('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group:last').after(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
-
-                {% comment %}if ($(this).attr('data-sort') < -$('#account .form-group').length) {{% endcomment %}
-                    {% comment %}$('#account .form-group:first').before(this);{% endcomment %}
-                {% comment %}}{% endcomment %}
-            {% comment %}});{% endcomment %}
-
-        {% comment %}$('input[name=\'customer_group_id\']').on('change', function () {{% endcomment %}
-            {% comment %}$.ajax({{% endcomment %}
-                {% comment %}url: 'index.php?route=account/register/customfield&customer_group_id=' + this.value,{% endcomment %}
-                {% comment %}dataType: 'json',{% endcomment %}
-                {% comment %}success: function (json) {{% endcomment %}
-                    {% comment %}$('.custom-field').hide();{% endcomment %}
-                    {% comment %}$('.custom-field').removeClass('required');{% endcomment %}
-
-                    {% comment %}for (i = 0; i < json.length; i++) {{% endcomment %}
-                        {% comment %}custom_field = json[i];{% endcomment %}
-
-                        {% comment %}$('#custom-field' + custom_field['custom_field_id']).show();{% endcomment %}
-
-                        {% comment %}if (custom_field['required']) {{% endcomment %}
-                            {% comment %}$('#custom-field' + custom_field['custom_field_id']).addClass('required');{% endcomment %}
-                        {% comment %}}{% endcomment %}
-                    {% comment %}}{% endcomment %}
-                {% comment %}},{% endcomment %}
-                {% comment %}error: function (xhr, ajaxOptions, thrownError) {{% endcomment %}
-                    {% comment %}alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);{% endcomment %}
-                {% comment %}}{% endcomment %}
-            {% comment %}});{% endcomment %}
-        {% comment %}});{% endcomment %}
-
-        {% comment %}$('input[name=\'customer_group_id\']:checked').trigger('change');{% endcomment %}
-{% comment %}</script>{% endcomment %}
-    {% comment %}<script type="text/javascript">< !--{% endcomment %}
-            {% comment %}$('button[id^=\'button-custom-field\']').on('click', function () {{% endcomment %}
-                {% comment %}var element = this;{% endcomment %}
-
-                {% comment %}$('#form-upload').remove();{% endcomment %}
-
-                {% comment %}$('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="file" /></form>');{% endcomment %}
-
-                {% comment %}$('#form-upload input[name=\'file\']').trigger('click');{% endcomment %}
-
-                {% comment %}if (typeof timer != 'undefined') {{% endcomment %}
-                    {% comment %}clearInterval(timer);{% endcomment %}
-                {% comment %}}{% endcomment %}
-
-                {% comment %}timer = setInterval(function () {{% endcomment %}
-                    {% comment %}if ($('#form-upload input[name=\'file\']').val() != '') {{% endcomment %}
-                        {% comment %}clearInterval(timer);{% endcomment %}
-
-                        {% comment %}$.ajax({{% endcomment %}
-                            {% comment %}url: 'index.php?route=tool/upload',{% endcomment %}
-                            {% comment %}type: 'post',{% endcomment %}
-                            {% comment %}dataType: 'json',{% endcomment %}
-                            {% comment %}data: new FormData($('#form-upload')[0]),{% endcomment %}
-                            {% comment %}cache: false,{% endcomment %}
-                            {% comment %}contentType: false,{% endcomment %}
-                            {% comment %}processData: false,{% endcomment %}
-                            {% comment %}beforeSend: function () {{% endcomment %}
-                                {% comment %}$(element).button('loading');{% endcomment %}
-                            {% comment %}},{% endcomment %}
-                            {% comment %}complete: function () {{% endcomment %}
-                                {% comment %}$(element).button('reset');{% endcomment %}
-                            {% comment %}},{% endcomment %}
-                            {% comment %}success: function (json) {{% endcomment %}
-                                {% comment %}$(element).parent().find('.text-danger').remove();{% endcomment %}
-
-                                {% comment %}if (json['error']) {{% endcomment %}
-                                    {% comment %}$(node).parent().find('input').after('<div class="text-danger">' + json['error'] + '</div>');{% endcomment %}
-                                {% comment %}}{% endcomment %}
-
-                                {% comment %}if (json['success']) {{% endcomment %}
-                                    {% comment %}alert(json['success']);{% endcomment %}
-
-                                    {% comment %}$(element).parent().find('input').val(json['code']);{% endcomment %}
-                                {% comment %}}{% endcomment %}
-                            {% comment %}},{% endcomment %}
-                            {% comment %}error: function (xhr, ajaxOptions, thrownError) {{% endcomment %}
-                                {% comment %}alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);{% endcomment %}
-                            {% comment %}}{% endcomment %}
-                        {% comment %}});{% endcomment %}
-                    {% comment %}}{% endcomment %}
-                {% comment %}}, 500);{% endcomment %}
-            {% comment %}});{% endcomment %}
-{% comment %}</script>{% endcomment %}
-    <script type="text/javascript">
-            $('.date').datetimepicker({
-                language: 'en-gb',
-                pickTime: false
-            });
-
-        $('.time').datetimepicker({
-            language: 'en-gb',
-            pickDate: false
-        });
-
-        $('.datetime').datetimepicker({
-            language: 'en-gb',
-            pickDate: true,
-            pickTime: true
-        });
-</script>
 </div>
 {% endblock content %}
