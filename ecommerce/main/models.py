@@ -84,7 +84,7 @@ class Product(models.Model):
     image_field = models.ImageField(upload_to="uploads/")
 
     def __str__(self):
-        return self.name
+        return self.product_name
 
 
 class Order(models.Model):

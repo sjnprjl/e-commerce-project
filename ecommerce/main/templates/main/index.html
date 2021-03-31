@@ -1,5 +1,6 @@
 {% extends 'main/base_files/base.html' %} 
 {% load static %} 
+
 {% block content %}
 <div class="wrapper">
     <div id="back-top"><i class="ion-chevron-up"></i></div>
@@ -706,7 +707,7 @@
                                                     <div class="product-thumb transition swiper-slide">
                                                         <div class="grid-style">
                                                             <div class="product-item">
-
+                                                              
                                                                 <div class="image rotate-image-container">
 
                                                                     <a href="apple-cinema-30-inch-hd-flat-panel-display2.html">
@@ -737,8 +738,8 @@
 
 
 
-                                                                    <h4><a href="apple-cinema-30-inch-hd-flat-panel-display2.html">Apple
-                                                                                Cinema 30-inch HD Flat-Panel Display</a>
+                                                                    <h4><a href="apple-cinema-30-inch-hd-flat-panel-display2.html">{{ product.product_name }}</a>
+                                                                 
                                                                     </h4>
                                                                     <div class="rating">
                                                                         <span class="icon-ratings"><i
@@ -753,7 +754,7 @@
                                                                                     class="icon-rating icon-rating-o"></i></span>
                                                                     </div>
                                                                     <p class="price">
-                                                                        <span class="price-new">$80.00</span> <span class="price-old">$120.00</span>
+                                                                        <span class="price-new">{{product.unit_price}}</span> <span class="price-old">{{product.unit_price}}</span>
                                                                     </p>
 
                                                                     <a class="button-view-more" href="apple-cinema-30-inch-hd-flat-panel-display2.html" target="_blank">View Details</a>
@@ -1142,16 +1143,18 @@
                                                     <div class="swiper-viewport">
                                                         <div id="127-0-products-container" class="multi-slides-127-0 swiper-container">
                                                             <div class="swiper-wrapper">
+                                                                {% for product in object_list %}
                                                                 <div class="product-thumb transition swiper-slide">
                                                                     <div class="grid-style">
+                                                                   
                                                                         <div class="product-item">
 
                                                                             <div class="image rotate-image-container">
 
                                                                                 <a href="apple-cinema-30-inch-hd-flat-panel-display2.html">
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/6-370x370.jpg" width="370" height="370" alt="Apple Cinema 30-inch HD Flat-Panel Display" title="Apple Cinema 30-inch HD Flat-Panel Display" class="img-responsive img-rotate-image  swiper-lazy "
+                                                                                    <img data-src="{{ product.image_field.url }}" width="370" height="370" alt="{{ product.product_name }}" title="Apple Cinema 30-inch HD Flat-Panel Display" class="img-responsive img-rotate-image  swiper-lazy "
                                                                                     />
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/1-370x370.jpg" width="370" height="370" alt="Apple Cinema 30-inch HD Flat-Panel Display" title="Apple Cinema 30-inch HD Flat-Panel Display" class=" swiper-lazy  img-responsive img-mod-127-0-88"
+                                                                                    <img data-src="{{ product.image_field.url }}" width="370" height="370" alt="{{ product.product_name }}" title="Apple Cinema 30-inch HD Flat-Panel Display" class=" swiper-lazy  img-responsive img-mod-127-0-88"
                                                                                     />
                                                                                 </a>
                                                                                 <div class="swiper-lazy-preloader">
@@ -1184,9 +1187,7 @@
                                                                                 </div>
 
 
-                                                                                <h4><a href="apple-cinema-30-inch-hd-flat-panel-display2.html">Apple
-                                                                                            Cinema 30-inch HD Flat-Panel
-                                                                                            Display</a></h4>
+                                                                                <h4><a href="apple-cinema-30-inch-hd-flat-panel-display2.html">{{ product.product_name }}</a></h4>
                                                                                 <div class="rating">
                                                                                     <span class="icon-ratings"><i
                                                                                                 class="icon-rating icon-rating-x"></i></span>
@@ -1200,357 +1201,24 @@
                                                                                                 class="icon-rating icon-rating-o"></i></span>
                                                                                 </div>
                                                                                 <p class="price">
-                                                                                    <span class="price-new">$80.00</span>
-                                                                                    <span class="price-old">$120.00</span>
+                                                                                    <span class="price-new">Rs.{{ product.unit_price}}</span>
+                                                                                    <span class="price-old">Rs.{{product.unit_price}} - {{product.discount}}</span>
                                                                                 </p>
 
                                                                                 <a class="button-view-more" href="apple-cinema-30-inch-hd-flat-panel-display2.html" target="_blank">View Details</a>
                                                                             </div>
                                                                         </div>
+
+                                                                     
                                                                     </div>
 
 
 
                                                                 </div>
-                                                                <div class="product-thumb transition swiper-slide">
-                                                                    <div class="grid-style">
-                                                                        <div class="product-item">
-
-                                                                            <div class="image rotate-image-container">
-
-                                                                                <a href="macbook-air2.html">
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/21-370x370.jpg" width="370" height="370" alt="MacBook Air - 13.3&quot; Retina Display - Intel Core i5" title="MacBook Air - 13.3&quot; Retina Display - Intel Core i5" class="img-responsive img-rotate-image  swiper-lazy "
-                                                                                    />
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/2-370x370.jpg" width="370" height="370" alt="MacBook Air - 13.3&quot; Retina Display - Intel Core i5" title="MacBook Air - 13.3&quot; Retina Display - Intel Core i5" class=" swiper-lazy  img-responsive img-mod-127-0-98"
-                                                                                    />
-                                                                                </a>
-                                                                                <div class="swiper-lazy-preloader">
-                                                                                </div>
-                                                                                <div class="button-group">
-                                                                                    <div class="inner">
-                                                                                        <button type="button" class="button-cart" onclick="cart.add('98');" title="Add to Cart"><span>Add
-                                                                                                    to
-                                                                                                    Cart</span></button>
-                                                                                        <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('macbook-air2.html')"><span>Quick
-                                                                                                    View</span></button>
-                                                                                        <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('98');"><span>Add
-                                                                                                    to Wish
-                                                                                                    List</span></button>
-                                                                                        <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('98');"><span>Compare
-                                                                                                    this
-                                                                                                    Product</span></button>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="caption">
-                                                                                <p class="manufacture-product">
-                                                                                    <a href="apple.html">Apple</a>
-                                                                                </p>
-
-                                                                                <div class="box-label">
-                                                                                    <div><span class="pro-label new">New</span>
-                                                                                    </div>
-                                                                                </div>
-
-
-                                                                                <h4><a href="macbook-air2.html">MacBook
-                                                                                            Air - 13.3&quot; Retina
-                                                                                            Display - Intel Core i5</a>
-                                                                                </h4>
-                                                                                <div class="rating">
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-o"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-o"></i></span>
-                                                                                </div>
-                                                                                <p class="price">
-                                                                                    $1,000.00
-                                                                                </p>
-
-                                                                                <a class="button-view-more" href="macbook-air2.html" target="_blank">View Details</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <div class="product-thumb transition swiper-slide">
-                                                                    <div class="grid-style">
-                                                                        <div class="product-item">
-
-                                                                            <div class="image ">
-
-                                                                                <a href="macbook2.html">
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/5-370x370.jpg" width="370" height="370" alt="MacBook Pro - 13&quot; Display with Touch Bar - Intel Core i5" title="MacBook Pro - 13&quot; Display with Touch Bar - Intel Core i5"
-                                                                                        class=" swiper-lazy  img-responsive img-mod-127-0-99" />
-                                                                                </a>
-                                                                                <div class="swiper-lazy-preloader">
-                                                                                </div>
-                                                                                <div class="button-group">
-                                                                                    <div class="inner">
-                                                                                        <button type="button" class="button-cart" onclick="cart.add('99');" title="Add to Cart"><span>Add
-                                                                                                    to
-                                                                                                    Cart</span></button>
-                                                                                        <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('macbook2.html')"><span>Quick
-                                                                                                    View</span></button>
-                                                                                        <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('99');"><span>Add
-                                                                                                    to Wish
-                                                                                                    List</span></button>
-                                                                                        <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('99');"><span>Compare
-                                                                                                    this
-                                                                                                    Product</span></button>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="caption">
-                                                                                <p class="manufacture-product">
-                                                                                    <a href="apple.html">Apple</a>
-                                                                                </p>
-
-                                                                                <div class="box-label">
-                                                                                    <div><span class="pro-label new">New</span>
-                                                                                    </div>
-                                                                                </div>
-
-
-                                                                                <h4><a href="macbook2.html">MacBook
-                                                                                            Pro - 13&quot; Display with
-                                                                                            Touch Bar - Intel Core
-                                                                                            i5</a></h4>
-                                                                                <div class="rating">
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-o"></i></span>
-                                                                                </div>
-                                                                                <p class="price">
-                                                                                    $500.00
-                                                                                </p>
-
-                                                                                <a class="button-view-more" href="macbook2.html" target="_blank">View Details</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <div class="product-thumb transition swiper-slide">
-                                                                    <div class="grid-style">
-                                                                        <div class="product-item">
-
-                                                                            <div class="image ">
-
-                                                                                <a href="viewsonic-vp32682.html">
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/4-370x370.jpg" width="370" height="370" alt="ViewSonic VP3268-4K PRO 32&quot; 4K Monitor with 100% sRGB" title="ViewSonic VP3268-4K PRO 32&quot; 4K Monitor with 100% sRGB"
-                                                                                        class=" swiper-lazy  img-responsive img-mod-127-0-105" />
-                                                                                </a>
-                                                                                <div class="swiper-lazy-preloader">
-                                                                                </div>
-                                                                                <div class="button-group">
-                                                                                    <div class="inner">
-                                                                                        <button type="button" class="button-cart" onclick="cart.add('105');" title="Add to Cart"><span>Add
-                                                                                                    to
-                                                                                                    Cart</span></button>
-                                                                                        <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('viewsonic-vp32682.html')"><span>Quick
-                                                                                                    View</span></button>
-                                                                                        <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('105');"><span>Add
-                                                                                                    to Wish
-                                                                                                    List</span></button>
-                                                                                        <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('105');"><span>Compare
-                                                                                                    this
-                                                                                                    Product</span></button>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="caption">
-                                                                                <p class="manufacture-product">
-                                                                                    <a href="htc.html">HTC</a>
-                                                                                </p>
-
-                                                                                <div class="box-label">
-                                                                                    <div><span class="pro-label new">New</span>
-                                                                                    </div>
-                                                                                </div>
-
-
-                                                                                <h4><a href="viewsonic-vp32682.html">ViewSonic
-                                                                                            VP3268-4K PRO 32&quot; 4K
-                                                                                            Monitor with 100% sRGB</a>
-                                                                                </h4>
-                                                                                <div class="rating">
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-o"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-o"></i></span>
-                                                                                </div>
-                                                                                <p class="price">
-                                                                                    $100.00
-                                                                                </p>
-
-                                                                                <a class="button-view-more" href="viewsonic-vp32682.html" target="_blank">View Details</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <div class="product-thumb transition swiper-slide">
-                                                                    <div class="grid-style">
-                                                                        <div class="product-item">
-
-                                                                            <div class="image ">
-
-                                                                                <a href="samsung-galaxy-tab-10-12.html">
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/6-370x370.jpg" width="370" height="370" alt="SAMSUNG Galaxy Tab E 9.6&quot; 16GB Android 6.0" title="SAMSUNG Galaxy Tab E 9.6&quot; 16GB Android 6.0" class=" swiper-lazy  img-responsive img-mod-127-0-102"
-                                                                                    />
-                                                                                </a>
-                                                                                <div class="swiper-lazy-preloader">
-                                                                                </div>
-                                                                                <div class="button-group">
-                                                                                    <div class="inner">
-                                                                                        <button type="button" class="button-cart" onclick="cart.add('102');" title="Add to Cart"><span>Add
-                                                                                                    to
-                                                                                                    Cart</span></button>
-                                                                                        <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('samsung-galaxy-tab-10-12.html')"><span>Quick
-                                                                                                    View</span></button>
-                                                                                        <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('102');"><span>Add
-                                                                                                    to Wish
-                                                                                                    List</span></button>
-                                                                                        <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('102');"><span>Compare
-                                                                                                    this
-                                                                                                    Product</span></button>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="caption">
-                                                                                <p class="manufacture-product">
-                                                                                    <a href="canon.html">Canon</a>
-                                                                                </p>
-
-                                                                                <div class="box-label">
-                                                                                    <div><span class="pro-label sale">Sale</span>
-                                                                                    </div>
-                                                                                    <div><span class="pro-label new">New</span>
-                                                                                    </div>
-                                                                                </div>
-
-
-                                                                                <h4><a href="samsung-galaxy-tab-10-12.html">SAMSUNG
-                                                                                            Galaxy Tab E 9.6&quot; 16GB
-                                                                                            Android 6.0</a></h4>
-                                                                                <div class="rating">
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-o"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-o"></i></span>
-                                                                                </div>
-                                                                                <p class="price">
-                                                                                    <span class="price-new">$200.00</span>
-                                                                                    <span class="price-old">$199.99</span>
-                                                                                </p>
-
-                                                                                <a class="button-view-more" href="samsung-galaxy-tab-10-12.html" target="_blank">View Details</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <div class="product-thumb transition swiper-slide">
-                                                                    <div class="grid-style">
-                                                                        <div class="product-item">
-
-                                                                            <div class="image ">
-
-                                                                                <a href="sony-vaio2.html">
-                                                                                    <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/8-370x370.jpg" width="370" height="370" alt="Sony Vaio VPCS125FG (Intel Core i3-350M 2.26GHz)" title="Sony Vaio VPCS125FG (Intel Core i3-350M 2.26GHz)" class=" swiper-lazy  img-responsive img-mod-127-0-104"
-                                                                                    />
-                                                                                </a>
-                                                                                <div class="swiper-lazy-preloader">
-                                                                                </div>
-                                                                                <div class="button-group">
-                                                                                    <div class="inner">
-                                                                                        <button type="button" class="button-cart" onclick="cart.add('104');" title="Add to Cart"><span>Add
-                                                                                                    to
-                                                                                                    Cart</span></button>
-                                                                                        <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('sony-vaio2.html')"><span>Quick
-                                                                                                    View</span></button>
-                                                                                        <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('104');"><span>Add
-                                                                                                    to Wish
-                                                                                                    List</span></button>
-                                                                                        <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('104');"><span>Compare
-                                                                                                    this
-                                                                                                    Product</span></button>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
-                                                                            <div class="caption">
-                                                                                <p class="manufacture-product">
-                                                                                    <a href="sony.html">Sony</a>
-                                                                                </p>
-
-
-
-                                                                                <h4><a href="sony-vaio2.html">Sony
-                                                                                            Vaio VPCS125FG (Intel Core
-                                                                                            i3-350M 2.26GHz)</a></h4>
-                                                                                <div class="rating">
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                    <span class="icon-ratings"><i
-                                                                                                class="icon-rating icon-rating-x"></i></span>
-                                                                                </div>
-                                                                                <p class="price">
-                                                                                    $1,000.00
-                                                                                </p>
-
-                                                                                <a class="button-view-more" href="sony-vaio2.html" target="_blank">View Details</a>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-
-
-                                                                </div>
+                                                                {% empty %}
+                                                                <li>No Product Found.</li>
+                                                        {% endfor %}
+                                                            
                                                             </div>
                                                         </div>
 
@@ -2647,13 +2315,13 @@
                                         <div class="swiper-viewport">
                                             <div class="swiper-container single-slides-120">
                                                 <div class="swiper-wrapper">
+                                                    {% for product in object_list %}
                                                     <div class="product-thumb transition swiper-slide">
-
                                                         <div class="list-style">
                                                             <div class="product-item">
                                                                 <div class="image ">
                                                                     <a href="htc-touch-hd2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/12-140x140.jpg" width="140" height="140" alt="HTC Touch HD Windows Mobile smartphone" title="HTC Touch HD Windows Mobile smartphone" class=" swiper-lazy  img-responsive img-mod-120-93"/>
+                                                                        <img data-src="{{ product.image_field.url}}" width="140" height="140" alt="HTC Touch HD Windows Mobile smartphone" title="HTC Touch HD Windows Mobile smartphone" class=" swiper-lazy  img-responsive img-mod-120-93"/>
                                                                     </a>
                                                                     <div class="swiper-lazy-preloader"></div>
                                                                 </div>
@@ -2663,8 +2331,7 @@
                                                                             <a href="htc.html">HTC</a>
                                                                         </p>
 
-                                                                        <h4><a href="htc-touch-hd2.html">HTC Touch
-                                                                                    HD Windows Mobile smartphone</a>
+                                                                        <h4><a href="htc-touch-hd2.html">{{ product.product_name}}</a>
                                                                         </h4>
                                                                         <div class="rating">
                                                                             <span class="icon-ratings"><i
@@ -2679,7 +2346,7 @@
                                                                                         class="icon-rating icon-rating-x"></i></span>
                                                                         </div>
                                                                         <p class="price">
-                                                                            $100.00
+                                                                            Rs.{{ product.unit_price}}
                                                                         </p>
                                                                         <div class="button-group">
                                                                             <div class="inner">
@@ -2697,498 +2364,13 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="macbook-air2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/2-140x140.jpg" width="140" height="140" alt="MacBook Air - 13.3&quot; Retina Display - Intel Core i5" title="MacBook Air - 13.3&quot; Retina Display - Intel Core i5" class=" swiper-lazy  img-responsive img-mod-120-98"
-                                                                        />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="macbook-air2.html">MacBook Air
-                                                                                    - 13.3&quot; Retina Display - Intel
-                                                                                    Core i5</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            $1,000.00
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('98');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('macbook-air2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('98');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('98');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="imac2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/13-140x140.jpg" width="140" height="140" alt="iMac 4K 21.5-inch 2017 Mac Center" title="iMac 4K 21.5-inch 2017 Mac Center" class=" swiper-lazy  img-responsive img-mod-120-94"
-                                                                        />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="imac2.html">iMac 4K 21.5-inch
-                                                                                    2017 Mac Center</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            <span class="price-new">$90.00</span>
-                                                                            <span class="price-old">$100.00</span>
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('94');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('imac2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('94');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('94');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="hp-lp30652.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/11-140x140.jpg" width="140" height="140" alt="HP LP3065 LCD Monitor 30 - 2560 x 1600 @ 60 Hz" title="HP LP3065 LCD Monitor 30 - 2560 x 1600 @ 60 Hz" class=" swiper-lazy  img-responsive img-mod-120-92"
-                                                                        />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="hewlett-packard.html">Hewlett-Packard</a>
-                                                                        </p>
-
-                                                                        <h4><a href="hp-lp30652.html">HP LP3065 LCD
-                                                                                    Monitor 30 - 2560 x 1600 @ 60 Hz</a>
-                                                                        </h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            $100.00
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('92');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('hp-lp30652.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('92');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('92');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="ipod-nano2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/16-140x140.jpg" width="140" height="140" alt="iPod nano 8 GB 2nd Generation (Black)" title="iPod nano 8 GB 2nd Generation (Black)" class=" swiper-lazy  img-responsive img-mod-120-97"
-                                                                        />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="ipod-nano2.html">iPod nano 8 GB
-                                                                                    2nd Generation (Black)</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            $100.00
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('97');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('ipod-nano2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('97');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('97');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="iphone2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/14-140x140.jpg" width="140" height="140" alt="iPhone 8 Plus features a 5.5-inch Retina HD display" title="iPhone 8 Plus features a 5.5-inch Retina HD display" class=" swiper-lazy  img-responsive img-mod-120-95"
-                                                                        />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="iphone2.html">iPhone 8 Plus
-                                                                                    features a 5.5-inch Retina HD
-                                                                                    display</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            $101.00
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('95');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('iphone2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('95');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('95');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="macbook2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/5-140x140.jpg" width="140" height="140" alt="MacBook Pro - 13&quot; Display with Touch Bar - Intel Core i5" title="MacBook Pro - 13&quot; Display with Touch Bar - Intel Core i5"
-                                                                            class=" swiper-lazy  img-responsive img-mod-120-99" />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="macbook2.html">MacBook Pro -
-                                                                                    13&quot; Display with Touch Bar -
-                                                                                    Intel Core i5</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            $500.00
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('99');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('macbook2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('99');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('99');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="apple-cinema-30-inch-hd-flat-panel-display2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/1-140x140.jpg" width="140" height="140" alt="Apple Cinema 30-inch HD Flat-Panel Display" title="Apple Cinema 30-inch HD Flat-Panel Display" class=" swiper-lazy  img-responsive img-mod-120-88"
-                                                                        />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="apple-cinema-30-inch-hd-flat-panel-display2.html">Apple
-                                                                                    Cinema 30-inch HD Flat-Panel
-                                                                                    Display</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            <span class="price-new">$80.00</span>
-                                                                            <span class="price-old">$120.00</span>
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('88');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('apple-cinema-30-inch-hd-flat-panel-display2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('88');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('88');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="ipod-touch2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/18-140x140.jpg" width="140" height="140" alt="Apple® IPod Touch (6th Generation)" title="Apple® IPod Touch (6th Generation)" class=" swiper-lazy  img-responsive img-mod-120-90"
-                                                                        />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="ipod-touch2.html">Apple® IPod
-                                                                                    Touch (6th Generation)</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            $100.00
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('90');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('ipod-touch2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('90');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('90');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="product-thumb transition swiper-slide">
-
-                                                        <div class="list-style">
-                                                            <div class="product-item">
-                                                                <div class="image ">
-                                                                    <a href="macbook-pro2.html">
-                                                                        <img data-src="http://ostromi2.demo.towerthemes.com/image/cache/catalog/products/2/9-140x140.jpg" width="140" height="140" alt="MacBook Pro - 15&quot; Display with Touch Bar - Intel Core i7" title="MacBook Pro - 15&quot; Display with Touch Bar - Intel Core i7"
-                                                                            class=" swiper-lazy  img-responsive img-mod-120-100" />
-                                                                    </a>
-                                                                    <div class="swiper-lazy-preloader"></div>
-                                                                </div>
-                                                                <div class="caption">
-                                                                    <div class="inner">
-                                                                        <p class="manufacture-product">
-                                                                            <a href="apple.html">Apple</a>
-                                                                        </p>
-
-                                                                        <h4><a href="macbook-pro2.html">MacBook Pro
-                                                                                    - 15&quot; Display with Touch Bar -
-                                                                                    Intel Core i7</a></h4>
-                                                                        <div class="rating">
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-x"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                            <span class="icon-ratings"><i
-                                                                                        class="icon-rating icon-rating-o"></i></span>
-                                                                        </div>
-                                                                        <p class="price">
-                                                                            <span class="price-new">$1,900.00</span>
-                                                                            <span class="price-old">$2,000.00</span>
-                                                                        </p>
-                                                                        <div class="button-group">
-                                                                            <div class="inner">
-                                                                                <button type="button" class="button-cart" onclick="cart.add('100');" title="Add to Cart"><span>Add to
-                                                                                            Cart</span></button>
-                                                                                <button type="button" title="Quick View" class="button-quickview" onclick="ptquickview.ajaxView('macbook-pro2.html')"><span>Quick
-                                                                                            View</span></button>
-                                                                                <button type="button" title="Add to Wish List" class="button-wishlist" onclick="wishlist.add('100');"><span>Add
-                                                                                            to Wish List</span></button>
-                                                                                <button type="button" title="Compare this Product" class="button-compare" onclick="compare.add('100');"><span>Compare
-                                                                                            this Product</span></button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                    </div>
+                                                     </div>
+                                                    {% empty %}
+                                                            <li>No products yet.</li>
+                                                        {% endfor %}
+                                                
                                                 </div>
                                             </div>
-
                                             <div class="swiper-pager">
                                                 <div class="swiper-button-next swiper-button-next-120"></div>
                                                 <div class="swiper-button-prev swiper-button-prev-120"></div>

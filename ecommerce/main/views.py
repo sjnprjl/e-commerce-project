@@ -11,11 +11,14 @@ from django.views.generic import FormView, RedirectView, View
 from django.views.generic import ListView
 from django.views import generic
 from .forms import SignupForm, LoginInForm
-from .models import Customer
+from .models import (
+    Customer,
+    Product,
+)
 
-
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = "main/index.html"
+    model = Product
 
 
 class ProductView(TemplateView):
