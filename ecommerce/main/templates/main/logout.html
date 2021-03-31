@@ -1,0 +1,26 @@
+{% extends 'dashboard/base_files/base.html' %}
+{% load static %}
+{% block rightbar %} {%endblock %}
+{% block leftbar %} {%endblock %}
+
+{% block content %}
+
+    <div class="card mr-12">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-xl-4">
+                    <div class="logout-content text-center my-5">
+                        <img src="{% static 'dashboard/images/ecommerce/logout.svg' %}" class="img-fluid mb-5" alt="logout">
+                        <h2 class="text-success">Logout ?</h2>
+                        <p class="my-4">Are you sure to want to Log out? You will miss your instant checkout deal.</p>
+                        <div class="button-list">
+                            <button type="button" class="btn btn-danger font-16"><i class="feather icon-check mr-2"></i>Yes, I'm sure</button>
+                            <button type="button" class="btn btn-success-rgba font-16"><i class="feather icon-x mr-2"></i>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

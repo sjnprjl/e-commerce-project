@@ -14,7 +14,7 @@ SECRET_KEY = "zvt!z3-&^j*cxv_o)u&ep0sq$&ufzy+8d70kt4s&94k#czq!1f"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main.apps.MainConfig",
     "dashboard.apps.DashboardConfig",
+    "django_email_verification", 
 ]
 
 MIDDLEWARE = [
@@ -93,6 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.AllowAllUsersModelBackend"]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -118,3 +120,11 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 AUTH_USER_MODEL = "main.Customer"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'yogeshkattel66@gmail.com'
+EMAIL_HOST_PASSWORD = 'ecjwkvywwhsencyn'
+EMAIL_USE_TLS = True
