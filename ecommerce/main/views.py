@@ -1,6 +1,11 @@
 import django
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model, login, update_session_auth_hash
+from django.contrib.auth import (
+    REDIRECT_FIELD_NAME,
+    get_user_model,
+    login,
+    update_session_auth_hash,
+)
 from django.contrib.auth.views import LoginView as LV
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
@@ -29,7 +34,6 @@ from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
 from .models import Customer
 
-        
 
 class IndexView(TemplateView):
     template_name = "main/index.html"
@@ -46,6 +50,7 @@ class SearchView(TemplateView):
 class AboutUsView(TemplateView):
     template_name = "main/about_us.html"
 
+
 class Activate(View):
     def get(self, request, uid, token):
 
@@ -53,16 +58,16 @@ class Activate(View):
             uid = force_text(urlsafe_base64_decode(uid))
             print(uid)
             user = Customer.objects.get(pk=uid)
-            
-        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             user = None
-        if user is not None and account_activation_token.check_token(user,token):
-            user.is_active=True
+        if user is not None and account_activation_token.check_token(user, token):
+            user.is_active = True
             user.save()
-            return HttpResponse('account activated succesfully')
+            return HttpResponse("account activated succesfully")
         else:
-            return HttpResponse('Activation link invalid')
-        
+            return HttpResponse("Activation link invalid")
+
 
 class LoginView(LV, UserPassesTestMixin):
 
@@ -72,12 +77,6 @@ class LoginView(LV, UserPassesTestMixin):
     success_url = "/"
     redirect_authenticated_user = True
 
-     
-     
-
-
-        
-
     def get_success_url(self):
         redirect_to = self.request.GET.get(self.redirect_field_name)
         if not is_safe_url(url=redirect_to, allowed_hosts=self.request.get_host()):
@@ -85,38 +84,43 @@ class LoginView(LV, UserPassesTestMixin):
         return redirect_to
 
 
-
 class RegisterView(CreateView):
     model = Customer
     template_name = "main/account-register.html"
     form_class = SignupForm
     success_url = "/"
-    
-    def get(self, request):
-        if self.request.user.is_authenticated:
-            return redirect('/')
+    redirect_field_name = REDIRECT_FIELD_NAME
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        redirect_to = self.request.GET.get(self.redirect_field_name)
+        if not is_safe_url(url=redirect_to, allowed_hosts=self.request.get_host()):
+            redirect_to = self.success_url
+        return redirect_to
 
     def post(self, request, *args, **kwargs):
         form = SignupForm(request.POST or None)
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-                
-            
-            mail_subject = 'Activate your account'
+
+            mail_subject = "Activate your account"
             current_site = get_current_site(request)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
             token = account_activation_token.make_token(user)
             # activation_link = "{0}/uid/{1}&token{2}".format(current_site, uid, token)
-            activation_link = reverse_lazy('activate',args=[uid,token])
-            message = "Hello {0},\n {1}".format(user.username, str(current_site)+str(activation_link))
-            to_email = form.cleaned_data['email']
+            activation_link = reverse_lazy("activate", args=[uid, token])
+            message = "Hello {0},\n {1}".format(
+                user.username, str(current_site) + str(activation_link)
+            )
+            to_email = form.cleaned_data["email"]
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
-            return HttpResponse('please confirm your  email address to be able to unlock all features')
+            return HttpResponse(
+                "please confirm your  email address to be able to unlock all features"
+            )
         else:
-            return HttpResponse('form is invalid')
-            
+            return HttpResponse("form is invalid")
 
 
 class PrivacyView(TemplateView):
@@ -134,8 +138,10 @@ class ProductWiseListView(TemplateView):
 class App(TemplateView):
     template_name = "main/app.html"
 
+
 class LogoutCustomer(TemplateView):
     template_name = "main/logout.html"
+
 
 class Profile(TemplateView):
     template_name = "main/profile.html"
