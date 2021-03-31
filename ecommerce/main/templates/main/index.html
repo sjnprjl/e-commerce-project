@@ -127,6 +127,8 @@
                     <div class="main-col col-sm-12 col-md-12">
                         <div class="row sub-row">
                             <div class="sub-col col-sm-12 col-md-12">
+                                {% if request.user.is_authenticated %}
+                                {% else %}
                                 <div class="newsletter-container newsletter-popup">
                                     <a href="javascript:void(0)" class="a-close-newsletter-full" onclick="ptnewsletter.closePopup();"></a>
                                     <div class="popup-content">
@@ -148,6 +150,7 @@
                                         <div class="newsletter-notification"></div>
                                     </div>
                                 </div>
+                                {% endif %}
                                 <script>
                                     ptnewsletter.checkCookie();
                                 </script>

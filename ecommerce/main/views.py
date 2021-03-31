@@ -37,7 +37,7 @@ class LoginView(LV, UserPassesTestMixin):
     template_name = "main/account-login.html"
     authentication_form = LoginInForm
     redirect_field_name = REDIRECT_FIELD_NAME
-    success_url = "/app/"
+    success_url = "/"
 
     def get_success_url(self):
         redirect_to = self.request.GET.get(self.redirect_field_name)
@@ -67,3 +67,9 @@ class ProductWiseListView(TemplateView):
 
 class App(TemplateView):
     template_name = "main/app.html"
+
+class LogoutCustomer(TemplateView):
+    template_name = "main/logout.html"
+
+class Profile(TemplateView):
+    template_name = "main/profile.html"
