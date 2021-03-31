@@ -1,9 +1,8 @@
-from django.shortcuts import render
-
-from django.views.generic.base import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.http import is_safe_url
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render
+from django.utils.http import is_safe_url
+from django.views.generic.base import TemplateView
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     login as auth_login,
@@ -21,10 +20,13 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "dashboard/dashboard-ecommerce.html"
 
 
-class LoginView(FormView):
+class LoginView(FormView, UserPassesTestMixin):
     """
     Provides the ability to login as a user with a username and password
     """
+
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user.is_superuser
 
     template_name = "dashboard/user-login.html"
 

@@ -32,7 +32,7 @@ class LoginInForm(AuthenticationForm):
             )
             if self.user_cache is None:
                 try:
-                    user_temp = Customer.objects.get(email=username)
+                    user_temp = Customer.objects.get(email=username, password=password)
                 except:
                     user_temp = None
 

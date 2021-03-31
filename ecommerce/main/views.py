@@ -13,6 +13,8 @@ from django.views import generic
 from .forms import SignupForm, LoginInForm
 from .models import Customer
 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 class IndexView(TemplateView):
     template_name = "main/index.html"
@@ -30,7 +32,8 @@ class AboutUsView(TemplateView):
     template_name = "main/about_us.html"
 
 
-class LoginView(LV):
+class LoginView(LV, UserPassesTestMixin):
+
     template_name = "main/account-login.html"
     authentication_form = LoginInForm
     redirect_field_name = REDIRECT_FIELD_NAME
