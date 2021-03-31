@@ -67,3 +67,6 @@ class App(TemplateView):
 
 class LogoutCustomer(TemplateView):
     template_name = "main/logout.html"
+
+class Profile(TemplateView):
+    template_name = "main/profile.html"
