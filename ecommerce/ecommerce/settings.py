@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main.apps.MainConfig",
     "dashboard.apps.DashboardConfig",
+    "django_email_verification", 
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,11 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 AUTH_USER_MODEL = "main.Customer"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_HOST_USER = 'yogeshkattel66@gmail.com'
+EMAIL_HOST_PASSWORD = 'ecjwkvywwhsencyn'
+EMAIL_USE_TLS = True
