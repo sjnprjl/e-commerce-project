@@ -70,6 +70,13 @@ class LoginView(LV, UserPassesTestMixin):
     authentication_form = LoginInForm
     redirect_field_name = REDIRECT_FIELD_NAME
     success_url = "/"
+    redirect_authenticated_user = True
+
+     
+     
+
+
+        
 
     def get_success_url(self):
         redirect_to = self.request.GET.get(self.redirect_field_name)
@@ -84,6 +91,10 @@ class RegisterView(CreateView):
     template_name = "main/account-register.html"
     form_class = SignupForm
     success_url = "/"
+    
+    def get(self, request):
+        if self.request.user.is_authenticated:
+            return redirect('/')
 
     def post(self, request, *args, **kwargs):
         form = SignupForm(request.POST or None)
@@ -98,7 +109,7 @@ class RegisterView(CreateView):
             token = account_activation_token.make_token(user)
             # activation_link = "{0}/uid/{1}&token{2}".format(current_site, uid, token)
             activation_link = reverse_lazy('activate',args=[uid,token])
-            message = "Hello {0},\n {1}".format(user.username, activation_link)
+            message = "Hello {0},\n {1}".format(user.username, str(current_site)+str(activation_link))
             to_email = form.cleaned_data['email']
             email = EmailMessage(mail_subject, message, to=[to_email])
             email.send()
