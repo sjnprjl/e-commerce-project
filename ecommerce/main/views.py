@@ -19,7 +19,7 @@ from .models import (
 
 class IndexView(ListView):
     template_name = "main/index.html"
-    model = Product
+    model = (Product)
 
 
 class ProductView(TemplateView):
