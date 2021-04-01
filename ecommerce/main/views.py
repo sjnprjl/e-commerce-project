@@ -14,6 +14,7 @@ from .forms import SignupForm, LoginInForm
 from .models import (
     Customer,
     Product,
+    Category,
 )
 
 class IndexView(ListView):
@@ -63,6 +64,7 @@ class TermsView(TemplateView):
 
 class ProductWiseListView(TemplateView):
     template_name = "main/product-wise-list.html"
+    
 
 
 class App(TemplateView):

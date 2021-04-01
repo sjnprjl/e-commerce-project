@@ -73,16 +73,23 @@ class Category(models.Model):
     category_name = models.CharField(max_length=200)
     description = RichTextField(max_length=200)
 
+    def __str__(self):
+       return self.category_name
+
 
 class Product(models.Model):
     product_name = models.CharField(max_length=200, null=True)
     unit_price = models.IntegerField()
+    Brand = models.CharField(max_length=20, default="Kamla Traders")
+    category = models.ManyToManyField(Category)
     discount = models.IntegerField()
     rating = models.IntegerField()
-    product_available = models.BooleanField(default=False)
-    description = RichTextField(max_length=500)
     quantity = models.IntegerField()
     image_field = models.ImageField(upload_to="uploads/")
+    product_available = models.BooleanField(default=False)
+    description = RichTextField(max_length=500)
+    
+    
 
     def __str__(self):
         return self.product_name

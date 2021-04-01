@@ -1117,21 +1117,16 @@
                                         <h3><span>Cookware</span></h3>
                                         <div class="tabs-style">
                                             <ul class="nav nav-tabs">
+                                                {% for category in object_list %}
                                                 <li>
-                                                    <a href="javascript:void(0);" data-tab="#tab-product-127-0">
-                                                        <span>Cookware Sets</span>
+                                                    <a href="javascript:void(0);" data-tab="#tab-product-127-{{ category.id}}">
+                                                        <span>{{ category.category_name}}</span>
                                                     </a>
                                                 </li>
-                                                <li>
-                                                    <a href="javascript:void(0);" data-tab="#tab-product-127-1">
-                                                        <span>Pans</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);" data-tab="#tab-product-127-2">
-                                                        <span>Skillets</span>
-                                                    </a>
-                                                </li>
+                                                {% empty %}
+                                                                <li>No Category Found.</li>
+                                                        {% endfor %}
+                                               
                                             </ul>
                                         </div>
                                     </div>
