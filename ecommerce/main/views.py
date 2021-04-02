@@ -17,9 +17,10 @@ from .models import (
     Category,
 )
 
+
 class IndexView(ListView):
     template_name = "main/index.html"
-    model = (Product)
+    model = Product
 
 
 class ProductView(TemplateView):
@@ -64,14 +65,15 @@ class TermsView(TemplateView):
 
 class ProductWiseListView(TemplateView):
     template_name = "main/product-wise-list.html"
-    
 
 
 class App(TemplateView):
     template_name = "main/app.html"
 
+
 class LogoutCustomer(TemplateView):
     template_name = "main/logout.html"
+
 
 class Profile(TemplateView):
     template_name = "main/profile.html"

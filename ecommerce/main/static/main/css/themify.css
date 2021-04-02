@@ -2,8 +2,8 @@
  * -------------------------- */
 @font-face {
   font-family: 'themify';
-  src: url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.eot?-fvbane");
-  src: url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.eot?#iefix-fvbane") format("embedded-opentype"), url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.woff?-fvbane") format("woff"), url("http://themes.pixelstrap.com/bigdeal/assets/fonts//themify.ttf?-fvbane") format("truetype"), url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.svg?-fvbane#themify") format("svg");
+  src: url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.eot");
+  src: url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.eot") format("embedded-opentype"), url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.woff") format("woff"), url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.ttf") format("truetype"), url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.svg") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -1251,8 +1251,8 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 
 @font-face {
   font-family: 'themify';
-  src: url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.eot?-fvbane");
-  src: url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.eot?#iefix-fvbane") format("embedded-opentype"), url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.woff?-fvbane") format("woff"), url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.ttf?-fvbane") format("truetype"), url("http://themes.pixelstrap.com/bigdeal/assets/fonts/themify.svg?-fvbane#themify") format("svg");
+  src: url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.eot");
+  src: url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.eot") format("embedded-opentype"), url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.woff") format("woff"), url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.ttf") format("truetype"), url("https://cdn.jsdelivr.net/npm/themify-icons@1.0.0/themify-icons/fonts/themify.svg") format("svg");
   font-weight: normal;
   font-style: normal; }
 
