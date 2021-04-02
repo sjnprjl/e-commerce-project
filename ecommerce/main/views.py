@@ -9,17 +9,18 @@ from django.contrib.auth import (
 from django.contrib.auth.views import LoginView as LV
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
-from django.http.response import HttpResponse
-from django.shortcuts import render, redirect, reverse
+from django.http.response import Http404, HttpResponse, HttpResponseForbidden
+from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.utils.http import is_safe_url, urlsafe_base64_decode
 from django.utils.translation import activate
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic import FormView, RedirectView, View, UpdateView
-from django.views.generic import ListView
+from django.views.generic import ListView, DeleteView, UpdateView
 from django.views import generic
 from .forms import SignupForm, LoginInForm
-from .models import Customer
+from .models import Customer, Order, OrderDetail
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -30,16 +31,19 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from .tokens import account_activation_token
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, message
 from django.urls import reverse_lazy
-from .models import Customer
+from .models import Customer, Product
+import json
+from django.http import JsonResponse
 
 
 class IndexView(TemplateView):
     template_name = "main/index.html"
 
 
-class ProductView(TemplateView):
+class ProductView(DetailView):
+    model = Product
     template_name = "main/product.html"
 
 
@@ -118,6 +122,7 @@ class RegisterView(CreateView):
             email.send()
             return HttpResponse(
                 "please confirm your  email address to be able to unlock all features"
+                
             )
         else:
             return HttpResponse("form is invalid")
@@ -131,8 +136,37 @@ class TermsView(TemplateView):
     template_name = "main/terms.html"
 
 
-class ProductWiseListView(TemplateView):
+class ProductWiseListView(ListView):
+    model = Product
     template_name = "main/product-wise-list.html"
+
+def updateItem(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+
+    user = request.user
+    print(user)
+    product = Product.objects.get(id=productId)
+    order,created = Order.objects.get_or_create(customer=user)
+    orderItem, created = OrderDetail.objects.get_or_create(order=order, product=product)
+
+    if action == 'add':
+        OrderDetail.quantity = (OrderDetail.quantity +1)
+    elif action == 'remove':
+        OrderDetail.quantity = (OrderDetail.quantity -1)
+    elif action == 'delete':
+        OrderDetail.delete()
+    OrderDetail.save()
+
+    if OrderDetail.quantity <=0:
+        OrderDetail.delete()
+    return JsonResponse('Item was successfully added.', safe=False)
+
+
+
+
+        
 
 
 class App(TemplateView):
@@ -145,3 +179,18 @@ class LogoutCustomer(TemplateView):
 
 class Profile(TemplateView):
     template_name = "main/profile.html"
+
+class DetailCartItem(ListView):
+    model = OrderDetail
+    template_name = "main/cart.html"
+
+class DeleteCartItem(DeleteView):
+    model = OrderDetail
+    success_url = reverse_lazy('main')
+    template_name = "main/delete.html"
+
+class UpdateCartItem(UpdateView):
+    model  = OrderDetail
+    fields=['quantity','product']
+    success_url = reverse_lazy('cart')
+    template_name = "main/update.html"

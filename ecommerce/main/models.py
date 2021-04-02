@@ -1,9 +1,12 @@
+from typing import Set
+from django.conf.urls import url
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
     BaseUserManager,
 )
+from django.db.models.deletion import SET_NULL
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
@@ -84,7 +87,16 @@ class Product(models.Model):
     image_field = models.ImageField(upload_to="uploads/")
 
     def __str__(self):
-        return self.name
+        return self.product_name
+
+    @property
+    def  imageURL(self):
+        try:
+            url = self.image_field.url
+        except:
+            url= ''
+        return url
+        
 
 
 class Order(models.Model):
@@ -95,14 +107,19 @@ class Order(models.Model):
     full_filled = models.BooleanField(default=False)
     deleted = models.BooleanField(default=False)
     paid = models.BooleanField(default=False)
-    transaction_id = models.CharField(max_length=200, null=True)
+    transaction_id = models.CharField(max_length=200, null=True, blank=True)
     ship_date = models.DateTimeField()
+    
+
 
     def __str__(self):
         return str(self.id)
 
 
 class OrderDetail(models.Model):
+    customer = models.ForeignKey(
+    Customer, on_delete=models.SET_NULL, blank=True, null=True
+    )
     product = models.ForeignKey(
         Product, on_delete=models.SET_NULL, blank=True, null=True
     )

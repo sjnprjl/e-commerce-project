@@ -5,7 +5,9 @@ from .models import Customer
 from django.core.exceptions import ValidationError
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
+
 
 from django.contrib.auth import login, authenticate
 
@@ -46,3 +48,6 @@ class LoginInForm(AuthenticationForm):
                     )
 
         return self.cleaned_data
+
+
+        
