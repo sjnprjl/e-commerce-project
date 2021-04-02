@@ -20,7 +20,7 @@ from django.views.generic import FormView, RedirectView, View, UpdateView
 from django.views.generic import ListView, DeleteView, UpdateView
 from django.views import generic
 from .forms import SignupForm, LoginInForm
-from .models import Customer, Order, OrderDetail
+from .models import Customer, Order, OrderItem
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -33,17 +33,18 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage, message
 from django.urls import reverse_lazy
-from .models import Customer, Product
+from .models import Customer, Item
 import json
 from django.http import JsonResponse
-
+from django.utils import timezone
+from django.urls import reverse_lazy
 
 class IndexView(TemplateView):
     template_name = "main/index.html"
 
 
 class ProductView(DetailView):
-    model = Product
+    model = Item
     template_name = "main/product.html"
 
 
@@ -137,32 +138,8 @@ class TermsView(TemplateView):
 
 
 class ProductWiseListView(ListView):
-    model = Product
+    model = Item
     template_name = "main/product-wise-list.html"
-
-def updateItem(request):
-    data = json.loads(request.body)
-    productId = data['productId']
-    action = data['action']
-
-    user = request.user
-    print(user)
-    product = Product.objects.get(id=productId)
-    order,created = Order.objects.get_or_create(customer=user)
-    orderItem, created = OrderDetail.objects.get_or_create(order=order, product=product)
-
-    if action == 'add':
-        OrderDetail.quantity = (OrderDetail.quantity +1)
-    elif action == 'remove':
-        OrderDetail.quantity = (OrderDetail.quantity -1)
-    elif action == 'delete':
-        OrderDetail.delete()
-    OrderDetail.save()
-
-    if OrderDetail.quantity <=0:
-        OrderDetail.delete()
-    return JsonResponse('Item was successfully added.', safe=False)
-
 
 
 
@@ -181,16 +158,44 @@ class Profile(TemplateView):
     template_name = "main/profile.html"
 
 class DetailCartItem(ListView):
-    model = OrderDetail
+    model = OrderItem
     template_name = "main/cart.html"
 
 class DeleteCartItem(DeleteView):
-    model = OrderDetail
+    model = OrderItem
     success_url = reverse_lazy('main')
     template_name = "main/delete.html"
 
 class UpdateCartItem(UpdateView):
-    model  = OrderDetail
-    fields=['quantity','product']
+    model  = OrderItem
+    fields=['quantity']
     success_url = reverse_lazy('cart')
     template_name = "main/update.html"
+
+def add_to_cart(request, pk):
+    item = get_object_or_404(Item, pk=pk)
+    order_item, created = OrderItem.objects.get_or_create(
+        item=item,
+        customer=request.user,
+        ordered=False
+    )
+    order_qs = Order.objects.filter(customer=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        # check if the order item is in the order
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item.quantity += 1
+            order_item.save()
+            messages.info(request, "This item quantity was updated.")
+            return redirect(reverse_lazy('cart'))
+        else:
+            order.items.add(order_item)
+            messages.info(request, "This item was added to your cart.")
+            return redirect(reverse_lazy('cart'))
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(
+            customer=request.user, ordered_date=ordered_date)
+        order.items.add(order_item)
+        messages.info(request, "This item was added to your cart.")
+        return redirect(reverse_lazy('cart'))

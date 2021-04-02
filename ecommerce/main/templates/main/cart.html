@@ -49,17 +49,15 @@
                 
 				<div class="cart-row">
 					<div style="flex:2"><img class="row-image" src=""></div>
-					<div style="flex:2"><p>{{CartItems.product.product_name}}</p></div>
-					<div style="flex:1"><p>${{CartItems.product.unit_price}}</p></div>
+					<div style="flex:2"><p>{{CartItems.item.title}}</p></div>
+					<div style="flex:1"><p>${{CartItems.item.price}}</p></div>
 					<div style="flex:1">
 						<p class="quantity">{{CartItems.quantity}}</p>
-                        <img height="200px" width="200px" src="{{CartItems.product.imageURL}}" alt="">
+                        <img height="200px" width="200px" src="{{CartItems.item.image.url}}" alt="">
 						<div class="quantity">
-                            <a>add</a>
-							<img height="20px" width="20px" data-product="{{CartItems.product.id}}" data-action="add" class="chg-quantity update-cart" src="{{CartItems.product.imageURL}}">
-						     <a>remove</a>   
-                            <img height="20px" width="20px"  data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{{CartItems.product.imageURL}}">
-
+							<button><a href="{% url 'deletecartitem' CartItems.pk%}"> delete </a></button>
+							<button><a href="{% url 'updatecart' CartItems.pk %}">Update</a></button>
+ 
 						</div>
 					</div>
 					<div style="flex:1"><p>${{item.get_total|floatformat:2}}</p></div>

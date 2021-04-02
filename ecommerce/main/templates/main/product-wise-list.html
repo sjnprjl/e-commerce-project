@@ -6,9 +6,9 @@
     <div id="back-top"><i class="ion-chevron-up"></i></div>
 
     <br>
-   {% for product in product_list %}
-   <img height="200", width="200" src="{{product.image_field.url}}" alt="">
-   {{product.product_name}}
+   {% for product in item_list %}
+   <img height="200", width="200" src="{{product.image.url}}" alt="">
+   {{product.title}}
   <h1> {{product.description}}</h1>
   <button><a href="{% url 'product' product.pk %}">detail view</a></button>
 
