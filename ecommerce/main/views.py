@@ -33,15 +33,16 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage, message
 from django.urls import reverse_lazy
-from .models import Customer, Item
+from .models import Customer, Item, OrderItem, Order
 import json
 from django.http import JsonResponse
 from django.utils import timezone
 from django.urls import reverse_lazy
 
+
 class IndexView(TemplateView):
     template_name = "main/index.html"
-    model = Product
+    model = Item
 
 
 class ProductView(DetailView):
@@ -65,7 +66,7 @@ class Activate(View):
             print(uid)
             user = Customer.objects.get(pk=uid)
 
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        except (TypeError, ValueError, OverflowError):
             user = None
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
@@ -124,7 +125,6 @@ class RegisterView(CreateView):
             email.send()
             return HttpResponse(
                 "please confirm your  email address to be able to unlock all features"
-                
             )
         else:
             return HttpResponse("form is invalid")
@@ -143,10 +143,6 @@ class ProductWiseListView(ListView):
     template_name = "main/product-wise-list.html"
 
 
-
-        
-
-
 class App(TemplateView):
     template_name = "main/app.html"
 
@@ -158,27 +154,29 @@ class LogoutCustomer(TemplateView):
 class Profile(TemplateView):
     template_name = "main/profile.html"
 
+
 class DetailCartItem(ListView):
     model = OrderItem
     template_name = "main/cart.html"
 
+
 class DeleteCartItem(DeleteView):
     model = OrderItem
-    success_url = reverse_lazy('main')
+    success_url = reverse_lazy("main")
     template_name = "main/delete.html"
 
+
 class UpdateCartItem(UpdateView):
-    model  = OrderItem
-    fields=['quantity']
-    success_url = reverse_lazy('cart')
+    model = OrderItem
+    fields = ["quantity"]
+    success_url = reverse_lazy("cart")
     template_name = "main/update.html"
+
 
 def add_to_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)
     order_item, created = OrderItem.objects.get_or_create(
-        item=item,
-        customer=request.user,
-        ordered=False
+        item=item, customer=request.user, ordered=False
     )
     order_qs = Order.objects.filter(customer=request.user, ordered=False)
     if order_qs.exists():
@@ -188,15 +186,14 @@ def add_to_cart(request, pk):
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This item quantity was updated.")
-            return redirect(reverse_lazy('cart'))
+            return redirect(reverse_lazy("cart"))
         else:
             order.items.add(order_item)
             messages.info(request, "This item was added to your cart.")
-            return redirect(reverse_lazy('cart'))
+            return redirect(reverse_lazy("cart"))
     else:
         ordered_date = timezone.now()
-        order = Order.objects.create(
-            customer=request.user, ordered_date=ordered_date)
+        order = Order.objects.create(customer=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
-        return redirect(reverse_lazy('cart'))
+        return redirect(reverse_lazy("cart"))
