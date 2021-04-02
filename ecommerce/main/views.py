@@ -41,6 +41,7 @@ from django.urls import reverse_lazy
 
 class IndexView(TemplateView):
     template_name = "main/index.html"
+    model = Product
 
 
 class ProductView(DetailView):

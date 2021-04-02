@@ -6,6 +6,7 @@ from django.contrib.auth.models import (
 )
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 from django.shortcuts import reverse
@@ -70,7 +71,10 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    description = RichTextField(max_length=200)
+
+    def __str__(self):
+       return self.category_name
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
