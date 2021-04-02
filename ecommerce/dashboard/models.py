@@ -1,2 +1,2 @@
 from django.db import models
-from main.models import *
+from .models import *

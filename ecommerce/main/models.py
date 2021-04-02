@@ -9,7 +9,7 @@ from django.utils import timezone
 from ckeditor.fields import RichTextField
 
 # Create your models here.
-
+from django.shortcuts import reverse
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
@@ -76,54 +76,82 @@ class Category(models.Model):
     def __str__(self):
        return self.category_name
 
+class Item(models.Model):
+    title = models.CharField(max_length=100)
+    price = models.FloatField()
+    discount_price = models.FloatField(blank=True, null=True)
 
-class Product(models.Model):
-    product_name = models.CharField(max_length=200, null=True)
-    unit_price = models.IntegerField()
-    Brand = models.CharField(max_length=20, default="Kamla Traders")
-    category = models.ManyToManyField(Category)
-    discount = models.IntegerField()
-    rating = models.IntegerField()
-    quantity = models.IntegerField()
-    image_field = models.ImageField(upload_to="uploads/")
-    product_available = models.BooleanField(default=False)
-    description = RichTextField(max_length=500)
-    
-    
+    slug = models.SlugField()
+    description = models.TextField()
+    image = models.ImageField()
 
     def __str__(self):
-        return self.product_name
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse("core:product", kwargs={
+            'slug': self.slug
+        })
+
+    def get_add_to_cart_url(self):
+        return reverse("core:add-to-cart", kwargs={
+            'slug': self.slug
+        })
+
+    def get_remove_from_cart_url(self):
+        return reverse("core:remove-from-cart", kwargs={
+            'slug': self.slug
+        })
+
+
+class OrderItem(models.Model):
+    customer = models.ForeignKey(
+    Customer, on_delete=models.SET_NULL, blank=True, null=True
+    )
+    ordered = models.BooleanField(default=False)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity} of {self.item.title}"
+
+    def get_total_item_price(self):
+        return self.quantity * self.item.price
+
+    def get_total_discount_item_price(self):
+        return self.quantity * self.item.discount_price
+
+    def get_amount_saved(self):
+        return self.get_total_item_price() - self.get_total_discount_item_price()
+
+    def get_final_price(self):
+        if self.item.discount_price:
+            return self.get_total_discount_item_price()
+        return self.get_total_item_price()
 
 
 class Order(models.Model):
     customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, blank=True, null=True
+    Customer, on_delete=models.SET_NULL, blank=True, null=True
     )
-    order_date = models.DateTimeField(auto_now_add=True)
-    full_filled = models.BooleanField(default=False)
-    deleted = models.BooleanField(default=False)
-    paid = models.BooleanField(default=False)
-    transaction_id = models.CharField(max_length=200, null=True)
-    ship_date = models.DateTimeField()
+    ref_code = models.CharField(max_length=20, blank=True, null=True)
+    items = models.ManyToManyField(OrderItem)
+    start_date = models.DateTimeField(auto_now_add=True)
+    ordered_date = models.DateTimeField()
+    ordered = models.BooleanField(default=False)
+
+    being_delivered = models.BooleanField(default=False)
+    received = models.BooleanField(default=False)
+    refund_requested = models.BooleanField(default=False)
+    refund_granted = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.id)
+        return self.user.username
 
-
-class OrderDetail(models.Model):
-    product = models.ForeignKey(
-        Product, on_delete=models.SET_NULL, blank=True, null=True
-    )
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-    quantity = models.IntegerField(default=0, null=True, blank=True)
-    full_filled = models.BooleanField(default=False)
-    date_added = models.DateTimeField(auto_now_add=True)
-
-
-class ShippingAddress(models.Model):
-    customer = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, blank=True, null=True
-    )
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, blank=True, null=True)
-    address = models.CharField(max_length=200, null=True)
-    phone_number = models.CharField(max_length=20, blank=True)
+    def get_total(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.get_final_price()
+        if self.coupon:
+            total -= self.coupon.amount
+        return total

@@ -5,7 +5,9 @@ from .models import Customer
 from django.core.exceptions import ValidationError
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.forms import ModelForm
 from django.utils.translation import gettext_lazy as _
+
 
 from django.contrib.auth import login, authenticate
 
@@ -32,7 +34,7 @@ class LoginInForm(AuthenticationForm):
             )
             if self.user_cache is None:
                 try:
-                    user_temp = Customer.objects.get(email=username)
+                    user_temp = Customer.objects.get(email=username, password=password)
                 except:
                     user_temp = None
 
@@ -46,3 +48,6 @@ class LoginInForm(AuthenticationForm):
                     )
 
         return self.cleaned_data
+
+
+        

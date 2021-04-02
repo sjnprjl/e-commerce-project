@@ -100,8 +100,7 @@ admin.site.unregister(Group)
 
 # Register your models here.
 
-admin.site.register(Product)
+admin.site.register(Item)
 admin.site.register(Order)
-admin.site.register(OrderDetail)
-admin.site.register(ShippingAddress)
+admin.site.register(OrderItem)
 admin.site.register(Category)

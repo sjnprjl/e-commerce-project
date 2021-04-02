@@ -5,7 +5,7 @@ from django.contrib import admin
 urlpatterns = [
     path("", DashboardView.as_view(), name="dashboard"),
     path("login/", LoginView.as_view(), name="loginadmin"),
-    path("products/", ProductView.as_view(), name="product"),
+    path("products/", ProductView.as_view(), name="Dproduct"),
     path("products-details/", ProductDetails.as_view(), name="details"),
     path("orders/", Order.as_view(), name="order"),
     path("orders-details/", OrderDetails.as_view(), name="orderdetails"),

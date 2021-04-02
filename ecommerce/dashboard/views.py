@@ -1,9 +1,9 @@
-from django.shortcuts import render
-
-from django.views.generic.base import TemplateView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.utils.http import is_safe_url
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView as LV
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import render, redirect
+from django.utils.http import is_safe_url
+from django.views.generic.base import TemplateView
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     login as auth_login,
@@ -14,6 +14,8 @@ from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, RedirectView
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect, QueryDict
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
@@ -21,39 +23,37 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "dashboard/dashboard-ecommerce.html"
 
 
-class LoginView(FormView):
+class LoginView(LV, UserPassesTestMixin):
     """
     Provides the ability to login as a user with a username and password
     """
 
-    template_name = "dashboard/user-login.html"
+    def test_func(self):
+        return self.request.user.is_staff or self.request.user.is_superuser
 
+    template_name = "dashboard/user-login.html"
     success_url = "/dashboard/"
     form_class = AuthenticationForm
     redirect_field_name = REDIRECT_FIELD_NAME
+    redirect_authenticated_user = True
 
-    @method_decorator(sensitive_post_parameters("password"))
+    @method_decorator(sensitive_post_parameters())
     @method_decorator(csrf_protect)
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
-        # Sets a test cookie to make sure the user has cookies enabled
-        request.session.set_test_cookie()
-
-        return super(LoginView, self).dispatch(request, *args, **kwargs)
-
-    def form_invalid(self, form):
-        response = super().form_invalid(form)
-        return response
-
-    def form_valid(self, form):
-        auth_login(self.request, form.get_user())
-
-        # If the test cookie worked, go ahead and
-        # delete it since its no longer needed
-        if self.request.session.test_cookie_worked():
-            self.request.session.delete_test_cookie()
-
-        return super(LoginView, self).form_valid(form)
+        if (
+            self.redirect_authenticated_user
+            and self.request.user.is_authenticated
+            and self.request.user.is_staff
+        ):
+            redirect_to = self.get_success_url()
+            if redirect_to == self.request.path:
+                raise ValueError(
+                    "Redirection loop for authenticated user detected. Check that "
+                    "your LOGIN_REDIRECT_URL doesn't point to a login page."
+                )
+            return HttpResponseRedirect(redirect_to)
+        return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
         redirect_to = self.request.GET.get(self.redirect_field_name)

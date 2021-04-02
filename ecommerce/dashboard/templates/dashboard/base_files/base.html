@@ -31,6 +31,7 @@
 
 <body class="vertical-layout">
     <!-- Start Infobar Setting Sidebar -->
+    {% block loginPage %} {% endblock %}
     <div id="infobar-settings-sidebar" class="infobar-settings-sidebar">
         <div class="infobar-settings-sidebar-head d-flex w-100 justify-content-between">
             <h4>Settings</h4><a href="javascript:void(0)" id="infobar-settings-close"
@@ -298,7 +299,7 @@
                                                                     class="img-fluid" alt="email">Email</a>
                                                     </li>
                                                     <li class="media dropdown-item">
-                                                        <a href="#" class="profile-icon"><img
+                                                        <a href="{% url 'logout' %}" class="profile-icon"><img
                                                                     src="{%static 'dashboard/images/svg-icon/logout.svg'%}"
                                                                     class="img-fluid" alt="logout">Logout</a>
                                                     </li>
