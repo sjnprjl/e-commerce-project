@@ -51,10 +51,10 @@
                             </div>
                             <div class="app-link">
                                 <h6>
-                                    Download aap
+                                    Download App
                                 </h6>
                                 <ul>
-                                    <li><a><i class="fa fa-apple"></i></a></li>
+                                    <li><a><i class="fa fa-android"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                         </ul>
                                     </li>
                                     <li> <a class="mor-slide-click">
-                                            mor category
+                                            more category
                                             <i class="fa fa-angle-down pro-down"></i>
                                             <i class="fa fa-angle-up pro-up"></i>
                                         </a> </li>
@@ -160,7 +160,7 @@
                                             </svg>
                                             <span class="contact-item">
                                                 call us
-                                                <span>123-456-789</span>
+                                               <a href='tel:9814048146'><span>+977-9814048146</span></a>
                                             </span>
                                         </div>
                                     </li>
@@ -191,7 +191,7 @@
                     </div>
                     <div class="col-4">
                         <div class="logo-block">
-                            <a href="index.html"> <img src="{% static 'main/images/layout-4/logo/logo.png' %}"
+                            <a href="index.html"> <img src="{% static 'main/images/layout-4/logo/ostromi2.png' %}" height="50px"
                                     alt="logo" class="img-fluid  "> </a>
                         </div>
                     </div>
@@ -241,7 +241,10 @@
                                         </svg>
                                     </a>
                                 </li>
-                                <li class="mobile-wishlist item-count" onclick="openWishlist()">
+
+
+                                
+                                <!-- <li class="mobile-wishlist item-count" onclick="openWishlist()">
                                     <a href="javascript:void(0)">
                                         <svg viewBox="0 -28 512.001 512" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -249,7 +252,7 @@
                                         </svg>
                                         <div class="item-count-contain"> 3 </div>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="mobile-setting" onclick="openSetting()">
                                     <a href="javascript:void(0)">
                                         <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512"
@@ -299,7 +302,7 @@
                                 </div>
                                 <div class="logo-block logo-sm-center ">
                                     <a href="index.html">
-                                        <img src="{% static 'main/images/layout-4/logo/logo.png' %}" alt="logo"
+                                        <img src="{% static 'main/images/layout-4/logo/logo-footer.png' %}" alt="logo"
                                             class="img-fluid  ">
                                     </a>
                                 </div>
@@ -347,7 +350,7 @@
                                                         </li>
                                                     </ul>
                                                 </li>
-                                                <li> <a class="mor-slide-click">mor category <i
+                                                <li> <a class="mor-slide-click">more category <i
                                                             class="fa fa-angle-down pro-down"></i><i
                                                             class="fa fa-angle-up pro-up"></i></a> </li>
                                             </ul>
@@ -738,19 +741,7 @@
                                     </li>
                                     <!--product-end end-->
 
-                                    <!--blog-meu start-->
-                                    <li>
-                                        <a class="light-menu-item" href="javascript:void(0)">blog</a>
-                                        <ul>
-                                            <li><a href="blog(left-sidebar).html">left sidebar</a></li>
-                                            <li><a href="blog(right-sidebar).html">right sidebar</a></li>
-                                            <li><a href="blog(no-sidebar).html">no sidebar</a></li>
-                                            <li><a href="blog-details.html">blog details</a></li>
-                                            <li><a href="blog-creative(left-sidebar).html">creative left sidebar</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <!--blog-meu end-->
+                                   
                                 </ul>
                             </div>
                             <div class="input-block">
@@ -949,12 +940,12 @@
                         <div class="footer-main">
                             <div class="footer-box">
                                 <div class="footer-title mobile-title">
-                                    <h5>about</h5>
+                                    <h5>About</h5>
                                 </div>
                                 <div class="footer-contant">
                                     <div class="footer-logo">
                                         <a href="index.html"> <img
-                                                src="{% static 'main/images/layout-1/logo/logo.png' %}"
+                                                src="{% static 'main/images/layout-4/logo/ostromi2.png' %}"
                                                 class="img-fluid" alt="logo"> </a>
                                     </div>
                                     <p>It is a long established fact that a reader will be distracted by the readable
@@ -988,11 +979,12 @@
                                 </div>
                                 <div class="footer-contant">
                                     <ul class="contact-list">
-                                        <li><i class="fa fa-map-marker"></i>big deal store demo store
-                                            <br> india-<span>3654123</span></li>
-                                        <li><i class="fa fa-phone"></i>call us: <span>123-456-7898</span></li>
-                                        <li><i class="fa fa-envelope-o"></i>email us: support@bigdeal.com</li>
-                                        <li><i class="fa fa-fax"></i>fax <span>123456</span></li>
+                                        <li><i class="fa fa-map-marker"></i>Mukti Chok, Debi Bhawan
+                                            <br> Birtamode-<span>Jhapa</span></li>
+                                        <li><i class="fa fa-phone"></i>call us: <a href='tel:*9988#'><span>9814048146</span></a></li>
+                                        
+                                        <li><i class="fa fa-envelope-o"></i>email us:<a href="mailto:kera@kera.com">mail@kamaltraders.com.np</a></li>
+                                     
                                     </ul>
                                 </div>
                             </div>
@@ -1039,27 +1031,27 @@
                             <ul class="payment">
                                 <li>
                                     <a href="javascript:void(0)"><img
-                                            src="{% static 'main/images/layout-1/pay/1.png' %}" class="img-fluid"
+                                            src="{% static 'main/images/layout-4/pay/1.png' %}" class="img-fluid"
                                             alt="pay"></a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)"><img
-                                            src="{% static 'main/images/layout-1/pay/2.png' %}" class="img-fluid"
+                                            src="{% static 'main/images/layout-4/pay/2.png' %}" class="img-fluid"
                                             alt="pay"></a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)"><img
-                                            src="{% static 'main/images/layout-1/pay/3.png' %}" class="img-fluid"
+                                            src="{% static 'main/images/layout-4/pay/3.png' %}" class="img-fluid"
                                             alt="pay"></a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)"><img
-                                            src="{% static 'main/images/layout-1/pay/4.png' %}" class="img-fluid"
+                                            src="{% static 'main/images/layout-4/pay/4.png' %}" class="img-fluid"
                                             alt="pay"></a>
                                 </li>
                                 <li>
                                     <a href="javascript:void(0)"><img
-                                            src="{% static 'main/images/layout-1/pay/5.png' %}" class="img-fluid"
+                                            src="{% static 'main/images/layout-4/pay/5.png' %}" class="img-fluid"
                                             alt="pay"></a>
                                 </li>
                             </ul>
