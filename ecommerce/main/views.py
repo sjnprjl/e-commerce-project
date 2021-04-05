@@ -40,10 +40,25 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 
 
+class JSONResponseMixin:
+    def render_to_json_response(self, context, **response_kwargs):
+        return JsonResponse(
+            self.get_data(context),
+            **response_kwargs
+        )
+
+        def get_data(self, context):
+            return context
+
+
 class IndexView(TemplateView):
     
     template_name = "main/index.html"
     
+
+
+class PageNotFoundView(TemplateView):
+    template_name = "main/404.html"
 
 
 class ProductView(DetailView):
@@ -194,7 +209,8 @@ def add_to_cart(request, pk):
             return redirect(reverse_lazy("cart"))
     else:
         ordered_date = timezone.now()
-        order = Order.objects.create(customer=request.user, ordered_date=ordered_date)
+        order = Order.objects.create(
+            customer=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
         return redirect(reverse_lazy("cart"))

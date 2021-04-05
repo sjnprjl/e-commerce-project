@@ -34,6 +34,8 @@
 
 <body class="bg-light">
     <!-- loader start -->
+
+    {% block header %}
     <div class="loader-wrapper">
         <div> <img src="{% static 'main/images/loader.gif' %}" alt="loader"> </div>
     </div>
@@ -897,10 +899,12 @@
         </div>
     </header>
     <!--header end-->
+    {% endblock %}
 
     {% block content %}
     {% endblock %}
     <!-- footer start -->
+    {% block footer %}
     <footer>
         <div class="footer1 ">
             <div class="container">
@@ -1034,7 +1038,9 @@
         </div>
     </footer>
     <!-- footer end -->
+    {% endblock %}
 
+    {% block newsletter-popup %}
     <!--Newsletter modal popup start-->
     {% if request.user.is_authenticated %}
 
@@ -1319,6 +1325,7 @@
         </div>
     </div>
     <!-- Quick-view modal popup end-->
+    {% endblock %}
 
     <!-- edit product modal start-->
     <div class="modal fade bd-example-modal-lg theme-modal pro-edit-modal" id="edit-product" tabindex="-1" role="dialog"
@@ -1736,7 +1743,8 @@
     <!-- Add to account bar end-->
 
 
-
+    {% endblock  %}
+    {% block notify-product  %}
     <!-- notification product -->
     <div class="product-notification" id="dismiss">
         <span onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
@@ -1749,6 +1757,7 @@
         </div>
     </div>
     <!-- notification product -->
+    {% endblock %}
 
     <!-- latest jquery-->
     <script src="{% static 'main/js/jquery-3.3.1.min.js' %}"></script>
@@ -1775,6 +1784,8 @@
     <script src="{% static 'main/js/script.js' %}"></script>
     <script src="{% static 'main/js/timer2.js' %}"></script>
     <script src="{% static 'main/js/modal.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
 </body>
 
 
