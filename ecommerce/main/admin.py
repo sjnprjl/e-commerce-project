@@ -90,7 +90,10 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ("email",)
     ordering = ("email",)
     filter_horizontal = ()
-
+class ItemsAdmin(admin.ModelAdmin):
+    list_display = ( "title", "price", "description", "slug")
+    list_filter = ("title", "price")
+   
 
 # Now register the new UserAdmin...
 admin.site.register(Customer, UserAdmin)
@@ -100,7 +103,10 @@ admin.site.unregister(Group)
 
 # Register your models here.
 
-admin.site.register(Item)
+admin.site.register(Item,ItemsAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(Category)
+admin.site.site_header = "Kera jasto Admin"
+admin.site.site_title = " Admin Portal"
+admin.site.index_title = "Muji Teo anuwar dekhauna feri aais."

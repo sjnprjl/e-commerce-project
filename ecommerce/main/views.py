@@ -52,8 +52,13 @@ class JSONResponseMixin:
 
 
 class IndexView(TemplateView):
+    
     template_name = "main/index.html"
-    model = Item
+    
+
+
+class PageNotFoundView(TemplateView):
+    template_name = "main/404.html"
 
 
 class PageNotFoundView(TemplateView):

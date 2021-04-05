@@ -6,11 +6,12 @@ from django.contrib.auth.models import (
 )
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
-from ckeditor.fields import RichTextField
+
 
 # Create your models here.
 from django.shortcuts import reverse
 from django.db import models
+from django.utils.html import mark_safe
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
@@ -71,20 +72,20 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
-    description = RichTextField(max_length=200)
+    description =  models.CharField(max_length=500)
 
     def __str__(self):
        return self.category_name
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    price = models.FloatField()
+    price = models.FloatField(help_text='in Rs',)
     discount_price = models.FloatField(blank=True, null=True)
-
+    category = models.ManyToManyField(Category, null=True)
     slug = models.SlugField()
-    description = models.TextField()
+    description =  models.TextField(max_length=500)
     image = models.ImageField()
-
+    h_image = models.ImageField()
     def __str__(self):
         return self.title
 
