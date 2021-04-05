@@ -2900,3 +2900,66 @@ function openSetting() {
 function closeSetting() {
     document.getElementById("mySetting").classList.remove('open-side');
 }
+
+
+
+
+// ajax form validation and form registration
+function validate_email(email_field) {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email_field).toLowerCase());
+}
+function validated_field(field) {
+    const $type = field.dataset.type;
+    let $val = $(field).val();
+    let is_valid = true;
+    // validate email
+    if ($type === "email") {
+        $val = $val.trim();
+        if ($val == "") {
+            is_valid = false;
+        } else if (!validate_email($val)) {
+            is_valid = false;
+        }
+    }
+    //validate password
+    if ($type === "password") {
+        if ($val == "") {
+            is_valid = false;
+        }
+    }
+    if (!is_valid) {
+        $(field).addClass("invalid-field");
+        $(field).removeClass("valid-field");
+    } else {
+        $(field).removeClass("invalid-field");
+        $(field).addClass("valid-field");
+    }
+    return is_valid;
+}
+
+
+function form_validator(form_identifier) {
+    const form = $(form_identifier);
+    const fields = $(`${form_identifier} input`);
+    $(form).on("submit", function (e) {
+        let total_valids = 0;
+        e.preventDefault();
+        fields.each((index, field) => {
+            total_valids += validated_field(field) ? 1 : 0;
+        })
+        if (fields.length === total_valids) {
+            $.ajax({
+                url: form.attr("action"),
+                type: form.attr("method"),
+                data: form.serialize(),
+                success: function (response) {
+                    $("#status").html(response.message);
+                    if (response.status_code === 200)
+                        window.location.replace(response.redirect_url)
+                }
+            })
+        }
+
+    })
+}

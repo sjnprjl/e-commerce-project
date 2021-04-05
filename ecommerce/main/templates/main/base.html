@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>{% block  title %} welcome to my fucking website {% endblock %}</title>
+    <title>{% block  title %} {% if request.user.is_authenticated %} {{user.username}} {% endif %} - welcome to my fucking website {% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -1747,19 +1747,23 @@
                     </a>
                 </div>
             </div>
-            <form class="theme-form">
+            <form class="theme-form" id="loginForm" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                    <input data-type="email" type="text" class="form-control" id="email" name="email" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label for="review">Password</label>
-                    <input type="password" class="form-control" id="review" placeholder="Enter your password"
-                        required="">
+                    <input data-type="password" type="password" name="password" class="form-control" id="review" placeholder="Enter your password" >
                 </div>
                 <div class="form-group">
-                    <a href="javascript:void(0)" class="btn btn-solid btn-md btn-block ">Login</a>
+                    <button id="loginButton" type="submit" class="btn btn-solid btn-md btn-block ">Login</button>
                 </div>
+                <div class="form-group">
+                    <strong id="status"></strong>
+                </div>
+
                 <div class="accout-fwd">
                     <a href="forget-pwd.html" class="d-block">
                         <h5>forget password?</h5>
@@ -1851,6 +1855,10 @@
     <script src="{% static 'main/js/timer2.js' %}"></script>
     <script src="{% static 'main/js/modal.js' %}"></script>
     {% block javascript %}
+<script>
+form_validator("#loginForm");
+
+</script>
     {% endblock %}
 </body>
 
