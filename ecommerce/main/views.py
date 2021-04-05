@@ -41,8 +41,9 @@ from django.urls import reverse_lazy
 
 
 class IndexView(TemplateView):
+    
     template_name = "main/index.html"
-    model = Item
+    
 
 
 class ProductView(DetailView):
@@ -78,7 +79,7 @@ class Activate(View):
 
 class LoginView(LV, UserPassesTestMixin):
 
-    template_name = "main/account-login.html"
+    template_name = "main/login.html"
     authentication_form = LoginInForm
     redirect_field_name = REDIRECT_FIELD_NAME
     success_url = "/"

@@ -19,7 +19,7 @@ urlpatterns = [
     path("product-wise-list/", ProductWiseListView.as_view(), name="product-wise-list"),
 	path('verification/', include('verify_email.urls')),	
     path('activate/<str:uid>/<str:token>', Activate.as_view(), name='activate'),
-    path('reset_password/', auth_views.PasswordResetView.as_view(template_name = "main/reset_password.html"), name ='reset_password'),
+    path('forgot-password/', auth_views.PasswordResetView.as_view(template_name = "main/forget-pwd.html"), name ='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name = "main/password_reset_sent.html"), name ='password_reset_done'),
     path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name = "main/password_reset_form.html"), name ='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name = "main/password_reset_done.html"), name ='password_reset_complete'),
