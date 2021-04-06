@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import allauth
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,7 @@ INSTALLED_APPS = [
     "main.apps.MainConfig",
     "dashboard.apps.DashboardConfig",
     "django_email_verification",
+    "django.contrib.sites",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -107,7 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.AllowAllUsersModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
-    "django.contrib.auth.backends.ModelBackend",
     ]
 
 # Internationalization
