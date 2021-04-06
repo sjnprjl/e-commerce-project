@@ -4,11 +4,14 @@ from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     get_user_model,
     login,
+    authenticate,
     update_session_auth_hash,
 )
 from django.contrib.auth.views import LoginView as LV
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
+
+from django.http import HttpResponseRedirect
 from django.http.response import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.utils.http import is_safe_url, urlsafe_base64_decode
@@ -52,7 +55,8 @@ class JSONResponseMixin:
 
 
 class IndexView(TemplateView):
-    
+    """ index view """
+
     template_name = "main/index.html"
     
 
@@ -61,20 +65,34 @@ class PageNotFoundView(TemplateView):
     template_name = "main/404.html"
 
 
+class PageNotFoundView(TemplateView):
+    """404 error page view"""
+
+    template_name = "main/404.html"
+
+
 class ProductView(DetailView):
+    """product page view"""
+
     model = Item
     template_name = "main/product.html"
 
 
 class SearchView(TemplateView):
+    """search view """
+
     template_name = "main/search.html"
 
 
 class AboutUsView(TemplateView):
+    """about us view"""
+
     template_name = "main/about_us.html"
 
 
 class Activate(View):
+    """activate view"""
+
     def get(self, request, uid, token):
 
         try:
@@ -93,6 +111,29 @@ class Activate(View):
 
 
 class LoginView(LV, UserPassesTestMixin):
+    """login view"""
+
+    def post(self, request):
+        if request.is_ajax():
+            data = None
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+
+            user = authenticate(username=email, password=password)
+            if user is None:
+                data = {
+                    "message": "Either username or password is incorrect",
+                    "status_code": 401,
+                }
+            else:
+                login(self.request, user)
+                data = {
+                    "message": "You are logged in",
+                    "status_code": 200,
+                    "redirect_url": self.get_success_url()
+                }
+
+            return JsonResponse(data)
 
     template_name = "main/login.html"
     authentication_form = LoginInForm
@@ -108,6 +149,8 @@ class LoginView(LV, UserPassesTestMixin):
 
 
 class RegisterView(CreateView):
+    """register view"""
+
     model = Customer
     template_name = "main/account-register.html"
     form_class = SignupForm
@@ -147,31 +190,45 @@ class RegisterView(CreateView):
 
 
 class PrivacyView(TemplateView):
+    """privacy view"""
+
     template_name = "main/privacy.html"
 
 
 class TermsView(TemplateView):
+    """terms view"""
+
     template_name = "main/terms.html"
 
 
 class ProductWiseListView(ListView):
+    """product list view"""
+
     model = Item
     template_name = "main/product-wise-list.html"
 
 
 class App(TemplateView):
+    """app view"""
+
     template_name = "main/app.html"
 
 
 class LogoutCustomer(TemplateView):
+    """logout customer view"""
+
     template_name = "main/logout.html"
 
 
 class Profile(TemplateView):
+    """profile view"""
+
     template_name = "main/profile.html"
 
 
 class DetailCartItem(ListView):
+    """detail view"""
+
     model = OrderItem
     template_name = "main/cart.html"
 

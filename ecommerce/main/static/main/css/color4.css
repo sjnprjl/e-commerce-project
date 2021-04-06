@@ -1,3 +1,13 @@
+/*my custom css*/
+
+.invalid-field {
+    border: 2px solid red !important;
+} 
+.valid-field {
+    border: 2px solid green; 
+}
+
+/*end of custom css*/
 @-webkit-keyframes rotation {
   from {
     -webkit-transform: rotateY(0deg);
