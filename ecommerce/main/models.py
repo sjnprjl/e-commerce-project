@@ -72,6 +72,12 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
+    ourtypes = (
+    ("0", "Jewlery"),
+    ("1", "Furniture"),
+)
+  
+    types = models.CharField(choices=ourtypes, max_length=2, null=False, default="Jewlery")
     description =  models.CharField(max_length=500)
 
     def __str__(self):
@@ -81,7 +87,8 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField(help_text='in Rs',)
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.ManyToManyField(Category, null=True)
+    category = models.ManyToManyField(Category)
+    Brand = models.CharField(max_length=20, null=True)
     slug = models.SlugField()
     description =  models.TextField(max_length=500)
     image = models.ImageField()

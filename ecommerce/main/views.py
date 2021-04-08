@@ -23,7 +23,12 @@ from django.views.generic import FormView, RedirectView, View, UpdateView
 from django.views.generic import ListView, DeleteView, UpdateView
 from django.views import generic
 from .forms import SignupForm, LoginInForm
-from .models import Customer, Order, OrderItem
+from .models import (
+    Customer,
+    Order,
+    OrderItem,
+    Category,
+    Item,)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -54,10 +59,10 @@ class JSONResponseMixin:
             return context
 
 
-class IndexView(TemplateView):
-    """ index view """
-
-    template_name = "main/index.html"
+def index(request):
+    cate = Category.objects.all()
+    items = Item.objects.all()
+    return render(request, "main/index.html",{'cate':cate,"items":items})
     
 
 
