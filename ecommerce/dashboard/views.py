@@ -9,6 +9,12 @@ from django.contrib.auth import (
     login as auth_login,
     logout as auth_logout,
 )
+from main.models import (
+    Customer,
+    Order,
+    OrderItem,
+    Category,
+    Item,)
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -74,16 +80,17 @@ class LogoutView(RedirectView):
         return super(LogoutView, self).get(request, *args, **kwargs)
 
 
-class ProductView(TemplateView):
-    template_name = "dashboard/ecommerce-product-list.html"
+def ProductView(request):
+    items = Item.objects.all()
+    return render (request,"dashboard/ecommerce-product-list.html",{"items":items})
 
 
 class ProductDetails(TemplateView):
     template_name = "dashboard/ecommerce-product-detail.html"
 
-
-class Order(TemplateView):
-    template_name = "dashboard/ecommerce-order-list.html"
+def myorder(request):
+    order = Order.objects.all()
+    return render (request,"dashboard/ecommerce-order-list.html",{"order":order})
 
 
 class OrderDetails(TemplateView):

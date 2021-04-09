@@ -91,7 +91,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ("email",)
     filter_horizontal = ()
 class ItemsAdmin(admin.ModelAdmin):
-    list_display = ( "title", "price", "description", "slug","types")
+    list_display = ( "title", "price", "description", "quantity","types")
     list_filter = ("title", "price")
    
 

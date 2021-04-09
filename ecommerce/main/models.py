@@ -95,7 +95,7 @@ class Item(models.Model):
   
     types = models.CharField(choices=ourtypes, max_length=2, null=False, default="Jewellery")
     Brand = models.CharField(max_length=20, null=True)
-    slug = models.SlugField()
+    quantity = models.IntegerField(default=0)
     description =  models.TextField(max_length=500)
     image = models.ImageField()
     h_image = models.ImageField()
@@ -148,19 +148,19 @@ class Order(models.Model):
     customer = models.ForeignKey(
     Customer, on_delete=models.SET_NULL, blank=True, null=True
     )
-    ref_code = models.CharField(max_length=20, blank=True, null=True)
+    order_id = models.CharField(max_length=20, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-
+    address = models.CharField(default='Nepal', max_length=10)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.username
+        return self.order_id
 
     def get_total(self):
         total = 0
