@@ -78,9 +78,12 @@ class PageNotFoundView(TemplateView):
 
 class ProductView(DetailView):
     """product page view"""
-
     model = Item
-    template_name = "main/product.html"
+    template_name = "main/product-wise-list.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
 
 
 class SearchView(TemplateView):

@@ -88,6 +88,12 @@ class Item(models.Model):
     price = models.FloatField(help_text='in Rs',)
     discount_price = models.FloatField(blank=True, null=True)
     category = models.ManyToManyField(Category)
+    ourtypes = (
+    ("0", "Jewellery"),
+    ("1", "Furniture"),
+)
+  
+    types = models.CharField(choices=ourtypes, max_length=2, null=False, default="Jewellery")
     Brand = models.CharField(max_length=20, null=True)
     slug = models.SlugField()
     description =  models.TextField(max_length=500)

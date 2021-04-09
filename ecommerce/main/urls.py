@@ -16,7 +16,7 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("privacy/", PrivacyView.as_view(), name="privacy"),
     path("terms/", TermsView.as_view(), name="terms"),
-    path("product-wise-list/", ProductWiseListView.as_view(), name="product-wise-list"),
+    path("product/<slug:slug>/", ProductWiseListView.as_view(), name="product-wise-list"),
     path("verification/", include("verify_email.urls")),
     path("activate/<str:uid>/<str:token>", Activate.as_view(), name="activate"),
     path(
