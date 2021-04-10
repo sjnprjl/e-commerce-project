@@ -1,3 +1,4 @@
+
 import django
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import (
@@ -7,11 +8,11 @@ from django.contrib.auth import (
     authenticate,
     update_session_auth_hash,
 )
-from django.contrib.auth.views import LoginView as LV
+from django.contrib.auth.views import LoginView as LV, redirect_to_login
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
 from django.http.response import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.utils.http import is_safe_url, urlsafe_base64_decode
@@ -79,7 +80,7 @@ class PageNotFoundView(TemplateView):
 class ProductView(DetailView):
     """product page view"""
     model = Item
-    template_name = "main/product-wise-list.html"
+    template_name = "main/product.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
@@ -239,6 +240,17 @@ class DetailCartItem(ListView):
 
     model = OrderItem
     template_name = "main/cart.html"
+
+    def get_context_data(self, **kwargs):
+        if self.request.user.is_authenticated:
+            context = super().get_context_data(**kwargs)
+            context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+            return context
+        else:
+            None
+
+
+ 
 
 
 class DeleteCartItem(DeleteView):
