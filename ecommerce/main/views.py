@@ -239,18 +239,28 @@ class DetailCartItem(ListView):
     """detail view"""
 
     model = OrderItem
+    
     template_name = "main/cart.html"
+    
 
-    def get_context_data(self, **kwargs):
+
+    # def get_context_data(self, **kwargs):
+    #     if self.request.user.is_authenticated:
+    #         context = super().get_context_data(**kwargs)
+    #         context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+    #         return context
+    #     else:
+    #         None
+    def get_queryset(self):
         if self.request.user.is_authenticated:
-            context = super().get_context_data(**kwargs)
-            context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+            context = OrderItem.objects.filter(
+            customer = self.request.user
+        )
             return context
-        else:
-            None
+        elif self.request.user.is_anonymous:
+            return HttpResponseRedirect("/login")
 
 
- 
 
 
 class DeleteCartItem(DeleteView):
