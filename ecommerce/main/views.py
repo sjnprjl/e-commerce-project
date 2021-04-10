@@ -63,9 +63,41 @@ class JSONResponseMixin:
 def index(request):
     cate = Category.objects.all()
     items = Item.objects.all()
-    return render(request, "main/index.html",{'cate':cate,"items":items})
-    
+    cart = OrderItem.objects.all()
+    return render(request, "main/index.html",{'cate':cate,"items":items,"cart":cart})
+    def get_context_data(self, **kwargs):
+        if self.request.user.is_authenticated:
+            context = super().get_context_data(**kwargs)
+            context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+            return context
+        else:
+            None
 
+class CheckOutView(TemplateView):
+    template_name = "main/checkout.html"
+
+
+
+class DetailCartItem(ListView):
+    """detail view"""
+
+    model = OrderItem
+    template_name = "main/cart.html"
+
+    def get_context_data(self, **kwargs):
+        if self.request.user.is_authenticated:
+            context = super().get_context_data(**kwargs)
+            context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+            return context
+        else:
+            None
+
+class DeleteCartItem(DeleteView):
+    model = OrderItem
+    success_url = reverse_lazy("cart")
+    def get(self, request, *args,**kwargs):
+        self.delete(request,*args,**kwargs)
+        return redirect(self.get_success_url())
 
 class PageNotFoundView(TemplateView):
     template_name = "main/404.html"
@@ -235,28 +267,9 @@ class Profile(TemplateView):
     template_name = "main/profile.html"
 
 
-class DetailCartItem(ListView):
-    """detail view"""
-
-    model = OrderItem
-    template_name = "main/cart.html"
-
-    def get_context_data(self, **kwargs):
-        if self.request.user.is_authenticated:
-            context = super().get_context_data(**kwargs)
-            context['customer'] = OrderItem.objects.filter(customer = self.request.user)
-            return context
-        else:
-            None
 
 
- 
 
-
-class DeleteCartItem(DeleteView):
-    model = OrderItem
-    success_url = reverse_lazy("main")
-    template_name = "main/delete.html"
 
 
 class UpdateCartItem(UpdateView):
@@ -264,6 +277,8 @@ class UpdateCartItem(UpdateView):
     fields = ["quantity"]
     success_url = reverse_lazy("cart")
     template_name = "main/update.html"
+
+        
 
 
 def add_to_cart(request, pk):

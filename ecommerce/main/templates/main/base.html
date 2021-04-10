@@ -8,7 +8,7 @@
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="670658057171-4k9vgc1cocjmgf77an3n63edv2vf1k0m.apps.googleusercontent.com">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="big-deal">
@@ -82,7 +82,7 @@
                                         <li><a href="javascript:void(0)"><i class="fa fa-dashboard"></i>Profile</a></li>
                                         <li><a href="javascript:void(0)"><i class="fa fa-unlock-alt"></i>Forgot
                                                 Password</a></li>
-                                        <li><a href="javascript:void(0)"><i class="fa fa-sign-out"></i>Log Out</a></li>
+                                        <li><a href="{% url 'logout_user' %}"><i class="fa fa-sign-out"></i>Log Out</a></li>
 
                                     </ul>
                                 </div>
@@ -209,7 +209,7 @@
                               <div>shopping<span>cart</span></div>
                             </div>
                           </div>  
-                          <div class="item-count-contain"> 3 </div>
+                          <div class="item-count-contain">{{items.loop.counter}}</div>
                         </a>
                       </li>
                     </ul> 
@@ -732,7 +732,7 @@
                     </div>
                     <div class="pro-group mb-0">
                         <div class="modal-btn">
-                            <a href="cart.html" class="btn btn-solid btn-sm">
+                            <a href="{% url 'cart' %}" class="btn btn-solid btn-sm">
                                 add to cart
                             </a>
                             <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
@@ -760,24 +760,25 @@
             </div>
             <div class="cart_media">
                 <ul class="cart_product">
+                    {% for items in cart %}
                     <li>
                         <div class="media">
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'product' items.pk %}">
                                 <img alt="megastore1" class="me-3"
-                                    src="{% static 'main/images/layout-2/product/1.jpg' %}">
+                                    src="{{items.item.image.url}}">
                             </a>
                             <div class="media-body">
                                 <a href="product-page(left-sidebar).html">
-                                    <h4>redmi not 3</h4>
+                                    <h4>{{items.title}}</h4>
                                 </a>
                                 <h6>
-                                    $80.00 <span>$120.00</span>
+                                    $80.00 <span>Rs.{{items.item.price}}</span>
                                 </h6>
                                 <div class="addit-box">
                                     <div class="qty-box">
                                         <div class="input-group">
                                             <button class="qty-minus"></button>
-                                            <input class="qty-adj form-control" type="number" value="1" />
+                                            <input class="qty-adj form-control" type="number" value="{{items.quantity}}" />
                                             <button class="qty-plus"></button>
                                         </div>
                                     </div>
@@ -794,74 +795,9 @@
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="media">
-                            <a href="product-page(left-sidebar).html">
-                                <img alt="megastore1" class="me-3"
-                                    src="{% static 'main/images/layout-2/product/2.jpg' %}">
-                            </a>
-                            <div class="media-body">
-                                <a href="product-page(left-sidebar).html">
-                                    <h4>Double Door Refrigerator</h4>
-                                </a>
-                                <h6>
-                                    $80.00 <span>$120.00</span>
-                                </h6>
-                                <div class="addit-box">
-                                    <div class="qty-box">
-                                        <div class="input-group">
-                                            <button class="qty-minus"></button>
-                                            <input class="qty-adj form-control" type="number" value="1" />
-                                            <button class="qty-plus"></button>
-                                        </div>
-                                    </div>
-                                    <div class="pro-add">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#edit-product">
-                                            <i data-feather="edit"></i>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <i data-feather="trash-2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="product-page(left-sidebar).html">
-                                <img alt="megastore1" class="me-3"
-                                    src="{% static 'main/images/layout-2/product/3.jpg' %}">
-                            </a>
-                            <div class="media-body">
-                                <a href="product-page(left-sidebar).html">
-                                    <h4>woman hande bag</h4>
-                                </a>
-                                <h6>
-                                    $80.00 <span>$120.00</span>
-                                </h6>
-                                <div class="addit-box">
-                                    <div class="qty-box">
-                                        <div class="input-group">
-                                            <button class="qty-minus"></button>
-                                            <input class="qty-adj form-control" type="number" value="1" />
-                                            <button class="qty-plus"></button>
-                                        </div>
-                                    </div>
-                                    <div class="pro-add">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#edit-product">
-                                            <i data-feather="edit"></i>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <i data-feather="trash-2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    {% endfor %}
+                  
+                 
                 </ul>
                 <ul class="cart_total">
                     <li>
@@ -880,8 +816,8 @@
                     </li>
                     <li>
                         <div class="buttons">
-                            <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-                            <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
+                            <a href="{% url 'cart' %}" class="btn btn-solid btn-sm">view cart</a>
+                            <a href="{% url 'checkout' %}" class="btn btn-solid btn-sm ">checkout</a>
                         </div>
                     </li>
                 </ul>

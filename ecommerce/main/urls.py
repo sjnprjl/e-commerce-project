@@ -47,7 +47,9 @@ urlpatterns = [
     ),
     path("product/<str:pk>/", ProductView.as_view(), name="product"),
     path("cart/", DetailCartItem.as_view(), name="cart"),
+
     path("cart/delete/<pk>/", DeleteCartItem.as_view(), name="deletecartitem"),
+    path("checkout/", CheckOutView.as_view(), name="checkout"),
     path("add-to-cart/<pk>/", add_to_cart, name="add-to-cart"),
     path("cart/update/<pk>", UpdateCartItem.as_view(), name="updatecart"),
     path("404/", PageNotFoundView.as_view(), name="404"),

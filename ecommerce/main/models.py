@@ -8,6 +8,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
 
+
 # Create your models here.
 from django.shortcuts import reverse
 from django.db import models
@@ -88,6 +89,7 @@ class Item(models.Model):
     price = models.FloatField(help_text='in Rs',)
     discount_price = models.FloatField(blank=True, null=True)
     category = models.ManyToManyField(Category)
+    slug = models.SlugField(default='asdf')
     ourtypes = (
     ("0", "Jewellery"),
     ("1", "Furniture"),
