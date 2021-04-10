@@ -47,7 +47,7 @@
                                         <tbody>
                                             <tr>
                                                 <th scope="row"><a href="{% url 'orderdetails' %}">#{{order.order_id}}</a></th>
-                                                <td>{{order.id}}</td>
+                                                <td>{{forloop.counter}}</td>
                                                 <td>{{order.customer}}</td>
                                                 <td>{{order.ordered_date}}</td>
                                                 <td>Rs.5656</td>

@@ -27,6 +27,7 @@ from django.http import HttpResponseRedirect, QueryDict
 class DashboardView(LoginRequiredMixin, TemplateView):
     login_url = "/dashboard/login/"
     template_name = "dashboard/dashboard-ecommerce.html"
+    
 
 
 class LoginView(LV, UserPassesTestMixin):

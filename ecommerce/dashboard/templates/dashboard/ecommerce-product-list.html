@@ -50,7 +50,7 @@
 
                                         <tbody>
                                             <tr>
-                                                <th scope="row">{{items.id}}</th>
+                                                <th scope="row">{{forloop.counter}}</th>
                                                 <td><img src="{{items.image.url}}" class="img-fluid" width="35" alt="product"></td>
                                                 <td><a href="{% url 'details' %}">{{items.title}}</a></td>
                                                 <td class="text-success">In Stock</td>
