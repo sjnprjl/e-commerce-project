@@ -158,6 +158,8 @@ class Order(models.Model):
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
+    checkout_address = models.ForeignKey('CheckoutAddress', on_delete=models.SET_NULL, blank=True, null=True)
+
 
     def __str__(self):
         return self.customer.username
@@ -169,3 +171,15 @@ class Order(models.Model):
         if self.coupon:
             total -= self.coupon.amount
         return total
+
+class CheckoutAddress(models.Model):
+    customer = models.ForeignKey(
+    Customer, on_delete=models.SET_NULL, blank=True, null=True
+    )    
+    address = models.CharField(max_length=100)
+    zip = models.CharField(max_length=100)
+    phone = models.IntegerField(default=None)
+
+
+    def __str__(self):
+        return self.address

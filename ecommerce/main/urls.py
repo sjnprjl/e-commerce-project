@@ -51,4 +51,5 @@ urlpatterns = [
     path("add-to-cart/<pk>/", add_to_cart, name="add-to-cart"),
     path("cart/update/<pk>", UpdateCartItem.as_view(), name="updatecart"),
     path("404/", PageNotFoundView.as_view(), name="404"),
+    path("checkout/", CheckoutView.as_view(), name="checkout")
 ]

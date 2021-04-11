@@ -1,6 +1,9 @@
 
 import django
+from django.contrib.auth import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.forms.forms import Form
+from .forms import CheckoutForm
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     get_user_model,
@@ -10,7 +13,7 @@ from django.contrib.auth import (
 )
 from django.contrib.auth.views import LoginView as LV, redirect_to_login
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 
 from django.http import HttpResponseRedirect, request
 from django.http.response import Http404, HttpResponse, HttpResponseForbidden
@@ -25,6 +28,8 @@ from django.views.generic import ListView, DeleteView, UpdateView
 from django.views import generic
 from .forms import SignupForm, LoginInForm
 from .models import (
+    CheckoutAddress,
+ 
     Customer,
     Order,
     OrderItem,
@@ -301,3 +306,45 @@ def add_to_cart(request, pk):
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
         return redirect(reverse_lazy("cart"))
+class CheckoutView(View):
+    
+    def get(self, *args, **kwargs):
+        form = CheckoutForm()
+        model = OrderItem.objects.filter(customer = self.request.user)
+
+        context = {
+            'form':form,
+            'model':model,
+        }
+        return render(self.request, "main/checkout-test.html", context)
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        try:
+            order = Order.objects.get(customer = self.request.user, ordered = False)
+            if form.is_valid():
+                address = form.cleaned_data.get('address')
+                zip = form.cleaned_data.get('zip')
+                phone =form.cleaned_data.get('phone')
+
+                checkout_address = CheckoutAddress(
+                    customer = self.request.user,
+                    zip = zip,
+                    
+                    address = address,
+                    phone = phone,
+
+                )
+                checkout_address.save()
+                order.checkout_address=checkout_address
+                order.save
+                return redirect(reverse_lazy('cart'))
+            message.warning(self.request, "Failed Checkout")
+            return redirect(reverse_lazy('checkout'))
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an order")
+            return redirect(reverse_lazy("main"))
+
+
+
+
+     

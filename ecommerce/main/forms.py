@@ -49,5 +49,7 @@ class LoginInForm(AuthenticationForm):
 
         return self.cleaned_data
 
-
-        
+class CheckoutForm(forms.Form):
+    address = forms.CharField(widget=forms.TextInput)
+    zip = forms.CharField(widget=forms.TextInput)
+    phone = forms.IntegerField()
