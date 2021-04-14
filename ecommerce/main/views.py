@@ -193,7 +193,7 @@ class RegisterView(CreateView):
     """register view"""
 
     model = Customer
-    template_name = "main/account-register.html"
+    template_name = "main/register.html"
     form_class = SignupForm
     success_url = "/"
     redirect_field_name = REDIRECT_FIELD_NAME
