@@ -11,6 +11,7 @@ from django.contrib.auth import (
 from django.contrib.auth.views import LoginView as LV, redirect_to_login
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
+from django.dispatch.dispatcher import receiver
 
 from django.http import HttpResponseRedirect, request
 from django.http.response import Http404, HttpResponse, HttpResponseForbidden
@@ -47,7 +48,7 @@ import json
 from django.http import JsonResponse
 from django.utils import timezone
 from django.urls import reverse_lazy
-
+from allauth.account.signals import user_signed_up
 
 class JSONResponseMixin:
     def render_to_json_response(self, context, **response_kwargs):
@@ -63,15 +64,24 @@ class JSONResponseMixin:
 def index(request):
     cate = Category.objects.all()
     items = Item.objects.all()
-    cart = OrderItem.objects.all()
-    return render(request, "main/index.html",{'cate':cate,"items":items,"cart":cart})
-    def get_context_data(self, **kwargs):
+    OrderItem.objects.filter(customer = request.user)
+
+    # if request.user.is_authenticated:
+    #     cart = OrderItem.objects.filter(customer = request.user)
+    #     context = {"cart":cart},
+    #     return context
+    # else:
+    #     None
+
+    return render(request, "main/index.html",{'cate':cate,"items":items})
+    def get(self, **kwargs):
         if self.request.user.is_authenticated:
-            context = super().get_context_data(**kwargs)
-            context['customer'] = OrderItem.objects.filter(customer = self.request.user)
-            return context
+            return 
+         
         else:
-            None
+            return HttpResponse("please login")
+    
+    
 
 class CheckOutView(TemplateView):
     template_name = "main/checkout.html"
@@ -229,6 +239,11 @@ class RegisterView(CreateView):
         else:
             return HttpResponse("form is invalid")
 
+@receiver(user_signed_up)
+def user_signed_up_(request, user, **kwargs):
+    user.is_active = True
+    user.save()
+
 
 class PrivacyView(TemplateView):
     """privacy view"""
@@ -265,6 +280,9 @@ class Profile(TemplateView):
     """profile view"""
 
     template_name = "main/profile.html"
+
+
+
 
 
 

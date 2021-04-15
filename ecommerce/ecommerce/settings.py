@@ -145,17 +145,22 @@ EMAIL_HOST_PASSWORD = "Hacker@1#"
 EMAIL_USE_TLS = True
 
 
-SOCIALACCOUNT_PROVIDER ={
-    'google':{
-        'SCOPE':[
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
             'profile',
             'email',
         ],
-        'AUTH_PARAMS':{
-            'access_type':'online'
-
+        'AUTH_PARAMS': {
+            'access_type': 'online',
         }
     }
 }
 
-SITE_ID = 2
+SITE_ID = 3
+
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
