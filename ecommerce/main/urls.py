@@ -4,13 +4,17 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth import views as auth_views
 from . import views
 
+
+    
+    
+
 urlpatterns = [
     path("", views.index, name="main"),
     path("app/", App.as_view(), name="app"),
     path("search/", SearchView.as_view(), name="search"),
-    path("about_us/", AboutUsView.as_view(), name="about"),
+    path("about_us/", views.AboutUsView, name="about"),
     path("login/", LoginView.as_view(), name="login"),
-    path("logout/", LogoutView.as_view(), name="logout"),
+    path("logout/", LogoutView.as_view(next_page=reverse_lazy('login')), name="logout"),
     path("profile/", Profile.as_view(), name="profile"),
     path("logout-user/", LogoutCustomer.as_view(), name="logout_user"),
     path("register/", RegisterView.as_view(), name="register"),

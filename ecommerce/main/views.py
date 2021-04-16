@@ -1,5 +1,6 @@
 
 import django
+from django import http
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
@@ -30,7 +31,8 @@ from .models import (
     Order,
     OrderItem,
     Category,
-    Item,)
+    Item,
+    Team,)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -60,44 +62,49 @@ class JSONResponseMixin:
         def get_data(self, context):
             return context
 
-
 def index(request):
     cate = Category.objects.all()
     items = Item.objects.all()
-    OrderItem.objects.filter(customer = request.user)
+    if request.user.is_authenticated:
+        cart = OrderItem.objects.filter(customer = request.user)
+        context = {'cate':cate,"items":items,"cart":cart}
+    else:
+        context = {'cate':cate,"items":items}
+
 
     # if request.user.is_authenticated:
     #     cart = OrderItem.objects.filter(customer = request.user)
-    #     context = {"cart":cart},
+    #     context = {"cart":cart}
     #     return context
     # else:
     #     None
 
-    return render(request, "main/index.html",{'cate':cate,"items":items})
-    def get(self, **kwargs):
-        if self.request.user.is_authenticated:
-            return 
-         
-        else:
-            return HttpResponse("please login")
+    return render(request, "main/index.html",context)
+    # def get(self, **kwargs):
+    #     if self.request.user.is_authenticated:
+    #         cart = OrderItem.objects.filter(customer = request.user)
+    #         return render(request, "main/index.html",{'cate':cate,"items":items,"cart":cart})
+    #     else:
+    #         return HttpResponse("ple")
     
-    
-
 class CheckOutView(TemplateView):
     template_name = "main/checkout.html"
 
-
-
-class DetailCartItem(ListView):
+class DetailCartItem(LoginRequiredMixin,ListView):
     """detail view"""
-
-    model = OrderItem
+    login_url = reverse_lazy('login')
     template_name = "main/cart.html"
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return OrderItem.objects.filter(customer = self.request.user)
+        else:
+            None
+   
 
     def get_context_data(self, **kwargs):
         if self.request.user.is_authenticated:
             context = super().get_context_data(**kwargs)
-            context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+            context['cart'] = OrderItem.objects.filter(customer = self.request.user)
             return context
         else:
             None
@@ -112,34 +119,40 @@ class DeleteCartItem(DeleteView):
 class PageNotFoundView(TemplateView):
     template_name = "main/404.html"
 
-
 class PageNotFoundView(TemplateView):
     """404 error page view"""
 
     template_name = "main/404.html"
 
-
 class ProductView(DetailView):
     """product page view"""
     model = Item
     template_name = "main/product.html"
+
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
-
-
+        if self.request.user.is_authenticated:
+          
+            context =super(ProductView, self).get_context_data(**kwargs)
+            context['cart']=OrderItem.objects.filter(customer=self.request.user)
+            return context
+        else:
+            None
+        
 class SearchView(TemplateView):
+    
     """search view """
 
     template_name = "main/search.html"
 
+def AboutUsView(request):
+    team = Team.objects.all()
+    if request.user.is_authenticated:
+        cart = OrderItem.objects.filter(customer = request.user)
+        context = {"cart":cart,'team':team}
+    else:
+        context = {'team':team}
 
-class AboutUsView(TemplateView):
-    """about us view"""
-
-    template_name = "main/about_us.html"
-
+    return render(request, "main/about-page.html", context)
 
 class Activate(View):
     """activate view"""
@@ -159,7 +172,6 @@ class Activate(View):
             return HttpResponse("account activated succesfully")
         else:
             return HttpResponse("Activation link invalid")
-
 
 class LoginView(LV, UserPassesTestMixin):
     """login view"""
@@ -197,7 +209,6 @@ class LoginView(LV, UserPassesTestMixin):
         if not is_safe_url(url=redirect_to, allowed_hosts=self.request.get_host()):
             redirect_to = self.success_url
         return redirect_to
-
 
 class RegisterView(CreateView):
     """register view"""
@@ -244,18 +255,15 @@ def user_signed_up_(request, user, **kwargs):
     user.is_active = True
     user.save()
 
-
 class PrivacyView(TemplateView):
     """privacy view"""
 
     template_name = "main/privacy.html"
 
-
 class TermsView(TemplateView):
     """terms view"""
 
     template_name = "main/terms.html"
-
 
 class ProductWiseListView(ListView):
     """product list view"""
@@ -263,41 +271,33 @@ class ProductWiseListView(ListView):
     model = Item
     template_name = "main/product-wise-list.html"
 
-
 class App(TemplateView):
     """app view"""
 
     template_name = "main/app.html"
-
 
 class LogoutCustomer(TemplateView):
     """logout customer view"""
 
     template_name = "main/logout.html"
 
-
 class Profile(TemplateView):
     """profile view"""
 
+        
+
+
+    
+
+
+
     template_name = "main/profile.html"
-
-
-
-
-
-
-
-
-
 
 class UpdateCartItem(UpdateView):
     model = OrderItem
     fields = ["quantity"]
     success_url = reverse_lazy("cart")
     template_name = "main/update.html"
-
-        
-
 
 def add_to_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)

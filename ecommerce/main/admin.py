@@ -1,3 +1,4 @@
+# from ecommerce.main.views import AboutUsView
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django import forms
 from django.contrib import admin
@@ -107,6 +108,7 @@ admin.site.register(Item,ItemsAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(Category)
+admin.site.register(Team)
 admin.site.site_header = "Kera jasto Admin"
 admin.site.site_title = " Admin Portal"
 admin.site.index_title = "Muji Teo anuwar dekhauna feri aais."

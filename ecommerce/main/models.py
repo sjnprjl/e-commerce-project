@@ -171,3 +171,7 @@ class Order(models.Model):
         if self.coupon:
             total -= self.coupon.amount
         return total
+class Team(models.Model):
+    Image = models.ImageField(blank=True, null=True)
+    Name = models.CharField(max_length=50, null=True, blank=True)
+    Description = models.TextField(null=True, blank=True, default="He is an employee of our business")
