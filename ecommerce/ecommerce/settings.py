@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import allauth
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,6 +30,11 @@ INSTALLED_APPS = [
     "main.apps.MainConfig",
     "dashboard.apps.DashboardConfig",
     "django_email_verification",
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
 ]
 
 MIDDLEWARE = [
@@ -100,7 +106,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.AllowAllUsersModelBackend"]
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.AllowAllUsersModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -134,3 +143,19 @@ EMAIL_PORT = "587"
 EMAIL_HOST_USER = "yogeshkattel66@gmail.com"
 EMAIL_HOST_PASSWORD = "ecjwkvywwhsencyn"
 EMAIL_USE_TLS = True
+
+
+SOCIALACCOUNT_PROVIDER ={
+    'google':{
+        'SCOPE':[
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS':{
+            'access_type':'online'
+
+        }
+    }
+}
+
+SITE_ID = 1

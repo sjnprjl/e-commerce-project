@@ -72,6 +72,12 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
+    ourtypes = (
+    ("0", "Jewlery"),
+    ("1", "Furniture"),
+)
+  
+    types = models.CharField(choices=ourtypes, max_length=2, null=False, default="Jewlery")
     description =  models.CharField(max_length=500)
 
     def __str__(self):
@@ -81,7 +87,14 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField(help_text='in Rs',)
     discount_price = models.FloatField(blank=True, null=True)
-    category = models.ManyToManyField(Category, null=True)
+    category = models.ManyToManyField(Category)
+    ourtypes = (
+    ("0", "Jewellery"),
+    ("1", "Furniture"),
+)
+  
+    types = models.CharField(choices=ourtypes, max_length=2, null=False, default="Jewellery")
+    Brand = models.CharField(max_length=20, null=True)
     slug = models.SlugField()
     description =  models.TextField(max_length=500)
     image = models.ImageField()
@@ -145,9 +158,11 @@ class Order(models.Model):
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
+    checkout_address = models.ForeignKey('CheckoutAddress', on_delete=models.SET_NULL, blank=True, null=True)
+
 
     def __str__(self):
-        return self.user.username
+        return self.customer.username
 
     def get_total(self):
         total = 0
@@ -156,3 +171,15 @@ class Order(models.Model):
         if self.coupon:
             total -= self.coupon.amount
         return total
+
+class CheckoutAddress(models.Model):
+    customer = models.ForeignKey(
+    Customer, on_delete=models.SET_NULL, blank=True, null=True
+    )    
+    address = models.CharField(max_length=100)
+    zip = models.CharField(max_length=100)
+    phone = models.IntegerField(default=None)
+
+
+    def __str__(self):
+        return self.address

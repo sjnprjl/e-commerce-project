@@ -1,14 +1,21 @@
+
 import django
+from django.contrib.auth import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.forms.forms import Form
+from .forms import CheckoutForm
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     get_user_model,
     login,
+    authenticate,
     update_session_auth_hash,
 )
-from django.contrib.auth.views import LoginView as LV
+from django.contrib.auth.views import LoginView as LV, redirect_to_login
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+
+from django.http import HttpResponseRedirect, request
 from django.http.response import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.utils.http import is_safe_url, urlsafe_base64_decode
@@ -20,7 +27,14 @@ from django.views.generic import FormView, RedirectView, View, UpdateView
 from django.views.generic import ListView, DeleteView, UpdateView
 from django.views import generic
 from .forms import SignupForm, LoginInForm
-from .models import Customer, Order, OrderItem
+from .models import (
+    CheckoutAddress,
+ 
+    Customer,
+    Order,
+    OrderItem,
+    Category,
+    Item,)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -51,9 +65,10 @@ class JSONResponseMixin:
             return context
 
 
-class IndexView(TemplateView):
-    
-    template_name = "main/index.html"
+def index(request):
+    cate = Category.objects.all()
+    items = Item.objects.all()
+    return render(request, "main/index.html",{'cate':cate,"items":items})
     
 
 
@@ -62,23 +77,36 @@ class PageNotFoundView(TemplateView):
 
 
 class PageNotFoundView(TemplateView):
+    """404 error page view"""
+
     template_name = "main/404.html"
 
 
 class ProductView(DetailView):
+    """product page view"""
     model = Item
     template_name = "main/product.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
 
 
 class SearchView(TemplateView):
+    """search view """
+
     template_name = "main/search.html"
 
 
 class AboutUsView(TemplateView):
+    """about us view"""
+
     template_name = "main/about_us.html"
 
 
 class Activate(View):
+    """activate view"""
+
     def get(self, request, uid, token):
 
         try:
@@ -97,6 +125,29 @@ class Activate(View):
 
 
 class LoginView(LV, UserPassesTestMixin):
+    """login view"""
+
+    def post(self, request):
+        if request.is_ajax():
+            data = None
+            email = request.POST.get("email")
+            password = request.POST.get("password")
+
+            user = authenticate(username=email, password=password)
+            if user is None:
+                data = {
+                    "message": "Either username or password is incorrect",
+                    "status_code": 401,
+                }
+            else:
+                login(self.request, user)
+                data = {
+                    "message": "You are logged in",
+                    "status_code": 200,
+                    "redirect_url": self.get_success_url()
+                }
+
+            return JsonResponse(data)
 
     template_name = "main/login.html"
     authentication_form = LoginInForm
@@ -112,6 +163,8 @@ class LoginView(LV, UserPassesTestMixin):
 
 
 class RegisterView(CreateView):
+    """register view"""
+
     model = Customer
     template_name = "main/account-register.html"
     form_class = SignupForm
@@ -151,33 +204,68 @@ class RegisterView(CreateView):
 
 
 class PrivacyView(TemplateView):
+    """privacy view"""
+
     template_name = "main/privacy.html"
 
 
 class TermsView(TemplateView):
+    """terms view"""
+
     template_name = "main/terms.html"
 
 
 class ProductWiseListView(ListView):
+    """product list view"""
+
     model = Item
     template_name = "main/product-wise-list.html"
 
 
 class App(TemplateView):
+    """app view"""
+
     template_name = "main/app.html"
 
 
 class LogoutCustomer(TemplateView):
+    """logout customer view"""
+
     template_name = "main/logout.html"
 
 
 class Profile(TemplateView):
+    """profile view"""
+
     template_name = "main/profile.html"
 
 
 class DetailCartItem(ListView):
+    """detail view"""
+
     model = OrderItem
+    
     template_name = "main/cart.html"
+    
+
+
+    # def get_context_data(self, **kwargs):
+    #     if self.request.user.is_authenticated:
+    #         context = super().get_context_data(**kwargs)
+    #         context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+    #         return context
+    #     else:
+    #         None
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            context = OrderItem.objects.filter(
+            customer = self.request.user
+        )
+            return context
+        elif self.request.user.is_anonymous:
+            return HttpResponseRedirect("/login")
+
+
 
 
 class DeleteCartItem(DeleteView):
@@ -218,3 +306,45 @@ def add_to_cart(request, pk):
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
         return redirect(reverse_lazy("cart"))
+class CheckoutView(View):
+    
+    def get(self, *args, **kwargs):
+        form = CheckoutForm()
+        model = OrderItem.objects.filter(customer = self.request.user)
+
+        context = {
+            'form':form,
+            'model':model,
+        }
+        return render(self.request, "main/checkout-test.html", context)
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        try:
+            order = Order.objects.get(customer = self.request.user, ordered = False)
+            if form.is_valid():
+                address = form.cleaned_data.get('address')
+                zip = form.cleaned_data.get('zip')
+                phone =form.cleaned_data.get('phone')
+
+                checkout_address = CheckoutAddress(
+                    customer = self.request.user,
+                    zip = zip,
+                    
+                    address = address,
+                    phone = phone,
+
+                )
+                checkout_address.save()
+                order.checkout_address=checkout_address
+                order.save
+                return redirect(reverse_lazy('cart'))
+            message.warning(self.request, "Failed Checkout")
+            return redirect(reverse_lazy('checkout'))
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an order")
+            return redirect(reverse_lazy("main"))
+
+
+
+
+     

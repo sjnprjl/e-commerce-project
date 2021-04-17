@@ -119,7 +119,7 @@
                             <a href="{% url 'dashboard' %}">Dashboard</a>
                         </a>   
                     </li>                    
-                            <li><a href="{% url 'product' %}">Product List</a></li>
+                            <li><a href="{% url 'Dproduct' %}">Product List</a></li>
                             <li><a href="{% url 'details' %}">Product Detail</a></li>
                             <li><a href="{% url 'order' %}">Order List</a></li>
                             <li><a href="{% url 'orderdetails' %}">Order Detail</a></li>
@@ -283,7 +283,7 @@
                                              aria-labelledby="profilelink">
                                             <div class="dropdown-item">
                                                 <div class="profilename">
-                                                    <h5>John Doe</h5>
+                                                    <h5>  {{request.user.username}}</h5>
                                                 </div>
                                             </div>
                                             <div class="userbox">

@@ -91,7 +91,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ("email",)
     filter_horizontal = ()
 class ItemsAdmin(admin.ModelAdmin):
-    list_display = ( "title", "price", "description", "slug")
+    list_display = ( "title", "price", "description", "slug","types")
     list_filter = ("title", "price")
    
 
@@ -110,3 +110,4 @@ admin.site.register(Category)
 admin.site.site_header = "Kera jasto Admin"
 admin.site.site_title = " Admin Portal"
 admin.site.index_title = "Muji Teo anuwar dekhauna feri aais."
+admin.site.register(CheckoutAddress)

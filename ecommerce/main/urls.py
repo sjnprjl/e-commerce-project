@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="main"),
+    path("", views.index, name="main"),
     path("app/", App.as_view(), name="app"),
     path("search/", SearchView.as_view(), name="search"),
     path("about_us/", AboutUsView.as_view(), name="about"),
@@ -16,7 +16,7 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path("privacy/", PrivacyView.as_view(), name="privacy"),
     path("terms/", TermsView.as_view(), name="terms"),
-    path("product-wise-list/", ProductWiseListView.as_view(), name="product-wise-list"),
+    path("product/<str:pk>/", ProductView.as_view(), name="product-wise-list"),
     path("verification/", include("verify_email.urls")),
     path("activate/<str:uid>/<str:token>", Activate.as_view(), name="activate"),
     path(
@@ -51,4 +51,5 @@ urlpatterns = [
     path("add-to-cart/<pk>/", add_to_cart, name="add-to-cart"),
     path("cart/update/<pk>", UpdateCartItem.as_view(), name="updatecart"),
     path("404/", PageNotFoundView.as_view(), name="404"),
+    path("checkout/", CheckoutView.as_view(), name="checkout")
 ]
