@@ -1,4 +1,3 @@
-
 import django
 from django.contrib.auth import forms
 from django import http
@@ -32,13 +31,13 @@ from django.views import generic
 from .forms import SignupForm, LoginInForm
 from .models import (
     CheckoutAddress,
- 
     Customer,
     Order,
     OrderItem,
     Category,
     Item,
-    Team,)
+    Team,
+)
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -58,25 +57,23 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from allauth.account.signals import user_signed_up
 
+
 class JSONResponseMixin:
     def render_to_json_response(self, context, **response_kwargs):
-        return JsonResponse(
-            self.get_data(context),
-            **response_kwargs
-        )
+        return JsonResponse(self.get_data(context), **response_kwargs)
 
         def get_data(self, context):
             return context
+
 
 def index(request):
     cate = Category.objects.all()
     items = Item.objects.all()
     if request.user.is_authenticated:
-        cart = OrderItem.objects.filter(customer = request.user)
-        context = {'cate':cate,"items":items,"cart":cart}
+        cart = OrderItem.objects.filter(customer=request.user)
+        context = {"cate": cate, "items": items, "cart": cart}
     else:
-        context = {'cate':cate,"items":items}
-
+        context = {"cate": cate, "items": items}
 
     # if request.user.is_authenticated:
     #     cart = OrderItem.objects.filter(customer = request.user)
@@ -85,80 +82,92 @@ def index(request):
     # else:
     #     None
 
-    return render(request, "main/index.html",context)
+    return render(request, "main/index.html", context)
     # def get(self, **kwargs):
     #     if self.request.user.is_authenticated:
     #         cart = OrderItem.objects.filter(customer = request.user)
     #         return render(request, "main/index.html",{'cate':cate,"items":items,"cart":cart})
     #     else:
     #         return HttpResponse("ple")
-    
+
+
 class CheckOutView(TemplateView):
     template_name = "main/checkout.html"
 
-class DetailCartItem(LoginRequiredMixin,ListView):
+
+class DetailCartItem(LoginRequiredMixin, ListView):
     """detail view"""
-    login_url = reverse_lazy('login')
+
+    login_url = reverse_lazy("login")
     template_name = "main/cart.html"
+
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return OrderItem.objects.filter(customer = self.request.user)
+            return OrderItem.objects.filter(customer=self.request.user)
         else:
             None
-   
 
     def get_context_data(self, **kwargs):
         if self.request.user.is_authenticated:
             context = super().get_context_data(**kwargs)
-            context['cart'] = OrderItem.objects.filter(customer = self.request.user)
+            context["cart"] = OrderItem.objects.filter(customer=self.request.user)
             return context
         else:
             None
 
+
 class DeleteCartItem(DeleteView):
     model = OrderItem
     success_url = reverse_lazy("cart")
-    def get(self, request, *args,**kwargs):
-        self.delete(request,*args,**kwargs)
+
+    def get(self, request, *args, **kwargs):
+        self.delete(request, *args, **kwargs)
         return redirect(self.get_success_url())
+
 
 class PageNotFoundView(TemplateView):
     template_name = "main/404.html"
+
 
 class PageNotFoundView(TemplateView):
     """404 error page view"""
 
     template_name = "main/404.html"
 
+
 class ProductView(DetailView):
     """product page view"""
+
     model = Item
     template_name = "main/product.html"
 
     def get_context_data(self, **kwargs):
         if self.request.user.is_authenticated:
-          
-            context =super(ProductView, self).get_context_data(**kwargs)
-            context['cart']=OrderItem.objects.filter(customer=self.request.user)
+
+            context = super(ProductView, self).get_context_data(**kwargs)
+            context["cart"] = OrderItem.objects.filter(customer=self.request.user)
             return context
         else:
             None
-        
+
+
 class SearchView(TemplateView):
-    
+
     """search view """
 
     template_name = "main/search.html"
 
+
 def AboutUsView(request):
     team = Team.objects.all()
     if request.user.is_authenticated:
-        cart = OrderItem.objects.filter(customer = request.user)
-        context = {"cart":cart,'team':team}
+        cart = OrderItem.objects.filter(customer=request.user)
+        context = {"cart": cart, "team": team}
     else:
-        context = {'team':team}
+        context = {"team": team}
 
     return render(request, "main/about-page.html", context)
+
 
 class Activate(View):
     """activate view"""
@@ -178,6 +187,7 @@ class Activate(View):
             return HttpResponse("account activated succesfully")
         else:
             return HttpResponse("Activation link invalid")
+
 
 class LoginView(LV, UserPassesTestMixin):
     """login view"""
@@ -199,7 +209,7 @@ class LoginView(LV, UserPassesTestMixin):
                 data = {
                     "message": "You are logged in",
                     "status_code": 200,
-                    "redirect_url": self.get_success_url()
+                    "redirect_url": self.get_success_url(),
                 }
 
             return JsonResponse(data)
@@ -215,6 +225,7 @@ class LoginView(LV, UserPassesTestMixin):
         if not is_safe_url(url=redirect_to, allowed_hosts=self.request.get_host()):
             redirect_to = self.success_url
         return redirect_to
+
 
 class RegisterView(CreateView):
     """register view"""
@@ -256,20 +267,24 @@ class RegisterView(CreateView):
         else:
             return HttpResponse("form is invalid")
 
+
 @receiver(user_signed_up)
 def user_signed_up_(request, user, **kwargs):
     user.is_active = True
     user.save()
+
 
 class PrivacyView(TemplateView):
     """privacy view"""
 
     template_name = "main/privacy.html"
 
+
 class TermsView(TemplateView):
     """terms view"""
 
     template_name = "main/terms.html"
+
 
 class ProductWiseListView(ListView):
     """product list view"""
@@ -277,31 +292,29 @@ class ProductWiseListView(ListView):
     model = Item
     template_name = "main/product-wise-list.html"
 
+
 class App(TemplateView):
     """app view"""
 
     template_name = "main/app.html"
+
 
 class LogoutCustomer(TemplateView):
     """logout customer view"""
 
     template_name = "main/logout.html"
 
+
 class Profile(TemplateView):
     """profile view"""
 
-        
 
-
-<<<<<<< HEAD
 class DetailCartItem(ListView):
     """detail view"""
 
     model = OrderItem
-    
-    template_name = "main/cart.html"
-    
 
+    template_name = "main/cart.html"
 
     # def get_context_data(self, **kwargs):
     #     if self.request.user.is_authenticated:
@@ -312,26 +325,20 @@ class DetailCartItem(ListView):
     #         None
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            context = OrderItem.objects.filter(
-            customer = self.request.user
-        )
+            context = OrderItem.objects.filter(customer=self.request.user)
             return context
         elif self.request.user.is_anonymous:
             return HttpResponseRedirect("/login")
 
-=======
-    
->>>>>>> origin/about-fix-and-reset
-
-
-
     template_name = "main/profile.html"
+
 
 class UpdateCartItem(UpdateView):
     model = OrderItem
     fields = ["quantity"]
     success_url = reverse_lazy("cart")
     template_name = "main/update.html"
+
 
 def add_to_cart(request, pk):
     item = get_object_or_404(Item, pk=pk)
@@ -353,50 +360,44 @@ def add_to_cart(request, pk):
             return redirect(reverse_lazy("cart"))
     else:
         ordered_date = timezone.now()
-        order = Order.objects.create(
-            customer=request.user, ordered_date=ordered_date)
+        order = Order.objects.create(customer=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart.")
         return redirect(reverse_lazy("cart"))
+
+
 class CheckoutView(View):
-    
     def get(self, *args, **kwargs):
         form = CheckoutForm()
-        model = OrderItem.objects.filter(customer = self.request.user)
+        model = OrderItem.objects.filter(customer=self.request.user)
 
         context = {
-            'form':form,
-            'model':model,
+            "form": form,
+            "model": model,
         }
         return render(self.request, "main/checkout-test.html", context)
+
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
         try:
-            order = Order.objects.get(customer = self.request.user, ordered = False)
+            order = Order.objects.get(customer=self.request.user, ordered=False)
             if form.is_valid():
-                address = form.cleaned_data.get('address')
-                zip = form.cleaned_data.get('zip')
-                phone =form.cleaned_data.get('phone')
+                address = form.cleaned_data.get("address")
+                zip = form.cleaned_data.get("zip")
+                phone = form.cleaned_data.get("phone")
 
                 checkout_address = CheckoutAddress(
-                    customer = self.request.user,
-                    zip = zip,
-                    
-                    address = address,
-                    phone = phone,
-
+                    customer=self.request.user,
+                    zip=zip,
+                    address=address,
+                    phone=phone,
                 )
                 checkout_address.save()
-                order.checkout_address=checkout_address
+                order.checkout_address = checkout_address
                 order.save
-                return redirect(reverse_lazy('cart'))
+                return redirect(reverse_lazy("cart"))
             message.warning(self.request, "Failed Checkout")
-            return redirect(reverse_lazy('checkout'))
+            return redirect(reverse_lazy("checkout"))
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an order")
             return redirect(reverse_lazy("main"))
-
-
-
-
-     
