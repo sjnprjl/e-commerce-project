@@ -6,8 +6,9 @@
     <title>{% block  title %} {% if request.user.is_authenticated %} {{user.username}} {% endif %} - welcome to my fucking website {% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="670658057171-4k9vgc1cocjmgf77an3n63edv2vf1k0m.apps.googleusercontent.com">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="big-deal">
@@ -58,7 +59,7 @@
                             <div class="app-link">
                                 <a href="#">
                                     <h6>
-                                        Download App
+                                        App Releasing Soon
                                     </h6>
                                     <ul>
                                         <li><a><i class="fa fa-android"></i></a></li>
@@ -79,9 +80,9 @@
                                     </span>
                                     <ul class="curroncy-dropdown-open">
                                         <li><a href="javascript:void(0)"><i class="fa fa-dashboard"></i>Profile</a></li>
-                                        <li><a href="javascript:void(0)"><i class="fa fa-unlock-alt"></i>Forgot
+                                        <li><a href="{% url 'reset_password' %}"><i class="fa fa-unlock-alt"></i>Forgot
                                                 Password</a></li>
-                                        <li><a href="javascript:void(0)"><i class="fa fa-sign-out"></i>Log Out</a></li>
+                                        <li><a href="{% url 'logout_user' %}"><i class="fa fa-sign-out"></i>Log Out</a></li>
 
                                     </ul>
                                 </div>
@@ -199,7 +200,7 @@
                         </a> 
                       </li>
                      
-                      
+                     {% if request.user.is_authenticated %} 
                       <li class="mobile-cart item-count" onclick="openCart()">
                         <a href="javascript:void(0)"> 
                           <div class="cart-item-main">
@@ -208,9 +209,25 @@
                               <div>shopping<span>cart</span></div>
                             </div>
                           </div>  
-                          <div class="item-count-contain"> 3 </div>
+                          <div class="item-count-contain">{{items.loop.counter}}</div>
                         </a>
                       </li>
+                      {% else %}
+                      <li class="mobile-cart item-count" onclick="openAccount()">
+                        <a href="javascript:void(0)"> 
+                          <div class="cart-item-main">
+                            <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g><path d="m497 401.667c-415.684 0-397.149.077-397.175-.139-4.556-36.483-4.373-34.149-4.076-34.193 199.47-1.037-277.492.065 368.071.065 26.896 0 47.18-20.377 47.18-47.4v-203.25c0-19.7-16.025-35.755-35.725-35.79l-124.179-.214v-31.746c0-17.645-14.355-32-32-32h-29.972c-17.64 0-31.99 14.351-31.99 31.99v31.594l-133.21-.232-9.985-54.992c-2.667-14.694-15.443-25.36-30.378-25.36h-68.561c-8.284 0-15 6.716-15 15s6.716 15 15 15c72.595 0 69.219-.399 69.422.719 16.275 89.632 5.917 26.988 49.58 306.416l-38.389.2c-18.027.069-32.06 15.893-29.81 33.899l4.252 34.016c1.883 15.06 14.748 26.417 29.925 26.417h26.62c-18.8 36.504 7.827 80.333 49.067 80.333 41.221 0 67.876-43.813 49.067-80.333h142.866c-18.801 36.504 7.827 80.333 49.067 80.333 41.22 0 67.875-43.811 49.066-80.333h31.267c8.284 0 15-6.716 15-15s-6.716-15-15-15zm-209.865-352.677c0-1.097.893-1.99 1.99-1.99h29.972c1.103 0 2 .897 2 2v111c0 8.284 6.716 15 15 15h22.276l-46.75 46.779c-4.149 4.151-10.866 4.151-15.015 0l-46.751-46.779h22.277c8.284 0 15-6.716 15-15v-111.01zm-30 61.594v34.416h-25.039c-20.126 0-30.252 24.394-16.014 38.644l59.308 59.342c15.874 15.883 41.576 15.885 57.452 0l59.307-59.342c14.229-14.237 4.13-38.644-16.013-38.644h-25.039v-34.254l124.127.214c3.186.005 5.776 2.603 5.776 5.79v203.25c0 10.407-6.904 17.4-17.18 17.4h-299.412l-35.477-227.039zm-56.302 346.249c0 13.877-11.29 25.167-25.167 25.167s-25.166-11.29-25.166-25.167 11.29-25.167 25.167-25.167 25.166 11.291 25.166 25.167zm241 0c0 13.877-11.289 25.167-25.166 25.167s-25.167-11.29-25.167-25.167 11.29-25.167 25.167-25.167 25.166 11.291 25.166 25.167z"/></g></svg>
+                            <div class="cart-item">
+                              <div>shopping<span>cart</span></div>
+                            </div>
+                          </div>  
+                          <div class="item-count-contain">{{items.loop.counter}}</div>
+                        </a>
+                      </li>
+                      
+                      
+                      {% endif %}
+                      
                     </ul> 
                     <span class="toggle-nav">
                         <i class="fa fa-bars"></i>
@@ -373,13 +390,13 @@
                       <div class="input-group ">
                         <span class="search"><i class="fa fa-search"></i></span>                       
                         <input type="text" class="form-control" placeholder="Search a Product">
-                        <div class="input-group-prepend">
+                        <!-- <div class="input-group-prepend">
                           <select>
                             <option>All Category</option>
                             <option>indurstrial</option>
                             <option>sports</option>
                           </select>
-                        </div>
+                        </div> -->
                       </div>
                     </form>
                   </div>
@@ -619,7 +636,8 @@
                     <div class="col-md-6">
                         <div class="footer-right">
                             <ul class="payment">
-                                <li>
+                                <p>Cash on delivery</p>
+                                <!-- <li>
                                     <a href="javascript:void(0)"><img
                                             src="{% static 'main/images/layout-4/pay/1.png' %}" class="img-fluid"
                                             alt="pay"></a>
@@ -643,7 +661,7 @@
                                     <a href="javascript:void(0)"><img
                                             src="{% static 'main/images/layout-4/pay/5.png' %}" class="img-fluid"
                                             alt="pay"></a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -731,7 +749,7 @@
                     </div>
                     <div class="pro-group mb-0">
                         <div class="modal-btn">
-                            <a href="cart.html" class="btn btn-solid btn-sm">
+                            <a href="{% url 'cart' %}" class="btn btn-solid btn-sm">
                                 add to cart
                             </a>
                             <a href="product-page(left-sidebar).html" class="btn btn-solid btn-sm">
@@ -757,26 +775,28 @@
                     </a>
                 </div>
             </div>
+            
             <div class="cart_media">
                 <ul class="cart_product">
+                    {% for items in cart %}
                     <li>
                         <div class="media">
-                            <a href="product-page(left-sidebar).html">
+                            <a href="{% url 'product' items.pk %}">
                                 <img alt="megastore1" class="me-3"
-                                    src="{% static 'main/images/layout-2/product/1.jpg' %}">
+                                    src="{{items.item.image.url}}">
                             </a>
                             <div class="media-body">
                                 <a href="product-page(left-sidebar).html">
-                                    <h4>redmi not 3</h4>
+                                    <h4>{{items.title}}</h4>
                                 </a>
                                 <h6>
-                                    $80.00 <span>$120.00</span>
+                                    $80.00 <span>Rs.{{items.item.price}}</span>
                                 </h6>
                                 <div class="addit-box">
                                     <div class="qty-box">
                                         <div class="input-group">
                                             <button class="qty-minus"></button>
-                                            <input class="qty-adj form-control" type="number" value="1" />
+                                            <input class="qty-adj form-control" type="number" value="{{items.quantity}}" />
                                             <button class="qty-plus"></button>
                                         </div>
                                     </div>
@@ -793,74 +813,9 @@
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="media">
-                            <a href="product-page(left-sidebar).html">
-                                <img alt="megastore1" class="me-3"
-                                    src="{% static 'main/images/layout-2/product/2.jpg' %}">
-                            </a>
-                            <div class="media-body">
-                                <a href="product-page(left-sidebar).html">
-                                    <h4>Double Door Refrigerator</h4>
-                                </a>
-                                <h6>
-                                    $80.00 <span>$120.00</span>
-                                </h6>
-                                <div class="addit-box">
-                                    <div class="qty-box">
-                                        <div class="input-group">
-                                            <button class="qty-minus"></button>
-                                            <input class="qty-adj form-control" type="number" value="1" />
-                                            <button class="qty-plus"></button>
-                                        </div>
-                                    </div>
-                                    <div class="pro-add">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#edit-product">
-                                            <i data-feather="edit"></i>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <i data-feather="trash-2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="media">
-                            <a href="product-page(left-sidebar).html">
-                                <img alt="megastore1" class="me-3"
-                                    src="{% static 'main/images/layout-2/product/3.jpg' %}">
-                            </a>
-                            <div class="media-body">
-                                <a href="product-page(left-sidebar).html">
-                                    <h4>woman hande bag</h4>
-                                </a>
-                                <h6>
-                                    $80.00 <span>$120.00</span>
-                                </h6>
-                                <div class="addit-box">
-                                    <div class="qty-box">
-                                        <div class="input-group">
-                                            <button class="qty-minus"></button>
-                                            <input class="qty-adj form-control" type="number" value="1" />
-                                            <button class="qty-plus"></button>
-                                        </div>
-                                    </div>
-                                    <div class="pro-add">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal"
-                                            data-bs-target="#edit-product">
-                                            <i data-feather="edit"></i>
-                                        </a>
-                                        <a href="javascript:void(0)">
-                                            <i data-feather="trash-2"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                    {% endfor %}
+                  
+                 
                 </ul>
                 <ul class="cart_total">
                     <li>
@@ -879,12 +834,13 @@
                     </li>
                     <li>
                         <div class="buttons">
-                            <a href="cart.html" class="btn btn-solid btn-sm">view cart</a>
-                            <a href="checkout.html" class="btn btn-solid btn-sm ">checkout</a>
+                            <a href="{% url 'cart' %}" class="btn btn-solid btn-sm">view cart</a>
+                            <a href="{% url 'checkout' %}" class="btn btn-solid btn-sm ">checkout</a>
                         </div>
                     </li>
                 </ul>
             </div>
+            
         </div>
     </div>
     <!-- Add to cart bar end-->
@@ -1083,7 +1039,7 @@
 
     {% block notify-product %}
     <!-- notification product -->
-    <div class="product-notification" id="dismiss">
+    <!-- <div class="product-notification" id="dismiss">
         <span onclick="dismiss();" class="btn-close" aria-hidden="true"></span>
         <div class="media">
             <img class="me-2" src="{% static 'main/images/layout-1/product/5.jpg' %}" alt="Generic placeholder image">
@@ -1092,7 +1048,7 @@
                 Cras sit amet nibh libero, in gravida nulla.
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- notification product -->
     {% endblock %}
 

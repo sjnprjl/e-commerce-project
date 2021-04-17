@@ -140,22 +140,27 @@ AUTH_USER_MODEL = "main.Customer"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = "587"
-EMAIL_HOST_USER = "yogeshkattel66@gmail.com"
-EMAIL_HOST_PASSWORD = "ecjwkvywwhsencyn"
+EMAIL_HOST_USER = "kamaltraders674@gmail.com"
+EMAIL_HOST_PASSWORD = "Hacker@1#"
 EMAIL_USE_TLS = True
 
 
-SOCIALACCOUNT_PROVIDER ={
-    'google':{
-        'SCOPE':[
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
             'profile',
             'email',
         ],
-        'AUTH_PARAMS':{
-            'access_type':'online'
-
+        'AUTH_PARAMS': {
+            'access_type': 'online',
         }
     }
 }
 
-SITE_ID = 1
+SITE_ID = 3
+
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'

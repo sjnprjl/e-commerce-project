@@ -73,54 +73,57 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 class Category(models.Model):
     category_name = models.CharField(max_length=200)
     ourtypes = (
-    ("0", "Jewlery"),
-    ("1", "Furniture"),
-)
-  
-    types = models.CharField(choices=ourtypes, max_length=2, null=False, default="Jewlery")
-    description =  models.CharField(max_length=500)
+        ("0", "Jewlery"),
+        ("1", "Furniture"),
+    )
+
+    types = models.CharField(
+        choices=ourtypes, max_length=2, null=False, default="Jewlery"
+    )
+    description = models.CharField(max_length=500)
 
     def __str__(self):
-       return self.category_name
+        return self.category_name
+
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
-    price = models.FloatField(help_text='in Rs',)
+    price = models.FloatField(
+        help_text="in Rs",
+    )
     discount_price = models.FloatField(blank=True, null=True)
     category = models.ManyToManyField(Category)
+    slug = models.SlugField(default="asdf")
     ourtypes = (
-    ("0", "Jewellery"),
-    ("1", "Furniture"),
-)
-  
-    types = models.CharField(choices=ourtypes, max_length=2, null=False, default="Jewellery")
+        ("0", "Jewellery"),
+        ("1", "Furniture"),
+    )
+
+    types = models.CharField(
+        choices=ourtypes, max_length=2, null=False, default="Jewellery"
+    )
     Brand = models.CharField(max_length=20, null=True)
-    slug = models.SlugField()
-    description =  models.TextField(max_length=500)
+    quantity = models.IntegerField(default=0)
+    description = models.TextField(max_length=500)
     image = models.ImageField()
     h_image = models.ImageField()
+
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse("core:product", kwargs={
-            'slug': self.slug
-        })
+        return reverse("core:product", kwargs={"slug": self.slug})
 
     def get_add_to_cart_url(self):
-        return reverse("core:add-to-cart", kwargs={
-            'slug': self.slug
-        })
+        return reverse("core:add-to-cart", kwargs={"slug": self.slug})
 
     def get_remove_from_cart_url(self):
-        return reverse("core:remove-from-cart", kwargs={
-            'slug': self.slug
-        })
+        return reverse("core:remove-from-cart", kwargs={"slug": self.slug})
 
 
 class OrderItem(models.Model):
     customer = models.ForeignKey(
-    Customer, on_delete=models.SET_NULL, blank=True, null=True
+        Customer, on_delete=models.SET_NULL, blank=True, null=True
     )
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
@@ -146,23 +149,24 @@ class OrderItem(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(
-    Customer, on_delete=models.SET_NULL, blank=True, null=True
+        Customer, on_delete=models.SET_NULL, blank=True, null=True
     )
-    ref_code = models.CharField(max_length=20, blank=True, null=True)
+    order_id = models.CharField(max_length=20, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-
+    address = models.CharField(default="Nepal", max_length=10)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
-    checkout_address = models.ForeignKey('CheckoutAddress', on_delete=models.SET_NULL, blank=True, null=True)
-
+    checkout_address = models.ForeignKey(
+        "CheckoutAddress", on_delete=models.SET_NULL, blank=True, null=True
+    )
 
     def __str__(self):
-        return self.customer.username
+        return self.order_id
 
     def get_total(self):
         total = 0
@@ -172,14 +176,22 @@ class Order(models.Model):
             total -= self.coupon.amount
         return total
 
+
 class CheckoutAddress(models.Model):
     customer = models.ForeignKey(
-    Customer, on_delete=models.SET_NULL, blank=True, null=True
-    )    
+        Customer, on_delete=models.SET_NULL, blank=True, null=True
+    )
     address = models.CharField(max_length=100)
     zip = models.CharField(max_length=100)
     phone = models.IntegerField(default=None)
 
-
     def __str__(self):
         return self.address
+
+
+class Team(models.Model):
+    Image = models.ImageField(blank=True, null=True)
+    Name = models.CharField(max_length=50, null=True, blank=True)
+    Description = models.TextField(
+        null=True, blank=True, default="He is an employee of our business"
+    )

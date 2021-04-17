@@ -43,15 +43,16 @@
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
+                                        {% for order in order %}
                                         <tbody>
                                             <tr>
-                                                <th scope="row"><a href="{% url 'orderdetails' %}">#o2599</a></th>
-                                                <td>11</td>
-                                                <td>Sushil Phyual</td>
-                                                <td>02/06/2019</td>
-                                                <td>$1,95,000</td>
-                                                <td>Boston</td>
-                                                <td><span class="badge badge-primary-inverse">Processing</span></td>
+                                                <th scope="row"><a href="{% url 'orderdetails' %}">#{{order.order_id}}</a></th>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{order.customer}}</td>
+                                                <td>{{order.ordered_date}}</td>
+                                                <td>Rs.5656</td>
+                                                <td>{{order.address}}</td>
+                                                <td><span class="badge badge-primary-inverse">{{order.being_delivered}}</span></td>
                                                 <td>
                                                     <div class="button-list">
                                                         <a href="#" class="btn btn-primary-rgba"><i class="feather icon-file"></i></a>
@@ -62,6 +63,7 @@
                                             </tr>
                                          
                                         </tbody>
+                                        {% endfor %}
                                     </table>
                                 </div>
                             </div>

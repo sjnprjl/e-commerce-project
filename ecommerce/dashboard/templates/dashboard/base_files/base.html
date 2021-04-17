@@ -26,6 +26,7 @@
     <link href="{% static 'dashboard/css/icons.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'dashboard/css/flag-icon.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'dashboard/css/style.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!-- End css -->
 </head>
 
@@ -105,9 +106,9 @@
         <div class="sidebar">
             <!-- Start Logobar -->
             <div class="logobar">
-                <a href="index.html" class="logo logo-large"><img src="{% static 'main/image/catalog/logo/ostromi2-footer.png' %}"
+                <a href="index.html" class="logo logo-large"><img src="{% static 'main/images/layout-4/logo/ostromi2.png' %}"
                                                                   class="img-fluid" alt="logo"></a>
-                <a href="index.html" class="logo logo-small"><img src="{% static 'main/image/catalog/logo/ostromi2-footer.png' %}"
+                <a href="index.html" class="logo logo-small"><img src="{% static 'main/images/layout-4/logo/ostromi2.png' %}"
                                                                   class="img-fluid" alt="logo"></a>
             </div>
             <!-- End Logobar -->
@@ -142,7 +143,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="mobile-logobar">
-                        <a href="index.html" class="mobile-logo"><img src="{% static 'main/image/catalog/logo/kamal-small.png' %}" height="10px" class="img-fluid" alt="logo"></a>
+                        <a href="index.html" class="mobile-logo"><img src="{% static 'main/images/layout-4/logo/ostromi2.png' %}" height="10px" class="img-fluid" alt="logo"></a>
                     </div>
                     <div class="mobile-togglebar">
                         <ul class="list-inline mb-0">
@@ -327,9 +328,11 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4">
+                    <a href='#'>
                     <div class="widgetbar">
                         <button class="btn btn-primary-rgba"><i class="feather icon-plus mr-2"></i>Add</button>
-                    </div>                        
+                    </div>   
+                </a>                     
                 </div>
             </div>          
         </div>

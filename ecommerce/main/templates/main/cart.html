@@ -1,17 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% for items in object_list %}
-    {{items.item.title}}
-    <img src="{{items.item.image.url}}" alt="">
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
 
-    {% endfor %}
-    
-</body>
-</html>
+<!--section start-->
+<section class="cart-section section-big-py-space b-g-light">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table cart-table table-responsive-xs">
+                    <thead>
+                    <tr class="table-head">
+                        <th scope="col">image</th>
+                        <th scope="col">product name</th>
+                        <th scope="col">price</th>
+                        <th scope="col">quantity</th>
+                        <th scope="col">action</th>
+                        <th scope="col">total</th>
+                    </tr>
+                    </thead>
+                  
+                    {% for items in object_list %}
+                    <tbody>
+                    <tr>
+                        <td>
+                            <a href="javascript:void(0)"><img src="{{items.item.image.url}}" alt="cart" class=" "></a>
+                        </td>
+                        <td><a href="javascript:void(0)">{{items.item.title}}</a>
+                            <div class="mobile-cart-content">
+                                <div class="col-xs-3">
+                                    <div class="qty-box">
+                                        <div class="input-group">
+                                            <input type="number" name="quantity" class="form-control input-number" value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <h2 class="td-color">$63.00</h2></div>
+                                <div class="col-xs-3">
+                                    <h2 class="td-color"><a href="javascript:void(0)" class="icon"><i class="ti-close"></i></a></h2></div>
+                            </div>
+                        </td>
+                        <td>
+                            <h2>Rs.{{items.item.price}}</h2></td>
+                        <td>
+                            <div class="qty-box">
+                                <div class="input-group">
+                             
+                                    <button class="qty-minus"></button>
+                                    <input class="qty-adj form-control" type="number" value="{{items.quantity}}"/>
+                                    <button class="qty-plus"></button>
+
+                                  
+                                </div>
+                            </div>
+                        </td>
+                        
+                        <td><a href="{% url 'deletecartitem' items.pk  %}" class="icon"><i class="ti-close"></i></a></td>
+                        <td>
+                            <h2 class="td-color">Rs.{{items.get_total_item_price}}</h2></td>
+                    </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+                <table class="table cart-table table-responsive-md">
+                    <tfoot>
+                    <tr>
+                        <td>total price :</td>
+                        <td>
+                            <h2>$6935.00</h2></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div class="row cart-buttons">
+            <div class="col-12"><a href="javascript:void(0)" class="btn btn-normal">continue shopping</a> <a href="javascript:void(0)" class="btn btn-normal ms-3">check out</a></div>
+        </div>
+    </div>
+</section>
+<!--section end-->
+{% endblock content %}  

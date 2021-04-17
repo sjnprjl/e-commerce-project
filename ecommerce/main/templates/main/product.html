@@ -1,21 +1,556 @@
-
+{% extends 'main/base.html' %}
 {% load static %}
 {% block content %}
-<div class="wrapper">
-    <div id="back-top"><i class="ion-chevron-up"></i></div>
-    
-    {{item.title}} <br>
-    {{item.description}} <br>
-    <i>first image</i>
-   <img height="200px" width="200px" src=" {{item.image.url}}" alt=""><br>
-   <i>second image</i>
-   <img height="200px" width="200px" src=" {{item.h_image.url}}" alt="">
-   <form action="" method="POST">
-    {% csrf_token %}
-    <a href="{% url 'add-to-cart' item.pk %}" class="btn btn-primary btn-md my-0 p">
-        Add to cart
-        <i class="fas fa-shopping-cart ml-1"></i>
 
-</form>
-   
+<!-- section start -->
+<section class="section-big-pt-space b-g-light center">
+  <div class="collection-wrapper">
+    <div class="custom-container">
+      <div class="row">
+       
+        <div class="col-lg-9 col-sm-12 col-xs-12">
+          <div class="container-fluid">
+            <div class="row ">
+              <div class="col-lg-5">
+                <div class="product-slick ">
+                  <div><img src="{{item.image.url}}" alt="" class="img-fluid  image_zoom_cls-0"></div>
+                
+                  <div><img src="{{item.h_image.url}}" alt="" class="img-fluid  image_zoom_cls-2"></div>
+                </div>
+                <div class="row">
+                  <div class="col-12 p-0">
+                    <div class="slider-nav">
+                      <div><img src="../assets/images/product-sidebar/001.jpg" alt="" class="img-fluid"></div>
+                      <div>
+                        <div class="video-icon">
+                          <div><img src="../assets/images/product-sidebar/002.jpg" alt="" class="img-fluid"></div>
+                          <i class="fa fa-play" aria-hidden="true"></i>
+                        </div>
+                      </div>
+                      <div><img src="../assets/images/product-sidebar/003.jpg" alt="" class="img-fluid"></div>
+                      <div><img src="../assets/images/product-sidebar/004.jpg" alt="" class="img-fluid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 rtl-text">
+                <div class="product-right ">
+                  <div class="pro-group">
+                    <h2>{{item.title}}</h2>
+                    <ul class="pro-price">
+                      <li>Rs.{{item.price}}</li>
+                      <li><span>mrp $140</span></li>
+                      <li>50% off</li>
+                    </ul>
+                   
+                   
+                  </div>
+                  
+                  <div id="selectSize" class="pro-group addeffect-section product-description border-product">
+                    <h6 class="product-title size-text">select size<span>
+                                      <a href="#" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
+                    <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"><img src="../assets/images/size-chart.jpg" alt="" class="img-fluid "></div>
+                        </div>
+                      </div>
+                    </div>
+                    <h6 class="error-message">please select size</h6>
+                   
+                    <h6 class="product-title">color</h6>
+                    
+                    <h6 class="product-title">quantity</h6>
+                    <div class="qty-box">
+                      <div class="input-group">
+                        <button class="qty-minus"></button>
+                        <input class="qty-adj form-control" type="number" value="1"/>
+                        <button class="qty-plus"></button>
+                      </div>
+                    </div>
+                    <div class="product-buttons">
+                      <a href="{% url 'add-to-cart' item.pk %}"   id="cartEffect" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                        <i class="fa fa-shopping-cart"></i>
+                        add to cart
+                      </a>
+                      <a href="javascript:void(0)" class="btn btn-normal add-to-wish tooltip-top" data-tippy-content="Add to wishlist">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="pro-group">
+                  
+                    <div class="delivery-detail">
+                    
+                      <div class="delivery-lable">
+                        <svg  enable-background="new 0 0 512 512"  viewBox="0 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g><g><path d="m412.65 107.667h-80.65v148.333l180-21.056v-.108z" fill="#cce6ff"/><path d="m332 234.944h180v158.722h-180z" fill="#cc295f"/></g><g><path d="m356.333 65h-170.065l-15.601 159 15.601 169.667h170.065z" fill="#fdae02"/><path d="m0 393.667h186.268v-148.334l-186.267 20.334z" fill="#fdcb02"/><path d="m0 65 .001 96 186.267 20.333v-116.333z" fill="#fdcb02"/><path d="m235.314 265.667 29.905-104.667h-78.951l-15.601 52.333 15.601 52.334z" fill="#cc295f"/><path d="m.001 161h186.267v104.666h-186.267z" fill="#ff4d4d"/></g><g><circle cx="122.667" cy="384" fill="#f9f9f9" r="48"/><path d="m122.667 447c-34.738 0-63-28.262-63-63s28.262-63 63-63 63 28.262 63 63-28.262 63-63 63zm0-96c-18.196 0-33 14.804-33 33s14.804 33 33 33 33-14.804 33-33-14.804-33-33-33z" fill="#29376d"/></g><g><circle cx="389.333" cy="384" fill="#eaf1ff" r="48"/><path d="m389.333 447c-34.738 0-63-28.262-63-63s28.262-63 63-63 63 28.262 63 63-28.261 63-63 63zm0-96c-18.196 0-33 14.804-33 33s14.804 33 33 33 33-14.804 33-33-14.803-33-33-33z" fill="#23305b"/></g></g></svg>
+                        Delivery within 12 hrs
+                      </div>
+                    </div>
+                  </div>
+                
+                 
+                
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <section class="tab-product tab-exes creative-card creative-inner">
+            <div class="row">
+              <div class="col-sm-12 col-lg-12">
+                <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
+                  <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-selected="true"><i class="icofont icofont-ui-home"></i>Description</a>
+                    <div class="material-border"></div>
+                  </li>
+                </ul>
+                <div class="tab-content nav-material" id="top-tabContent">
+                  <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+<p>{{item.description}}</p>
+                  </div>
+                 
+                 
+                
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section ends -->
+
+<!-- related products -->
+<section class="section-big-py-space  ratio_asos b-g-light">
+  <div class="custom-container">
+    <div class="row">
+      <div class="col-12 product-related">
+        <h2>related products</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 product">
+        <div class="product-slide-6 product-m no-arrow">
+          <div>
+            <div class="product-box">
+              <div class="product-imgbox">
+                <div class="product-front">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/1.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-back">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/a1.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-icon icon-inline">
+                  <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
+                    <i  data-feather="shopping-cart"></i>
+                  </button>
+                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                    <i  data-feather="heart"></i>
+                  </a>
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i  data-feather="eye"></i>
+                  </a>
+                  <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <i  data-feather="refresh-cw"></i>
+                  </a>
+                </div>
+
+              </div>
+              <div class="product-detail detail-inline ">
+                <div class="detail-title">
+                  <div class="detail-left">
+                    <div class="rating-star">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a href="product-page(left-sidebar).html">
+                      <h6 class="price-title">
+                        sony xperia m5
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="detail-right">
+                    <div class="check-price">
+                      $ 56.21
+                    </div>
+                    <div class="price">
+                      <div class="price">
+                        $ 24.05
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="product-box">
+              <div class="product-imgbox">
+                <div class="product-front">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/3.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-back">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/a3.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-icon icon-inline">
+                  <button data-bs-toggle="modal" data-bs-target="#addtocart" class="tooltip-top" data-tippy-content="Add to cart" >
+                    <i  data-feather="shopping-cart"></i>
+                  </button>
+                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist">
+                    <i  data-feather="heart"></i>
+                  </a>
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i  data-feather="eye"></i>
+                  </a>
+                  <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <i  data-feather="refresh-cw"></i>
+                  </a>
+                </div>
+
+              </div>
+              <div class="product-detail detail-inline">
+                <div class="detail-title">
+                  <div class="detail-left">
+                    <div class="rating-star">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a href="product-page(left-sidebar).html">
+                      <h6 class="price-title">
+                        woman hande bag
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="detail-right">
+                    <div class="check-price">
+                      $ 56.21
+                    </div>
+                    <div class="price">
+                      <div class="price">
+                        $ 24.05
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="product-box">
+              <div class="product-imgbox">
+                <div class="product-front">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/4.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-back">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/a4.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-icon icon-inline">
+                  <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
+                    <i  data-feather="shopping-cart"></i>
+                  </button>
+                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                    <i  data-feather="heart"></i>
+                  </a>
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i  data-feather="eye"></i>
+                  </a>
+                  <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <i  data-feather="refresh-cw"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-detail detail-inline">
+                <div class="detail-title">
+                  <div class="detail-left">
+                    <div class="rating-star">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a href="product-page(left-sidebar).html">
+                      <h6 class="price-title">
+                        nikon camera
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="detail-right">
+                    <div class="check-price">
+                      $ 60.21
+                    </div>
+                    <div class="price">
+                      <div class="price">
+                        $ 20.05
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="product-box">
+              <div class="product-imgbox">
+                <div class="product-front">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/5.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-back">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/a5.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-icon icon-inline">
+                  <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
+                    <i  data-feather="shopping-cart"></i>
+                  </button>
+                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                    <i  data-feather="heart"></i>
+                  </a>
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i  data-feather="eye"></i>
+                  </a>
+                  <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <i  data-feather="refresh-cw"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-detail detail-inline">
+                <div class="detail-title">
+                  <div class="detail-left">
+                    <div class="rating-star">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a href="product-page(left-sidebar).html">
+                      <h6 class="price-title">
+                        lenovo laptop
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="detail-right">
+                    <div class="check-price">
+                      $ 70.21
+                    </div>
+                    <div class="price">
+                      <div class="price">
+                        $ 30.05
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="product-box">
+              <div class="product-imgbox">
+                <div class="product-front">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/6.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-back">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/a6.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-icon icon-inline">
+                  <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
+                    <i  data-feather="shopping-cart"></i>
+                  </button>
+                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                    <i  data-feather="heart"></i>
+                  </a>
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i  data-feather="eye"></i>
+                  </a>
+                  <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <i  data-feather="refresh-cw"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-detail detail-inline">
+                <div class="detail-title">
+                  <div class="detail-left">
+                    <div class="rating-star">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a href="product-page(left-sidebar).html">
+                      <h6 class="price-title">
+                        earphone Pouch Bag
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="detail-right">
+                    <div class="check-price">
+                      $ 100.21
+                    </div>
+                    <div class="price">
+                      <div class="price">
+                        $ 80.05
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="product-box">
+              <div class="product-imgbox">
+                <div class="product-front">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/7.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-back">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/a7.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-icon icon-inline">
+                  <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
+                    <i  data-feather="shopping-cart"></i>
+                  </button>
+                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                    <i  data-feather="heart"></i>
+                  </a>
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i  data-feather="eye"></i>
+                  </a>
+                  <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <i  data-feather="refresh-cw"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-detail detail-inline">
+                <div class="detail-title">
+                  <div class="detail-left">
+                    <div class="rating-star">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a href="product-page(left-sidebar).html">
+                      <h6 class="price-title">
+                        wooden table
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="detail-right">
+                    <div class="check-price">
+                      $ 90.21
+                    </div>
+                    <div class="price">
+                      <div class="price">
+                        $ 28.05
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="product-box">
+              <div class="product-imgbox">
+                <div class="product-front">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/8.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-back">
+                  <a href="product-page(left-sidebar).html">
+                    <img src="../assets/images/layout-2/product/a8.jpg" class="img-fluid  " alt="product">
+                  </a>
+                </div>
+                <div class="product-icon icon-inline">
+                  <button data-bs-toggle="modal" data-bs-target="#addtocart"   class="tooltip-top" data-tippy-content="Add to cart" >
+                    <i  data-feather="shopping-cart"></i>
+                  </button>
+                  <a href="javascript:void(0)"  class="add-to-wish tooltip-top"  data-tippy-content="Add to Wishlist" >
+                    <i  data-feather="heart"></i>
+                  </a>
+                  <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#quick-view" class="tooltip-top"  data-tippy-content="Quick View">
+                    <i  data-feather="eye"></i>
+                  </a>
+                  <a href="compare.html" class="tooltip-top" data-tippy-content="Compare">
+                    <i  data-feather="refresh-cw"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-detail detail-inline">
+                <div class="detail-title">
+                  <div class="detail-left">
+                    <div class="rating-star">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <a href="product-page(left-sidebar).html">
+                      <h6 class="price-title">
+                        Wireless Optical Mouse
+                      </h6>
+                    </a>
+                  </div>
+                  <div class="detail-right">
+                    <div class="check-price">
+                      $ 80.21
+                    </div>
+                    <div class="price">
+                      <div class="price">
+                        $ 28.05
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- related products -->
 {% endblock content %}
