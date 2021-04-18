@@ -127,7 +127,7 @@
 
                         {% for category in cate %}
                         {% if category.types == "0" %}
-                      <li><a href="#">{{category.category_name}}</a></li>
+                      <li><a href="#">{{category.name}}</a></li>
                      
                       {% endif %}
                       {% endfor %}
@@ -386,18 +386,12 @@
               </div>
               <div class="input-block">
                   <div class="input-box">
-                    <form class="big-deal-form">
+                    <form class="big-deal-form" style="position: relative;">
                       <div class="input-group ">
                         <span class="search"><i class="fa fa-search"></i></span>                       
-                        <input type="text" class="form-control" placeholder="Search a Product">
-                        <!-- <div class="input-group-prepend">
-                          <select>
-                            <option>All Category</option>
-                            <option>indurstrial</option>
-                            <option>sports</option>
-                          </select>
-                        </div> -->
+                        <input type="text" id="searchProduct" class="form-control" placeholder="Search a Product">
                       </div>
+                      <div id="searchResult"></div>
                     </form>
                   </div>
                 </div>

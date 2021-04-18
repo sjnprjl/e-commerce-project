@@ -71,7 +71,7 @@ class Customer(AbstractBaseUser, PermissionsMixin):
 
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     ourtypes = (
         ("0", "Jewlery"),
         ("1", "Furniture"),
@@ -83,7 +83,7 @@ class Category(models.Model):
     description = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.category_name
+        return self.name
 
 
 class Item(models.Model):

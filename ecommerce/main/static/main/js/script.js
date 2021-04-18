@@ -2963,3 +2963,39 @@ function form_validator(form_identifier) {
 
     })
 }
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+$("#searchProduct").on('keyup', search_product);
+const $searchResultContainer = $("#searchResult");
+$searchResultContainer.css({"display": "none"});
+function search_product() {
+    const keyword = escapeHtml($(this).val());
+    if (keyword === "") {
+        $searchResultContainer.css({"display": "none"});
+
+    } else
+        $searchResultContainer.css({"display": "flex"});
+    $.ajax({
+        url: '/search/',
+        type: "get",
+        data: {
+            "keyword": keyword,
+        },
+        success: function (response) {
+            $searchResultContainer.html("");
+            if (response.length) {
+                response.forEach(item => {
+                    $searchResultContainer.append(`<a href='/product/${item.pk}/'>${item.fields.title}</a>`);
+                })
+            } else
+                $searchResultContainer.append(`<div>${keyword} not found</div>`);
+
+        }
+    })
+}

@@ -6,6 +6,18 @@
 .valid-field {
     border: 2px solid green; 
 }
+#searchResult {
+	position: absolute;
+	z-index: 99;
+	background: white;
+	padding: 10px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 4px 8px 10px 1px rgba(0,0,0,0.25);
+	top: 110%;
+    min-height: 50px;
+}
 
 /*end of custom css*/
 @-webkit-keyframes rotation {

@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load main_extras %}
 {% block content %}
 
 <!-- section start -->
@@ -38,9 +39,9 @@
                   <div class="pro-group">
                     <h2>{{item.title}}</h2>
                     <ul class="pro-price">
-                      <li>Rs.{{item.price}}</li>
-                      <li><span>mrp $140</span></li>
-                      <li>50% off</li>
+                      <li>Rs.{% discount item.price item.discount_price %}</li>
+                      <li><span>Rs. {{ item.price }}</span></li>
+                      <li>{% discount_percentage item.price item.discount_price %}% off</li>
                     </ul>
                    
                    

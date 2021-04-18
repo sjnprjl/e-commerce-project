@@ -13,6 +13,7 @@ from django.contrib.auth import (
 )
 from django.contrib.auth.views import LoginView as LV, redirect_to_login
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.core.exceptions import ValidationError
 from django.dispatch.dispatcher import receiver
@@ -56,14 +57,7 @@ from django.http import JsonResponse
 from django.utils import timezone
 from django.urls import reverse_lazy
 from allauth.account.signals import user_signed_up
-
-
-class JSONResponseMixin:
-    def render_to_json_response(self, context, **response_kwargs):
-        return JsonResponse(self.get_data(context), **response_kwargs)
-
-        def get_data(self, context):
-            return context
+from django.db.models import Q, F
 
 
 def index(request):
@@ -89,6 +83,23 @@ def index(request):
     #         return render(request, "main/index.html",{'cate':cate,"items":items,"cart":cart})
     #     else:
     #         return HttpResponse("ple")
+
+
+def search_view(request):
+    query = request.GET.get("keyword", None)
+    if query:
+        items = Item.objects.filter(
+            Q(title__icontains=query)
+            | Q(description__icontains=query)
+            | Q(Brand__icontains=query)
+            | Q(category__name=query)
+            | Q(category__description__icontains=query)
+            | Q(types__icontains=query)
+        )
+        item_list = serializers.serialize("json", items)
+        return HttpResponse(item_list, content_type="text/json-comment-filtered")
+    else:
+        return HttpResponse("field is empty")
 
 
 class CheckOutView(TemplateView):
@@ -142,20 +153,9 @@ class ProductView(DetailView):
     template_name = "main/product.html"
 
     def get_context_data(self, **kwargs):
-        if self.request.user.is_authenticated:
-
-            context = super(ProductView, self).get_context_data(**kwargs)
-            context["cart"] = OrderItem.objects.filter(customer=self.request.user)
-            return context
-        else:
-            None
-
-
-class SearchView(TemplateView):
-
-    """search view """
-
-    template_name = "main/search.html"
+        context = super(ProductView, self).get_context_data(**kwargs)
+        # context["cart"] = OrderItem.objects.all()
+        return context
 
 
 def AboutUsView(request):
@@ -308,6 +308,8 @@ class LogoutCustomer(TemplateView):
 class Profile(TemplateView):
     """profile view"""
 
+    pass
+
 
 class DetailCartItem(ListView):
     """detail view"""
@@ -330,7 +332,7 @@ class DetailCartItem(ListView):
         elif self.request.user.is_anonymous:
             return HttpResponseRedirect("/login")
 
-    template_name = "main/profile.html"
+    # template_name = "main/profile.html"
 
 
 class UpdateCartItem(UpdateView):
