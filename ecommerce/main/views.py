@@ -38,6 +38,7 @@ from .models import (
     Category,
     Item,
     Team,
+    SpecialOffer,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
@@ -58,16 +59,21 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from allauth.account.signals import user_signed_up
 from django.db.models import Q, F
-
+import datetime
 
 def index(request):
-    cate = Category.objects.all()
+    
     items = Item.objects.all()
+    specialoffer = SpecialOffer.objects.all()
+    team = Team.objects.all()
     if request.user.is_authenticated:
         cart = OrderItem.objects.filter(customer=request.user)
-        context = {"cate": cate, "items": items, "cart": cart}
+        context = {"items": items, "cart": cart, "offer":specialoffer, "team":team}
     else:
-        context = {"cate": cate, "items": items}
+        context = {"items": items, "offer":specialoffer,"team":team}
+
+
+
 
     # if request.user.is_authenticated:
     #     cart = OrderItem.objects.filter(customer = request.user)

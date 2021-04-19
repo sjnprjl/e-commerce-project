@@ -113,3 +113,4 @@ admin.site.site_header = "Kera jasto Admin"
 admin.site.site_title = " Admin Portal"
 admin.site.index_title = "Muji Teo anuwar dekhauna feri aais."
 admin.site.register(CheckoutAddress)
+admin.site.register(SpecialOffer)
