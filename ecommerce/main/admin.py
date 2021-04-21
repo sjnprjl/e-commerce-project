@@ -109,8 +109,7 @@ admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(Category)
 admin.site.register(Team)
-admin.site.site_header = "Kera jasto Admin"
-admin.site.site_title = " Admin Portal"
-admin.site.index_title = "Muji Teo anuwar dekhauna feri aais."
+admin.site.site_header = "Kamal Traders and Jwellers"
+admin.site.site_title = " Admin"
+admin.site.index_title = "Dashboard"
 admin.site.register(CheckoutAddress)
-admin.site.register(SpecialOffer)
