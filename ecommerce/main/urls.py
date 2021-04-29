@@ -13,7 +13,7 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(next_page=reverse_lazy("login")), name="logout"),
     path("profile/", Profile.as_view(), name="profile"),
-    path("logout-user/", LogoutCustomer.as_view(), name="logout_user"),
+    
     path("register/", RegisterView.as_view(), name="register"),
     path("privacy/", PrivacyView.as_view(), name="privacy"),
     path("terms/", TermsView.as_view(), name="terms"),

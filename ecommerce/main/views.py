@@ -305,10 +305,7 @@ class App(TemplateView):
     template_name = "main/app.html"
 
 
-class LogoutCustomer(TemplateView):
-    """logout customer view"""
 
-    template_name = "main/logout.html"
 
 
 class Profile(TemplateView):
