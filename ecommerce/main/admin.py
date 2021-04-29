@@ -1,6 +1,7 @@
 # from ecommerce.main.views import AboutUsView
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django import forms
+from django.utils.html import format_html
 from django.contrib import admin
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -92,8 +93,14 @@ class UserAdmin(BaseUserAdmin):
     ordering = ("email",)
     filter_horizontal = ()
 class ItemsAdmin(admin.ModelAdmin):
-    list_display = ( "title", "price", "description", "quantity","types")
+    readonly_fields = ('Photo',)
+    exclude = ()
+    list_display = ("Photo","title", "price", "description", "quantity","types")
     list_filter = ("title", "price")
+    search_fields = ("title","types","price",)
+
+    def Photo(self, obj ):
+        return format_html(f'<img src="/media/{obj.image}" style="height:50px;width:50px">')
    
 
 # Now register the new UserAdmin...
@@ -101,15 +108,14 @@ admin.site.register(Customer, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
-
 # Register your models here.
-
 admin.site.register(Item,ItemsAdmin)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(Category)
 admin.site.register(Team)
-admin.site.site_header = "Kamal Traders and Jwellers"
-admin.site.site_title = " Admin"
+
+admin.site.site_title = "Dashboard"
 admin.site.index_title = "Dashboard"
 admin.site.register(CheckoutAddress)
+admin.site.register(SpecialOffer)

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>{% block  title %} {% if request.user.is_authenticated %} {{user.username}} {% endif %} - welcome to my fucking website {% endblock %}</title>
+    <title>{% block  title %}Kamal Traders Jewelers shoping store {% endblock %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
@@ -85,8 +85,8 @@
                                         <li><a href="{% url 'logout_user' %}"><i class="fa fa-sign-out"></i>Log Out</a></li>
 
                                     </ul>
-                                </div>
-                            </div>
+                                </div>          
+                            </div>                            
                         </div>
                     </div>
                     {% else %}
@@ -119,21 +119,7 @@
               <div class="row">
                 <div class="col-4">
                   <div class="contact-block">
-                    <div class="sm-nav-block">
-                      <ul class="nav-slide">
-                        <li>
-                          <div class="nav-sm-back"> back <i class="fa fa-angle-right ps-2"></i> </div>
-                        </li>
-
-                        {% for category in cate %}
-                        {% if category.types == "0" %}
-                      <li><a href="#">{{category.name}}</a></li>
-                     
-                      {% endif %}
-                      {% endfor %}
-                         
-                      </ul>
-                    </div>
+                   
                     <div class="desc-nav-block"> 
                       <ul>
                         <li>
@@ -209,7 +195,7 @@
                               <div>shopping<span>cart</span></div>
                             </div>
                           </div>  
-                          <div class="item-count-contain">{{items.loop.counter}}</div>
+                          <div class="item-count-contain"> {% for items in cart %}{{items.loop.counter}}{% endfor %}</div>
                         </a>
                       </li>
                       {% else %}
@@ -221,7 +207,7 @@
                               <div>shopping<span>cart</span></div>
                             </div>
                           </div>  
-                          <div class="item-count-contain">{{items.loop.counter}}</div>
+                          <div class="item-count-contain">X</div>
                         </a>
                       </li>
                       
@@ -258,6 +244,7 @@
                         </svg>
                     </span>
                 </div>
+
             </div> -->
         </div>
         </div>
@@ -267,34 +254,13 @@
           <div class="col-12">
             <div class="navbar-menu">
               <div class="category-left">
-                <div class="sm-nav-btn">
-                  <i class="fa fa-bars"></i>
-                </div>
+               
                 <div class="logo-block logo-sm-center ">
                   <a href="{% url 'main' %}">
                       <img src="{% static 'main/images/layout-4/logo/ostromi2.png' %}" alt="logo" class="img-fluid  ">
                   </a>
                 </div>
-                <div class=" nav-block">
-                  <div class="nav-left">
-                    <nav class="navbar" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
-                      <button class="navbar-toggler" type="button"> <span class="navbar-icon"><i class="fa fa-arrow-down"></i></span> </button>
-                      <h5 class="mb-0  text-white title-font">Jwellery</h5> </nav>
-                    <div class="collapse show nav-desk" id="navbarToggleExternalContent">
-                     
-                      <ul class="nav-cat title-font">
-                        {% for category in cate %}
-                        {% if category.types == "0" %}
-                        <li><a href="#">{{category.category_name}}</a></li>
-                       
-                        {% endif %}
-                      {% endfor %}
-                       
-                      </ul>
-                     
-                    </div>
-                  </div>
-                </div>
+            
               </div>
               <div class="menu-block">
                 <ul id="main-menu" class="sm pixelstrap sm-horizontal">
@@ -544,27 +510,14 @@
                             </div>
                             <div class="footer-box">
                                 <div class="footer-title">
-                                    <h5>newsletter</h5>
+                                    <h5>Map</h5>
                                 </div>
                                 <div class="footer-contant">
                                     <div class="newsletter-second">
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="enter full name">
-                                                <span class="input-group-text"><i class="ti-user"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control"
-                                                    placeholder="enter email address">
-                                                <span class="input-group-text"><i class="ti-email"></i>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group"> <a href="javascript:void(0)"
-                                                class="btn btn-solid btn-sm">submit now</a> </div>
+                                        <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q=Kamal%20Traders%20%26%20Jwellers%2C%20Birtamode%2C%20Nepal&key=AIzaSyClyhZoVyBKEOdsxMu2Zz7e9FS-K59rsnw"></iframe>s
+                                          </div>
                                     </div>
+                                       
                                 </div>
                             </div>
                         </div>
@@ -973,7 +926,7 @@
                     <a href="{% url 'reset_password' %}" class="d-block">
                         <h5>forget password?</h5>
                     </a>
-                    <a href="register.html" class="d-block">
+                    <a href="{% url 'register' %}" class="d-block">
                         <h6>you have no account ?<span>signup now</span></h6>
                     </a>
                 </div>

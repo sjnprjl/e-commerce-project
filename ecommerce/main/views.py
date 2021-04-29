@@ -375,6 +375,7 @@ def add_to_cart(request, pk):
 
 
 class CheckoutView(View):
+    model = OrderItem
     def get(self, *args, **kwargs):
         form = CheckoutForm()
         model = OrderItem.objects.filter(customer=self.request.user)

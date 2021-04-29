@@ -87,9 +87,11 @@
                                         <div>Product <span>Total</span></div>
                                     </div>
                                     <ul class="qty">
-                                        <li>Pink Slim Shirt × 1 <span>$25.10</span></li>
-                                        <li>SLim Fit Jeans × 1 <span>$555.00</span></li>
+                                    {% for items in object_list %}
+                                        <li>{{items.item.title}} × {{items.item.quantity}} <span>Rs.{{items.item.price}}</span></li>
+                                    {% endfor %}
                                     </ul>
+
                                     <ul class="sub-total">
                                         <li>Subtotal <span class="count">$380.10</span></li>
                                         <li>Shipping
