@@ -1,28 +1,3 @@
-/*
- *	jQuery elevateZoom 3.0.8
- *	Demo's and documentation:
- *	www.elevateweb.co.uk/image-zoom
- *
- *	Copyright (c) 2012 Andrew Eades
- *	www.elevateweb.co.uk
- *
- *	Dual licensed under the GPL and MIT licenses.
- *	http://en.wikipedia.org/wiki/MIT_License
- *	http://en.wikipedia.org/wiki/GNU_General_Public_License
- *
-
-/*
- *	jQuery elevateZoom 3.0.3
- *	Demo's and documentation:
- *	www.elevateweb.co.uk/image-zoom
- *
- *	Copyright (c) 2012 Andrew Eades
- *	www.elevateweb.co.uk
- *
- *	Dual licensed under the GPL and MIT licenses.
- *	http://en.wikipedia.org/wiki/MIT_License
- *	http://en.wikipedia.org/wiki/GNU_General_Public_License
- */
 
 
 if ( typeof Object.create !== 'function' ) {
@@ -1777,7 +1752,7 @@ if ( typeof Object.create !== 'function' ) {
 			imageCrossfade: false,
 			constrainType: false,  //width or height
 			constrainSize: false,  //in pixels the dimensions you want to constrain on
-			loadingIcon: false, //http://www.example.com/spinner.gif
+			loadingIcon: false, 
 			cursor:"default", // user should set to what they want the cursor as, if they have set a click function
 			responsive:true,
 			onComplete: $.noop,

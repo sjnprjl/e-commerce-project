@@ -1,6 +1,4 @@
-/*! Magnific Popup - v1.1.0 - 2016-02-20
-* http://dimsemenov.com/plugins/magnific-popup/
-* Copyright (c) 2016 Dmitry Semenov; */
+
 ;(function (factory) { 
 if (typeof define === 'function' && define.amd) { 
  // AMD. Register as an anonymous module. 
@@ -103,7 +101,6 @@ var _mfpOn = function(name, f) {
 			$.magnificPopup.instance = mfp;
 		}
 	},
-	// CSS transition detection, http://stackoverflow.com/questions/7264899/detect-css-transitions-using-javascript-and-without-modernizr
 	supportsTransitions = function() {
 		var s = document.createElement('p').style, // 's' for style. better to create an element if body yet to exist
 			v = ['ms','O','Moz','Webkit']; // 'v' for vendor
@@ -458,7 +455,7 @@ MagnificPopup.prototype = {
 	updateSize: function(winHeight) {
 
 		if(mfp.isIOS) {
-			// fixes iOS nav bars https://github.com/dimsemenov/Magnific-Popup/issues/2
+		
 			var zoomLevel = document.documentElement.clientWidth / window.innerWidth;
 			var height = window.innerHeight * zoomLevel;
 			mfp.wrap.css('height', height);
@@ -854,8 +851,7 @@ $.magnificPopup = {
 
 	defaults: {
 
-		// Info about options is in docs:
-		// http://dimsemenov.com/plugins/magnific-popup/documentation.html#options
+
 
 		disableOn: 0,
 

@@ -1,31 +1,3 @@
-/*-----------------------------------------------------------------------------------
- Template Name:Bigdeal
- Template URI: themes.pixelstrap.com/bigdeal
- Description: This is E-commerce website
- Author: Pixelstrap
- Author URI: https://themeforest.net/user/pixelstrap
- ----------------------------------------------------------------------------------- */
-// 01. Slick slider
-// 02. header js
-// 03.footer js
-// 04. Image to background js
-// 05 toggle nav
-// 06 navbar mobile nav
-// 07 menu js
-// 08. Product page
-// 09. category page
-// 10. Product page Quantity Counter
-// 11. filter sidebar js
-// 12. Filter js
-// 13. tab js
-// 14. null
-// 15. Add to cart
-// 16.  Add to wishlist
-// 17. Tap on Top
-// 18. loader
-// 19. add to cart sidebar js
-// 20. Color Picker
-// 21. Add to cart quantity Counter
 
 
 (function ($) {

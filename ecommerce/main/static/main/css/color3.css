@@ -341,53 +341,6 @@
   100% {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg); } }
-
-/*-----------------------------------------------------------------------------------
-
-    Template Name: Bigdeal
-    Template URI: themes.pixelstrap.com/bigdeal
-    Description: This is E-commerce Theme
-    Author: Pixelstrap
-    Author URI: https://themeforest.net/user/pixelstrap
------------------------------------------------------------------------------------ */
-/*-----------------------------------------------------------------------------------
-1.General CSS start
-  1.1.Button CSS start
-2.Services CSS start
-3.Instagram CSS start
-4. Brand panel CSS start
-5. Testimonial CSS start
-6. Offer-banner CSS start
-7. Deal banner CSS start
-8. Discount banner CSS start
-9. Contact banner CSS start
-10. Rounded category CSS start
-11. Box category CSS start
-12.Blog CSS start
-13. Collection banner CSS start
-14. Product CSS start
-15. Hot Deal CSS start
-16. Header CSS start
-17. Media Banner start
-18. Footer start
-19.  Slider start
-20. Title css
-21. Tab-product css
-22. Newsleatter css
-23. breadcrumb CSS start
-24. payment offer CSS start
-25.Inner pages CSS start
-26.add to cart CSS start
-27.add to account bar css start
-28. Tab to top CSS start
-29. Modal CSS start
-30. Loader css start
-31. masonory-banner css start
-31. masonory-banner css start
------------------------------------------------------------------------------------ */
-/*=====================
-  1.General CSS start
-==========================*/
 html {
   scroll-behavior: smooth; }
 
@@ -9361,7 +9314,7 @@ ul.sosiyal {
 
 .filter-slide {
   padding-top: 30px;
-  /*# sourceMappingURL=ion.rangeSlider.css.map */ }
+
   .filter-slide .irs {
     position: relative;
     display: block;
@@ -26208,4 +26161,4 @@ body.dark {
 
 .bg-light {
   background-color: #f8f9fa !important; }
-/*# sourceMappingURL=color3.css.map */
+

@@ -1,14 +1,3 @@
-// Ion.RangeSlider
-// version 2.3.0 Build: 381
-// © Denis Ineshin, 2018
-// https://github.com/IonDen
-//
-// Project page:    http://ionden.com/a/plugins/ion.rangeSlider/en.html
-// GitHub page:     https://github.com/IonDen/ion.rangeSlider
-//
-// Released under MIT licence:
-// http://ionden.com/a/plugins/licence-en.html
-// =====================================================================================================================
 
 ;(function(factory) {
     if (!jQuery && typeof define === "function" && define.amd) {
@@ -2413,13 +2402,6 @@
 
 
 
-    // =================================================================================================================
-    // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-    // http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
-
-    // requestAnimationFrame polyfill by Erik Möller. fixes from Paul Irish and Tino Zijdel
-
-    // MIT license
 
     (function() {
         var lastTime = 0;
