@@ -40,8 +40,10 @@
                     <h2>{{item.title}}</h2>
                     <ul class="pro-price">
                       <li>Rs.{% discount item.price item.discount_price %}</li>
+                      {% if item.discount_price %}
                       <li><span>Rs. {{ item.price }}</span></li>
                       <li>{{item.discount_percentage|floatformat:0}}% off</li>
+                      {% endif %}
                     </ul>
                    
                    
@@ -59,7 +61,7 @@
                       </div>
                     </div>
                     <div class="product-buttons">
-                        <a href="{% if request.user.is_authenticated %}{% url 'add-to-cart' item.pk %}{% else %} {% url 'login'%} {% endif %}"   id="cartEffect" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                        <a {% if not request.user.is_authenticated %} href="{% url 'login'%}" {% endif %} data-item="{{item.pk }}" data-action="add"  id="cartEffect" class="btn cart-btn btn-normal tooltip-top update-cart" data-tippy-content="Add to cart">
                         <i class="fa fa-shopping-cart"></i>
                         add to cart
                       </a>
