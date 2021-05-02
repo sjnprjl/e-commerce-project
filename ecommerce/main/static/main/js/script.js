@@ -1677,7 +1677,10 @@
     })
     qtyIncs.forEach((qtyDec) => {
         qtyDec.addEventListener("click", function (e) {
-            e.target.previousElementSibling.value++;
+            const max_quantity = e.target.previousElementSibling.getAttribute("maxlength");
+            if (e.target.previousElementSibling.value < Number(max_quantity))
+                e.target.previousElementSibling.value++;
+            else e.target.previousElementSibling.value = Number(max_quantity);
         })
     })
 
@@ -2971,8 +2974,8 @@ function escapeHtml(unsafe) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
-$("#searchProduct").on('keyup', search_product);
-const $searchResultContainer = $("#searchResult");
+$(".searchProduct").on('keyup', search_product);
+const $searchResultContainer = $(".searchResult");
 $searchResultContainer.css({"display": "none"});
 function search_product() {
     const keyword = escapeHtml($(this).val());
@@ -2989,6 +2992,7 @@ function search_product() {
         },
         success: function (response) {
             $searchResultContainer.html("");
+            console.log(response)
             if (response.length) {
                 response.forEach(item => {
                     $searchResultContainer.append(`<a href='/product/${item.pk}/'>${item.fields.title}</a>`);
@@ -2998,4 +3002,54 @@ function search_product() {
 
         }
     })
+}
+
+
+// javascript :D 
+
+
+
+/*======================
+COPIED SHAMELESSLY FROM 
+https://www.sitepoint.com/css3-animation-javascript-event-handlers/
+=====================*/
+var pfx = ["webkit", "moz", "MS", "o", ""];
+function PrefixedEvent(element, type, callback) {
+    for (var p = 0; p < pfx.length; p++) {
+        if (!pfx[p]) type = type.toLowerCase();
+        element.addEventListener(pfx[p] + type, callback, false);
+    }
+}
+// UTILITY ===
+const _ = (elm) => document.querySelector(elm);
+// END UTILITY ===
+
+/*=======
+    POPUP V1.0
+========*/
+
+// @params msg {String}
+function popMessage(msg) {
+    const TIME = 3000;
+
+    let a = document.createElement("div");
+    let b = document.createElement("strong");
+    let c = document.createTextNode(msg);
+    b.appendChild(c);
+    a.appendChild(b);
+
+    a.classList.add("popup-message");
+
+    _("#popupContainer").appendChild(a);
+
+
+
+    const interv = setInterval(() => {
+        a.classList.add("popout-message");
+        PrefixedEvent(a, "AnimationEnd", () => {
+            a.remove();
+            clearInterval(interv);
+        })
+    }, TIME);
+
 }

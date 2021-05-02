@@ -41,45 +41,27 @@
                     <ul class="pro-price">
                       <li>Rs.{% discount item.price item.discount_price %}</li>
                       <li><span>Rs. {{ item.price }}</span></li>
-                      <li>{% discount_percentage item.price item.discount_price %}% off</li>
+                      <li>{{item.discount_percentage|floatformat:0}}% off</li>
                     </ul>
                    
                    
                   </div>
                   
                   <div id="selectSize" class="pro-group addeffect-section product-description border-product">
-                    <h6 class="product-title size-text">select size<span>
-                                      <a href="#" data-bs-toggle="modal" data-bs-target="#sizemodal">size chart</a></span></h6>
-                    <div class="modal fade" id="sizemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Sheer Straight Kurta</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body"><img src="../assets/images/size-chart.jpg" alt="" class="img-fluid "></div>
-                        </div>
-                      </div>
-                    </div>
-                    <h6 class="error-message">please select size</h6>
                    
-                    <h6 class="product-title">color</h6>
                     
                     <h6 class="product-title">quantity</h6>
                     <div class="qty-box">
                       <div class="input-group">
                         <button class="qty-minus"></button>
-                        <input class="qty-adj form-control" type="number" value="1"/>
+                        <input class="qty-adj form-control" type="number" value="1" maxlength="{{item.quantity}}"/>
                         <button class="qty-plus"></button>
                       </div>
                     </div>
                     <div class="product-buttons">
-                      <a href="{% url 'add-to-cart' item.pk %}"   id="cartEffect" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
+                        <a href="{% if request.user.is_authenticated %}{% url 'add-to-cart' item.pk %}{% else %} {% url 'login'%} {% endif %}"   id="cartEffect" class="btn cart-btn btn-normal tooltip-top" data-tippy-content="Add to cart">
                         <i class="fa fa-shopping-cart"></i>
                         add to cart
-                      </a>
-                      <a href="javascript:void(0)" class="btn btn-normal add-to-wish tooltip-top" data-tippy-content="Add to wishlist">
-                        <i class="fa fa-heart" aria-hidden="true"></i>
                       </a>
                     </div>
                   </div>

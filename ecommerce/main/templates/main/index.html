@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load static %}
+{% load main_extras %}
 {% block content %}
 <!--slider start-->
 <section class="theme-slider section-py-space home-slide">
@@ -136,40 +137,9 @@
                                C373.017,484.463,330.283,494.933,256,494.933z" />
                             </g>
                         </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
-                        <g>
-                        </g>
                     </svg>
 
                     <div class="media-body">
-
                         <h5>Jewellery Items</h5>
 
                     </div>
@@ -239,22 +209,29 @@
                                                     </a>
                                                 </div>
                                                 <div class="detail-right">
+                                                    {% if items.discount_price > 0 %}
                                                     <div class="check-price"> Rs.{{items.price}}</div>
+                                                    {% endif %}
                                                     <div class="price">
-                                                        <div class="price"> Rs.{{items.price}} </div>
+                                                        <div class="price"> Rs.{{items.new_price}} </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% if not request.user.is_authenticated %}
+                                            <a href="{% url 'login' %}">
+                                            {% endif %}
                                             <div class="icon-detail">
-                                                <button onclick="openCart()" href="{% url 'cart'%}" class="tooltip-top"
-                                                    data-tippy-content="Add to cart"> <i
-                                                        data-feather="shopping-cart"></i> </button>
+                                                <button  data-item="{{items.pk  }}" data-action="add" onclick="{% if request.user.is_authenticated %}openCart(){% endif%}" class="tooltip-top update-cart"
+                                                    data-tippy-content="Add to cart"> <i data-feather="shopping-cart"></i> </button>
 
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#quick-view" class="tooltip-top"
-                                                    data-tippy-content="Quick View"> <i data-feather="eye"></i> </a>
+                                                <a href="{% url 'product' items.pk %}" data-bs-toggle="modal"
+                                                     class="tooltip-top"
+                                                    data-tippy-content="View Item"> <i data-feather="eye"></i> </a>
 
                                             </div>
+                                            {% if not request.user.is_authenticated %}
+                                                </a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -328,9 +305,6 @@
                                 <!-- pRODUCT fETCH -->
                                 {% for items in items %}
                                 {% if items.types == "1" %}
-
-
-
                                 <div>
                                     <div class="product-box">
                                         <div class="product-imgbox">
@@ -352,7 +326,6 @@
                                         <div class="product-detail detail-center detail-inverse">
                                             <div class="detail-title">
                                                 <div class="detail-left">
-
                                                     <a href="{% url 'product' items.pk %}">
                                                         <h6 class="price-title">
                                                             {{items.title}}
@@ -360,29 +333,34 @@
                                                     </a>
                                                 </div>
                                                 <div class="detail-right">
+                                                    {% if items.discount_price > 0 %}
                                                     <div class="check-price"> Rs.{{items.price}}</div>
+                                                    {% endif %}
                                                     <div class="price">
-                                                        <div class="price"> Rs.{{items.price}} </div>
+                                                     Rs.{{items.new_price}}
                                                     </div>
                                                 </div>
                                             </div>
+                                            {% if not request.user.is_authenticated %}
+                                            <a href="{% url 'login' %}">
+                                            {% endif %}
                                             <div class="icon-detail">
-                                                <button onclick="openCart()" class="tooltip-top"
-                                                    data-tippy-content="Add to cart"> <i
-                                                        data-feather="shopping-cart"></i> </button>
+                                                <button  data-item="{{items.pk  }}" data-action="add" onclick="{% if request.user.is_authenticated %}openCart(){% endif%}" class="tooltip-top update-cart"
+                                                    data-tippy-content="Add to cart"> <i data-feather="shopping-cart"></i> </button>
 
-                                                <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#quick-view" class="tooltip-top"
-                                                    data-tippy-content="Quick View"> <i data-feather="eye"></i> </a>
+                                                <a href="{% url 'product' items.pk %}" data-bs-toggle="modal"
+                                                     class="tooltip-top"
+                                                    data-tippy-content="View Item"> <i data-feather="eye"></i> </a>
 
                                             </div>
+                                            {% if not request.user.is_authenticated %}
+                                                </a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
                                 {% endif %}
                                 {%endfor%}
-
-
                             </div>
                         </div>
                         <div id="tab-2" class="tab-content">

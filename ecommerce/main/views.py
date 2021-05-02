@@ -3,7 +3,6 @@ from django.contrib.auth import forms
 from django import http
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.forms import Form
-from .forms import CheckoutForm
 from django.contrib.auth import (
     REDIRECT_FIELD_NAME,
     get_user_model,
@@ -29,7 +28,7 @@ from django.views.generic.edit import CreateView
 from django.views.generic import FormView, RedirectView, View, UpdateView
 from django.views.generic import ListView, DeleteView, UpdateView
 from django.views import generic
-from .forms import SignupForm, LoginInForm
+from .forms import SignupForm, LoginInForm, CheckoutForm
 from .models import (
     CheckoutAddress,
     Customer,
@@ -51,23 +50,47 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.core.mail import EmailMessage, message
 from django.urls import reverse_lazy
-from .models import Customer, Item, OrderItem, Order
 import json
 from django.http import JsonResponse
 from django.utils import timezone
 from django.urls import reverse_lazy
 from allauth.account.signals import user_signed_up
-from django.db.models import Q, F
+from django.db.models import Q, F, DecimalField, ExpressionWrapper, Sum
+
+
+def items_object():
+    return Item.objects.all().annotate(
+        new_price=ExpressionWrapper(
+            F("price") - F("discount_price"), output_field=DecimalField()
+        ),
+        discount_percentage=ExpressionWrapper(
+            (F("discount_price") / F("price")) * 100, output_field=DecimalField()
+        ),
+    )
+
+
+def item_object(item):
+    return item.annotate(
+        new_price=ExpressionWrapper(
+            F("price") - F("discount_price"), output_field=DecimalField()
+        ),
+        discount_percentage=ExpressionWrapper(
+            (F("discount_price") / F("price")) * 100, output_field=DecimalField()
+        ),
+    )
+
+
+ITEMS_OBJECT = items_object()
 
 
 def index(request):
     cate = Category.objects.all()
-    items = Item.objects.all()
     if request.user.is_authenticated:
         cart = OrderItem.objects.filter(customer=request.user)
-        context = {"cate": cate, "items": items, "cart": cart}
+
+        context = {"cate": cate, "items": ITEMS_OBJECT, "cart": cart}
     else:
-        context = {"cate": cate, "items": items}
+        context = {"cate": cate, "items": ITEMS_OBJECT}
 
     # if request.user.is_authenticated:
     #     cart = OrderItem.objects.filter(customer = request.user)
@@ -102,31 +125,6 @@ def search_view(request):
         return HttpResponse("field is empty")
 
 
-class CheckOutView(TemplateView):
-    template_name = "main/checkout.html"
-
-
-class DetailCartItem(LoginRequiredMixin, ListView):
-    """detail view"""
-
-    login_url = reverse_lazy("login")
-    template_name = "main/cart.html"
-
-    def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return OrderItem.objects.filter(customer=self.request.user)
-        else:
-            None
-
-    def get_context_data(self, **kwargs):
-        if self.request.user.is_authenticated:
-            context = super().get_context_data(**kwargs)
-            context["cart"] = OrderItem.objects.filter(customer=self.request.user)
-            return context
-        else:
-            None
-
-
 class DeleteCartItem(DeleteView):
     model = OrderItem
     success_url = reverse_lazy("cart")
@@ -146,16 +144,11 @@ class PageNotFoundView(TemplateView):
     template_name = "main/404.html"
 
 
-class ProductView(DetailView):
-    """product page view"""
-
-    model = Item
-    template_name = "main/product.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(ProductView, self).get_context_data(**kwargs)
-        # context["cart"] = OrderItem.objects.all()
-        return context
+def product_view(request, pk):
+    item = item_object(Item.objects).get(pk=pk)
+    context = {}
+    context["item"] = item
+    return render(request, "main/product.html", context)
 
 
 def AboutUsView(request):
@@ -212,7 +205,7 @@ class LoginView(LV, UserPassesTestMixin):
                     "redirect_url": self.get_success_url(),
                 }
 
-            return JsonResponse(data)
+            return JsonResponse(data, safe=False)
 
     template_name = "main/login.html"
     authentication_form = LoginInForm
@@ -311,35 +304,55 @@ class Profile(TemplateView):
     pass
 
 
-class DetailCartItem(ListView):
+# class DetailCartItem(ListView):
+# """detail view"""
+
+# model = OrderItem
+
+# template_name = "main/cart.html"
+
+# # def get_context_data(self, **kwargs):
+# #     if self.request.user.is_authenticated:
+# #         context = super().get_context_data(**kwargs)
+# #         context['customer'] = OrderItem.objects.filter(customer = self.request.user)
+# #         return context
+# #     else:
+# #         None
+# def get_queryset(self):
+# if self.request.user.is_authenticated:
+# context = OrderItem.objects.filter(customer=self.request.user)
+# return context
+# elif self.request.user.is_anonymous:
+# return HttpResponseRedirect("/login")
+
+# # template_name = "main/profile.html"
+class DetailCartItem(LoginRequiredMixin, ListView):
     """detail view"""
 
-    model = OrderItem
-
+    login_url = reverse_lazy("login")
     template_name = "main/cart.html"
 
-    # def get_context_data(self, **kwargs):
-    #     if self.request.user.is_authenticated:
-    #         context = super().get_context_data(**kwargs)
-    #         context['customer'] = OrderItem.objects.filter(customer = self.request.user)
-    #         return context
-    #     else:
-    #         None
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            context = OrderItem.objects.filter(customer=self.request.user)
+            return OrderItem.objects.filter(customer=self.request.user)
+        else:
+            None
+
+    @staticmethod
+    def get_total_price():
+        total = 0
+        for item in OrderItem.objects.all():
+            total += item.get_final_price()
+        return total
+
+    def get_context_data(self, **kwargs):
+        if self.request.user.is_authenticated:
+            context = super().get_context_data(**kwargs)
+            context["carts"] = OrderItem.objects.filter(customer=self.request.user)
+            context["total"] = DetailCartItem.get_total_price()
             return context
-        elif self.request.user.is_anonymous:
-            return HttpResponseRedirect("/login")
-
-    # template_name = "main/profile.html"
-
-
-class UpdateCartItem(UpdateView):
-    model = OrderItem
-    fields = ["quantity"]
-    success_url = reverse_lazy("cart")
-    template_name = "main/update.html"
+        else:
+            None
 
 
 def add_to_cart(request, pk):
@@ -347,59 +360,58 @@ def add_to_cart(request, pk):
     order_item, created = OrderItem.objects.get_or_create(
         item=item, customer=request.user, ordered=False
     )
-    order_qs = Order.objects.filter(customer=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs[0]
-        # check if the order item is in the order
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item.quantity += 1
-            order_item.save()
-            messages.info(request, "This item quantity was updated.")
-            return redirect(reverse_lazy("cart"))
-        else:
-            order.items.add(order_item)
-            messages.info(request, "This item was added to your cart.")
-            return redirect(reverse_lazy("cart"))
-    else:
-        ordered_date = timezone.now()
-        order = Order.objects.create(customer=request.user, ordered_date=ordered_date)
-        order.items.add(order_item)
-        messages.info(request, "This item was added to your cart.")
-        return redirect(reverse_lazy("cart"))
+    ordered_date = timezone.now()
+    order = Order.objects.create(customer=request.user, ordered_date=ordered_date)
+    return redirect(reverse_lazy("cart"))
 
 
-class CheckoutView(View):
+def update_item(request):
+    data = json.loads(request.body)
+    productId = data["productId"]
+    action = data["action"]
+    customer = request.user
+    product = Item.objects.get(id=productId)
+    order, created = Order.objects.get_or_create(customer=customer, ordered=False)
+    orderItem, created = OrderItem.objects.get_or_create(
+        item=product, customer=customer
+    )
+    output = ""
+
+    if action == "add" and orderItem.quantity < product.quantity:
+        orderItem.quantity = orderItem.quantity + 1
+        output = "quanity added"
+    elif action == "remove":
+        orderItem.quantity = orderItem.quantity - 1
+        output = "quanity decreased"
+
+    # save quantity of products, for an order
+    orderItem.save()
+    if action == "delete":
+        orderItem.delete()
+        output = "quanity deleted"
+
+    if orderItem.quantity <= 0:
+        # remove the orderItem from cart, when quantity reaches 0, or below it
+        orderItem.delete()
+        output = "quanity deleted"
+
+    return JsonResponse(output, safe=False)
+
+
+class CheckoutView(LoginRequiredMixin, View):
+    login_url = reverse_lazy("login")
+
     def get(self, *args, **kwargs):
-        form = CheckoutForm()
-        model = OrderItem.objects.filter(customer=self.request.user)
+        items = OrderItem.objects.filter(customer=self.request.user)
 
         context = {
-            "form": form,
-            "model": model,
+            "form": CheckoutForm(
+                instance=Customer.objects.get(id=self.request.user.id)
+            ),
+            "items": items,
+            "total": DetailCartItem.get_total_price(),
         }
-        return render(self.request, "main/checkout-test.html", context)
+        return render(self.request, "main/checkout.html", context)
 
     def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST or None)
-        try:
-            order = Order.objects.get(customer=self.request.user, ordered=False)
-            if form.is_valid():
-                address = form.cleaned_data.get("address")
-                zip = form.cleaned_data.get("zip")
-                phone = form.cleaned_data.get("phone")
-
-                checkout_address = CheckoutAddress(
-                    customer=self.request.user,
-                    zip=zip,
-                    address=address,
-                    phone=phone,
-                )
-                checkout_address.save()
-                order.checkout_address = checkout_address
-                order.save
-                return redirect(reverse_lazy("cart"))
-            message.warning(self.request, "Failed Checkout")
-            return redirect(reverse_lazy("checkout"))
-        except ObjectDoesNotExist:
-            messages.error(self.request, "You do not have an order")
-            return redirect(reverse_lazy("main"))
+        pass

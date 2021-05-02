@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
@@ -120,6 +121,12 @@ class Item(models.Model):
     def get_remove_from_cart_url(self):
         return reverse("core:remove-from-cart", kwargs={"slug": self.slug})
 
+    def get_new_price(self):
+        return self.price - self.discount_price
+
+    def get_discount_percentage(self):
+        return (self.discount_price / self.price) * 100
+
 
 class OrderItem(models.Model):
     customer = models.ForeignKey(
@@ -127,7 +134,7 @@ class OrderItem(models.Model):
     )
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
@@ -142,9 +149,7 @@ class OrderItem(models.Model):
         return self.get_total_item_price() - self.get_total_discount_item_price()
 
     def get_final_price(self):
-        if self.item.discount_price:
-            return self.get_total_discount_item_price()
-        return self.get_total_item_price()
+        return self.item.get_new_price() * self.quantity
 
 
 class Order(models.Model):
@@ -154,10 +159,8 @@ class Order(models.Model):
     order_id = models.CharField(max_length=20, blank=True, null=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
     address = models.CharField(default="Nepal", max_length=10)
-    being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
@@ -166,7 +169,7 @@ class Order(models.Model):
     )
 
     def __str__(self):
-        return self.order_id
+        return str(self.order_id)
 
     def get_total(self):
         total = 0

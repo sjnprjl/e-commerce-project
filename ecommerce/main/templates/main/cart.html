@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                   
-                    {% for items in object_list %}
+                    {% for items in carts %}
                     <tbody>
                     <tr>
                         <td>
@@ -41,23 +41,23 @@
                             </div>
                         </td>
                         <td>
-                            <h2>Rs.{{items.item.price}}</h2></td>
+                            <h2>Rs.{{items.item.get_new_price}}</h2></td>
                         <td>
                             <div class="qty-box">
                                 <div class="input-group">
                              
-                                    <button class="qty-minus"></button>
-                                    <input class="qty-adj form-control" type="number" value="{{items.quantity}}"/>
-                                    <button class="qty-plus"></button>
+                                    <button class="qty-minus update-cart" data-action="remove" data-item="{{items.item.pk}}" ></button>
+                                    <input class="qty-adj form-control" type="number" value="{{items.quantity}}" maxlength="{{items.item.quantity}}"/>
+                                    <button class="qty-plus update-cart" data-action="add" data-item="{{items.item.pk}}"></button>
 
                                   
                                 </div>
                             </div>
                         </td>
                         
-                        <td><a href="{% url 'deletecartitem' items.pk  %}" class="icon"><i class="ti-close"></i></a></td>
+                        <td><a  href="javascript:void(0)" data-action="delete" data-item="{{items.item.pk}}" class="icon update-cart"><i class="ti-close"></i></a></td>
                         <td>
-                            <h2 class="td-color">Rs.{{items.get_total_item_price}}</h2></td>
+                            <h2 class="td-color">Rs.{{items.get_final_price}}</h2></td>
                     </tr>
                     </tbody>
                     {% endfor %}
@@ -67,14 +67,14 @@
                     <tr>
                         <td>total price :</td>
                         <td>
-                            <h2>$6935.00</h2></td>
+                            <h2>Rs. {{total}}</h2></td>
                     </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
         <div class="row cart-buttons">
-            <div class="col-12"><a href="javascript:void(0)" class="btn btn-normal">continue shopping</a> <a href="javascript:void(0)" class="btn btn-normal ms-3">check out</a></div>
+            <div class="col-12"><a href="{% url 'main' %}" class="btn btn-normal">continue shopping</a> <a href="{% url 'checkout' %}" class="btn btn-normal ms-3">check out</a></div>
         </div>
     </div>
 </section>

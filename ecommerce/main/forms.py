@@ -49,7 +49,8 @@ class LoginInForm(AuthenticationForm):
 
         return self.cleaned_data
 
-class CheckoutForm(forms.Form):
-    address = forms.CharField(widget=forms.TextInput)
-    zip = forms.CharField(widget=forms.TextInput)
-    phone = forms.IntegerField()
+
+class CheckoutForm(ModelForm):
+    class Meta:
+        model = Customer
+        fields = ["full_name", "address", "phone_number", "email"]

@@ -1,4 +1,5 @@
 /*my custom css*/
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap");
 
 .invalid-field {
     border: 2px solid red !important;
@@ -6,7 +7,7 @@
 .valid-field {
     border: 2px solid green; 
 }
-#searchResult {
+.searchResult {
 	position: absolute;
 	z-index: 99;
 	background: white;
@@ -17,6 +18,63 @@
 	box-shadow: 4px 8px 10px 1px rgba(0,0,0,0.25);
 	top: 110%;
     min-height: 50px;
+}
+
+.popup-message {
+  position: relative;
+  width: 300px;
+  padding: 0.2em;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 999999999;
+  background: white;
+  border-top: 5px solid #ee1f46;
+  color: #000;
+  margin: 0.4em;
+  pointer-events: none;
+  animation: popup 0.5s ease forwards;
+  border-radius: 0.1em;
+  transition: all 0.3s ease;
+}
+.popup-message div {
+  font-size: 1.2em;
+}
+
+#popupContainer{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 9999999999999;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(40%);
+  }
+}
+.popout-message {
+  animation: popout 0.5s ease forwards;
+}
+
+@keyframes popout {
+  0% {
+    opacity: 1;
+    transform: translateY(40%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
 }
 
 /*end of custom css*/
