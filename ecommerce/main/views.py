@@ -37,6 +37,7 @@ from .models import (
     Category,
     Item,
     Team,
+    SpecialOffer,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect

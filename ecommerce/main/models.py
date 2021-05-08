@@ -4,7 +4,10 @@ from django.contrib.auth.models import (
     AbstractBaseUser,
     PermissionsMixin,
     BaseUserManager,
+
 )
+from django.db.models.base import Model
+from django.db.models.deletion import SET_NULL
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
@@ -198,3 +201,10 @@ class Team(models.Model):
     Description = models.TextField(
         null=True, blank=True, default="He is an employee of our business"
     )
+class SpecialOffer(models.Model):
+    item = models.OneToOneField(Item, on_delete=SET_NULL, blank=True, null=True)
+    festiveoffer = models.BooleanField(default=False)
+    sales = models.BooleanField(default=False)
+    extraoffer = models.CharField(max_length=80, null=True, blank=True)
+    discount = models.IntegerField(default="0")
+    endingdate = models.DateTimeField(null=True, blank=True)
